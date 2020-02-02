@@ -8,16 +8,13 @@ public class AmpConnect {
     JTable table = new JTable();
 
     public JTable Request(int id, Connection co){
-        table.removeAll();
-        table.revalidate();
-        table.repaint();
         String request = "SELECT amp_name, R.room_name, amp_status, amp_color, amp_time_on, amp_time_off " +
                 "FROM ampconnect AS A " +
                 "LEFT JOIN room AS R " +
                 "ON R.room_id = A.amp_room_id " +
                 "WHERE R.room_user_id = " + id +
                 " ORDER BY amp_name ASC;";
-        String[] t = {"name", "salle", "status", "couleur", "heure d'activation", "heure d'extinction"};
+        String[] t = {"name", "room", "status", "color", "activation time", "extinction time"};
         table = tableAdd.Table(co, t, request);
         return table;
     }

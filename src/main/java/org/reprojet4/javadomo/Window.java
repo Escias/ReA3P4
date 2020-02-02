@@ -15,13 +15,15 @@ public class Window{
     JTextField login = new JTextField("jimmyl@projet.com",10);
     JPasswordField password = new JPasswordField("ascrgn91",10);
     JButton blog = new JButton("Sign In");
+    JLabel label = new JLabel("Mail/Password Incorrect");
     Box win1 = Box.createHorizontalBox();
     Box win2 = Box.createHorizontalBox();
     Box win3 = Box.createHorizontalBox();
+    Box win4 = Box.createHorizontalBox();
     Box wincol1 = Box.createVerticalBox();
+    int id;
     String role;
     String nolog;
-    int id;
     public String[] infoUser = {"id", "role", "nolog"};
 
     protected void Window() throws SQLException {
@@ -29,28 +31,35 @@ public class Window{
         window.setTitle("Javadomo");
         window.setSize(700,500);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setLayout(new FlowLayout());
         win1.add(new JLabel("login"));
         win1.add(login);
         win2.add(new JLabel("password"));
         win2.add(password);
         win3.add(blog);
+        win4.add(new JLabel(" "));
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win3);
         panel.add(wincol1);
+        String log = login.getText();
+        String pass = password.getText();
         window.add(panel, BorderLayout.NORTH);
         blog.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    infoUser = connectSLQ.ConnectSQL(login, password, co);
+                    infoUser = connectSLQ.ConnectSQL(log, pass, co);
                     id = Integer.parseInt(infoUser[0]);
                     role = infoUser[1];
                     nolog = infoUser[2];
                     if(nolog == "fail"){
-                        window.add(new JLabel("Username/Password incorrect"));
+                        window.getContentPane().remove(label);
+                        window.add(label);
+                        window.setVisible(true);
+                    }else{
+                        Request(id, role, co);
                     }
-                    Request(id, role, co);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -63,6 +72,7 @@ public class Window{
     JButton bupdate = new JButton("Update");
     JButton binsert = new JButton("Insert");
     JButton bdelete = new JButton("Delete");
+    JButton bdisconnect = new JButton("Disconnect");
     JButton bvalid = new JButton("Validate");
     JButton breturn = new JButton("Return");
     private String[] req = {"Ampoule Connectée", "Caméra installée", "Donnée Ampoule", "Donnée Thermos", "Nourriture", "Info personnel", "Photo", "Salle", "Capteur", "Thermostats"};
@@ -77,7 +87,10 @@ public class Window{
         win1.add(bupdate);
         win1.add(binsert);
         win1.add(bdelete);
-        panel.add(win1);
+        win2.add(bdisconnect);
+        wincol1.add(win1);
+        wincol1.add(win2);
+        panel.add(wincol1);
         window.add(panel);
         brequest.addActionListener(new ActionListener() {
             @Override
@@ -105,6 +118,16 @@ public class Window{
             public void actionPerformed(ActionEvent e) {
                 buttext = bdelete.getText();
                 SelectTab(id, role , co, buttext);
+            }
+        });
+        bdisconnect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Disconnect();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         window.setVisible(true);
@@ -164,6 +187,11 @@ public class Window{
     private void ReturnToRequest(int id, String role, Connection co){
         RemoveAll();
         Request(id, role, co);
+    }
+
+    private void Disconnect() throws SQLException {
+        RemoveAll();
+        Window();
     }
 
     private void RemoveTable(){

@@ -1,13 +1,20 @@
 package org.reprojet4.javadomo;
 
-public class Room {
+import javax.swing.*;
+import java.sql.Connection;
 
-    public void Request(int id){
+public class Room {
+    TableAdd tableAdd = new TableAdd();
+    JTable table = new JTable();
+
+    public JTable Request(int id, Connection co){
         String request = "SELECT room_name, room_description " +
                 "FROM room " +
                 "WHERE room_user_id = " + id +
                 " ORDER BY room_name ASC;";
         String[] t = {"name", "description"};
+        table = tableAdd.Table(co, t, request);
+        return table;
     }
 
     public void Update(int id){
