@@ -69,7 +69,6 @@ public class Window{
     JComboBox scroll = new JComboBox(req);
     int table;
     String buttext;
-    Request request = new Request();
     SelectTable selectTable = new SelectTable();
 
     private void Request(int id, String role, Connection co){
@@ -83,47 +82,65 @@ public class Window{
         brequest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RemoveAll();
-                win1.add(scroll);
-                win1.add(bvalid);
-                win2.add(breturn);
-                wincol1.add(win1);
-                wincol1.add(win2);
-                panel.add(wincol1);
-                window.add(panel);
-                bvalid.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        buttext = brequest.getText();
-                        table = scroll.getSelectedIndex();
-                        selectTable.SelectTable(table, id, role, co, buttext);
-                    }
-                });
-                breturn.addActionListener(Return());
+                buttext = brequest.getText();
+                SelectTab(id, role , co, buttext);
             }
         });
         bupdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RemoveAll();
+                buttext = bupdate.getText();
+                SelectTab(id, role , co, buttext);
             }
         });
         binsert.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RemoveAll();
+                buttext = binsert.getText();
+                SelectTab(id, role , co, buttext);
             }
         });
         bdelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RemoveAll();
+                buttext = bdelete.getText();
+                SelectTab(id, role , co, buttext);
+            }
+        });
+        window.setVisible(true);
+    }
+
+    private void SelectTab(int id, String role, Connection co, String buttext){
+        RemoveAll();
+        ScrollTable();
+        bvalid.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                table = scroll.getSelectedIndex();
+                selectTable.SelectTable(table, id, role, co, buttext);
+            }
+        });
+        breturn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ReturnToRequest(id, role, co);
             }
         });
     }
 
-    private void Return(){
+    private void ScrollTable(){
+        win1.add(scroll);
+        win1.add(bvalid);
+        win2.add(breturn);
+        wincol1.add(win1);
+        wincol1.add(win2);
+        panel.add(wincol1);
+        window.add(panel);
+    }
 
+    private void ReturnToRequest(int id, String role, Connection co){
+        RemoveAll();
+        Request(id, role, co);
     }
 
     private void RemoveAll(){
