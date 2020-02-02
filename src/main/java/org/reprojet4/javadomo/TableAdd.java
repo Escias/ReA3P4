@@ -5,16 +5,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.*;
 
-public class Table {
+public class TableAdd {
 
-    public JTable Table(JFrame window, Connection co, String[] t, String req) {
+    public JTable Table(Connection co, String[] t, String req) {
         JTable table = new JTable();
         DefaultTableModel aModel = (DefaultTableModel) table.getModel();
         aModel.setColumnIdentifiers(t);
         JScrollPane jsp = new JScrollPane(table);
         Dimension dimension = new Dimension(500, 300);
         jsp.setPreferredSize(dimension);
-        window.add(jsp);
         String request = req;
         try {
             Statement statement = co.createStatement();
@@ -32,7 +31,6 @@ public class Table {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        window.setVisible(true);
         return table;
     }
 }
