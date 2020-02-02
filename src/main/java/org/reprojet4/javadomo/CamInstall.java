@@ -1,4 +1,4 @@
-package org.reprojet4.javadomo.table;
+package org.reprojet4.javadomo;
 
 public class CamInstall {
 

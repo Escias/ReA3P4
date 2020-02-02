@@ -69,7 +69,7 @@ public class Window{
     JComboBox scroll = new JComboBox(req);
     int table;
     String buttext;
-    SelectTable selectTable = new SelectTable();
+    Request request = new Request();
 
     private void Request(int id, String role, Connection co){
         RemoveAll();
@@ -117,7 +117,18 @@ public class Window{
             @Override
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
-                selectTable.SelectTable(table, id, role, co, buttext);
+                switch (buttext){
+                    case "Request":
+                        DTable = request.Request(id, role, co, table);
+                        DisplayTable(DTable);
+                        break;
+                    case "Update":
+                        break;
+                    case "Insert":
+                        break;
+                    case "Delete":
+                        break;
+                }
             }
         });
         breturn.addActionListener(new ActionListener() {
@@ -126,6 +137,18 @@ public class Window{
                 ReturnToRequest(id, role, co);
             }
         });
+    }
+
+    JTable DTable = new JTable();
+
+    private void DisplayTable(JTable DTable){
+        RemoveTable();
+        win3.add(DTable);
+        wincol1.add(win3);
+        panel.add(wincol1);
+        window.revalidate();
+        window.repaint();
+        window.setVisible(true);
     }
 
     private void ScrollTable(){
@@ -141,6 +164,15 @@ public class Window{
     private void ReturnToRequest(int id, String role, Connection co){
         RemoveAll();
         Request(id, role, co);
+    }
+
+    private void RemoveTable(){
+        win3.removeAll();
+        win3.revalidate();
+        win3.repaint();
+        wincol1.remove(win3);
+        wincol1.revalidate();
+        wincol1.repaint();
     }
 
     private void RemoveAll(){
