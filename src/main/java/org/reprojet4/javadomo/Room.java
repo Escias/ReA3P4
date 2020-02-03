@@ -7,7 +7,7 @@ public class Room {
     TableAdd tableAdd = new TableAdd();
     JTable table = new JTable();
 
-    public JTable Request(int id, Connection co){
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT room_name, room_description " +
                 "FROM room " +
                 "WHERE room_user_id = " + id +

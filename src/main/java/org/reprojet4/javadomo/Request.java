@@ -25,34 +25,34 @@ public class Request {
         DTable.repaint();
         switch (table){
             case 0:
-                DTable = ampConnect.Request(id, co);
+                DTable = ampConnect.Request(id, co, role);
                 break;
             case 1:
-                DTable = camInstall.Request(id, co);
+                DTable = camInstall.Request(id, co, role);
                 break;
             case 2:
-                DTable = datamp.Request(id, co);
+                DTable = datamp.Request(id, co, role);
                 break;
             case 3:
-                DTable = datatemp.Request(id, co);
+                DTable = datatemp.Request(id, co, role);
                 break;
             case 4:
-                DTable = food.Request(id, co);
+                DTable = food.Request(id, co, role);
                 break;
             case 5:
-                DTable = personalUser.Request(id, co);
+                DTable = personalUser.Request(id, co, role);
                 break;
             case 6:
-                DTable = photo.Request(id, co);
+                DTable = photo.Request(id, co, role);
                 break;
             case 7:
-                DTable = room.Request(id, co);
+                DTable = room.Request(id, co, role);
                 break;
             case 8:
-                DTable = sensor.Request(id, co);
+                DTable = sensor.Request(id, co, role);
                 break;
             case 9:
-                DTable = thermoIntel.Request(id, co);
+                DTable = thermoIntel.Request(id, co, role);
                 break;
             default:
                 break;

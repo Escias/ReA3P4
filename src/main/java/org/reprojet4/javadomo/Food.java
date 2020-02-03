@@ -7,7 +7,7 @@ public class Food {
     TableAdd tableAdd = new TableAdd();
     JTable table = new JTable();
 
-    public JTable Request(int id, Connection co){
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT food_id, R.room_name, food_name, food_perempt, food_quantity " +
                 "FROM food AS F " +
                 "LEFT JOIN room AS R " +

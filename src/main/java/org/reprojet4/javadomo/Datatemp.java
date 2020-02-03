@@ -7,7 +7,7 @@ public class Datatemp {
     TableAdd tableAdd = new TableAdd();
     JTable table = new JTable();
 
-    public JTable Request(int id, Connection co){
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT datatemp_id, S.sensor_name, datatemp_temp, datatemp_time " +
                 "FROM datatemp AS D " +
                 "LEFT JOIN sensor AS S " +

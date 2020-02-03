@@ -7,7 +7,7 @@ public class Photo {
     TableAdd tableAdd = new TableAdd();
     JTable table = new JTable();
 
-    public JTable Request(int id, Connection co){
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT photo_id, cam_name, photo_image, photo_date " +
                 "FROM photo AS P " +
                 "LEFT JOIN caminstall AS C " +

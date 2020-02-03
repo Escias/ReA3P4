@@ -7,7 +7,7 @@ public class Sensor {
     TableAdd tableAdd = new TableAdd();
     JTable table = new JTable();
 
-    public JTable Request(int id, Connection co){
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT sensor_id, sensor_name, R.room_name, sensor_status, sensor_interval, sensor_temp_min, sensor_temp_max " +
                 "FROM sensor AS S " +
                 "LEFT JOIN room AS R " +

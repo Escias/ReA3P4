@@ -7,7 +7,7 @@ public class CamInstall {
     TableAdd tableAdd = new TableAdd();
     JTable table = new JTable();
 
-    public JTable Request(int id, Connection co){
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT cam_name, R.room_name, cam_status, cam_dist, cam_time_begin, cam_time_end " +
                 "FROM caminstall AS C " +
                 "LEFT JOIN room AS R " +

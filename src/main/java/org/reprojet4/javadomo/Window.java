@@ -15,6 +15,7 @@ public class Window{
     JTextField login = new JTextField("jimmyl@projet.com",10);
     JPasswordField password = new JPasswordField("ascrgn91",10);
     JButton blog = new JButton("Sign In");
+    JButton breg = new JButton("Register");
     JLabel label = new JLabel("Mail/Password Incorrect");
     Box win1 = Box.createHorizontalBox();
     Box win2 = Box.createHorizontalBox();
@@ -37,6 +38,7 @@ public class Window{
         win2.add(new JLabel("password"));
         win2.add(password);
         win3.add(blog);
+        win3.add(breg);
         win4.add(new JLabel(" "));
         wincol1.add(win1);
         wincol1.add(win2);

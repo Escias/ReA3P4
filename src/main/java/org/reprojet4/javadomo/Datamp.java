@@ -7,7 +7,7 @@ public class Datamp {
     TableAdd tableAdd = new TableAdd();
     JTable table = new JTable();
 
-    public JTable Request(int id, Connection co){
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT datamp_id, A.amp_name, datamp_action, datamp_datetime " +
                 "FROM datamp AS D " +
                 "LEFT JOIN ampconnect AS A " +
