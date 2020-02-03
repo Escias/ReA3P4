@@ -1,8 +1,13 @@
 package org.reprojet4.javadomo;
 
-public class Photo {
+import javax.swing.*;
+import java.sql.Connection;
 
-    public void Request(int id){
+public class Photo {
+    TableAdd tableAdd = new TableAdd();
+    JTable table = new JTable();
+
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT photo_id, cam_name, photo_image, photo_date " +
                 "FROM photo AS P " +
                 "LEFT JOIN caminstall AS C " +
@@ -12,6 +17,8 @@ public class Photo {
                 "WHERE R.room_user_id = " + id +
                 " ORDER BY room_name ASC;";
         String[] t = {"id", "nom", "chemin", "date"};
+        table = tableAdd.Table(co, t, request);
+        return table;
     }
 
     public void Update(int id){

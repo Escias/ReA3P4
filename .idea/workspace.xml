@@ -2,40 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="160fceb7-af8d-46f4-9dfb-873d56164528" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Request.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/SelectTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/SelectTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/AmpConnect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/CamInstall.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/Datamp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/Datatemp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/Food.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/PersonalUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/Photo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/Room.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/Sensor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/table/ThermoIntel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/AmpConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/AmpConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/CamInstall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/CamInstall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Datamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Datamp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Datatemp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Datatemp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/PersonalUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/PersonalUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Photo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/SelectTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/SelectTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/TableAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Sensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Sensor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/ThermoIntel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/ThermoIntel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/AmpConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/AmpConnect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/CamInstall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/CamInstall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/Datamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Datamp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/Datatemp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Datatemp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/PersonalUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/PersonalUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Photo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/Sensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Sensor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/table/ThermoIntel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/ThermoIntel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +37,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1XFTYGP8llP5troPZK1peHmpbE0" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -111,7 +93,10 @@
       <option name="presentableId" value="Default" />
       <updated>1580640888566</updated>
       <workItem from="1580640892830" duration="8000" />
-      <workItem from="1580641385135" duration="10441000" />
+      <workItem from="1580641385135" duration="10752000" />
+      <workItem from="1580674661164" duration="4225000" />
+      <workItem from="1580679413191" duration="72000" />
+      <workItem from="1580717183757" duration="1235000" />
     </task>
     <servers />
   </component>
@@ -131,41 +116,58 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="431" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1580649680676" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1580656049080">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1580718737898">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580656049080" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1580656049078">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580718737898" />
+    <state width="1638" height="363" key="GridCell.Tab.0.bottom/0.23.1680.954@0.23.1680.954" timestamp="1580678969259" />
+    <state width="1638" height="363" key="GridCell.Tab.0.bottom/0.23.1680.958@0.23.1680.958" timestamp="1580656361686" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1580718737897">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580656049078" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1580656049078">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580718737897" />
+    <state width="1638" height="363" key="GridCell.Tab.0.center/0.23.1680.954@0.23.1680.954" timestamp="1580678969256" />
+    <state width="1638" height="363" key="GridCell.Tab.0.center/0.23.1680.958@0.23.1680.958" timestamp="1580656361686" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1580718737897">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580656049078" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1580656049079">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580718737897" />
+    <state width="1638" height="363" key="GridCell.Tab.0.left/0.23.1680.954@0.23.1680.954" timestamp="1580678969255" />
+    <state width="1638" height="363" key="GridCell.Tab.0.left/0.23.1680.958@0.23.1680.958" timestamp="1580656361685" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1580718737898">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580656049079" />
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1580654305699">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580718737898" />
+    <state width="1638" height="363" key="GridCell.Tab.0.right/0.23.1680.954@0.23.1680.954" timestamp="1580678969258" />
+    <state width="1638" height="363" key="GridCell.Tab.0.right/0.23.1680.958@0.23.1680.958" timestamp="1580656361686" />
+    <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1580678969263">
+      <screen x="0" y="23" width="1680" height="954" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580654305699" />
-    <state width="1638" height="363" key="GridCell.Tab.1.center" timestamp="1580654305698">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1580678138785" />
+    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.23.1680.954@0.23.1680.954" timestamp="1580678969263" />
+    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.23.1680.958@0.23.1680.958" timestamp="1580656361688" />
+    <state width="1638" height="363" key="GridCell.Tab.1.center" timestamp="1580678969261">
+      <screen x="0" y="23" width="1680" height="954" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580654305698" />
-    <state width="1638" height="363" key="GridCell.Tab.1.left" timestamp="1580654305698">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state width="1638" height="363" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1580678138783" />
+    <state width="1638" height="363" key="GridCell.Tab.1.center/0.23.1680.954@0.23.1680.954" timestamp="1580678969261" />
+    <state width="1638" height="363" key="GridCell.Tab.1.center/0.23.1680.958@0.23.1680.958" timestamp="1580656361687" />
+    <state width="1638" height="363" key="GridCell.Tab.1.left" timestamp="1580678969260">
+      <screen x="0" y="23" width="1680" height="954" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580654305698" />
-    <state width="1638" height="363" key="GridCell.Tab.1.right" timestamp="1580654305699">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state width="1638" height="363" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1580678138783" />
+    <state width="1638" height="363" key="GridCell.Tab.1.left/0.23.1680.954@0.23.1680.954" timestamp="1580678969260" />
+    <state width="1638" height="363" key="GridCell.Tab.1.left/0.23.1680.958@0.23.1680.958" timestamp="1580656361687" />
+    <state width="1638" height="363" key="GridCell.Tab.1.right" timestamp="1580678969262">
+      <screen x="0" y="23" width="1680" height="954" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580654305699" />
-    <state x="519" y="357" key="com.intellij.ide.util.TipDialog" timestamp="1580641385645">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1580678138784" />
+    <state width="1638" height="363" key="GridCell.Tab.1.right/0.23.1680.954@0.23.1680.954" timestamp="1580678969262" />
+    <state width="1638" height="363" key="GridCell.Tab.1.right/0.23.1680.958@0.23.1680.958" timestamp="1580656361688" />
+    <state x="519" y="357" key="com.intellij.ide.util.TipDialog" timestamp="1580717201310">
+      <screen x="0" y="23" width="1680" height="960" />
     </state>
-    <state x="519" y="357" key="com.intellij.ide.util.TipDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1580641385644" />
+    <state x="519" y="357" key="com.intellij.ide.util.TipDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1580679422778" />
+    <state x="519" y="357" key="com.intellij.ide.util.TipDialog/0.23.1680.960@0.23.1680.960" timestamp="1580717201310" />
   </component>
 </project>

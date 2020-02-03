@@ -1,8 +1,13 @@
 package org.reprojet4.javadomo;
 
-public class Datatemp {
+import javax.swing.*;
+import java.sql.Connection;
 
-    public void Request(int id){
+public class Datatemp {
+    TableAdd tableAdd = new TableAdd();
+    JTable table = new JTable();
+
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT datatemp_id, S.sensor_name, datatemp_temp, datatemp_time " +
                 "FROM datatemp AS D " +
                 "LEFT JOIN sensor AS S " +
@@ -12,6 +17,8 @@ public class Datatemp {
                 "WHERE R.room_user_id = " + id +
                 " ORDER BY datatemp_id ASC;";
         String[] t = {"id", "capteur", "température", "date et heure"};
+        table = tableAdd.Table(co, t, request);
+        return table;
     }
 
     public void Update(int id){

@@ -7,10 +7,10 @@ public class ConnectSLQ {
     protected String nolog;
     protected String role;
     protected String id;
-    public String[] infoUser = {"id", "role", "nolog"};
+    public String[] infoUser = {"0", "role", "nolog"};
 
-    public String[] ConnectSQL(JTextField login, JPasswordField password, Connection co) throws SQLException {
-        String request = "SELECT user_id, user_type FROM personal_user WHERE '" + login.getText() + "' = personal_user.user_mail AND '" + password.getText() + "' = personal_user.user_password;";
+    public String[] ConnectSQL(String login, String password, Connection co) throws SQLException {
+        String request = "SELECT user_id, user_type FROM personal_user WHERE '" + login + "' = personal_user.user_mail AND '" + password + "' = personal_user.user_password;";
         Statement stm = co.createStatement();
         ResultSet rslt = stm.executeQuery(request);
         if(rslt.next()){
@@ -20,7 +20,7 @@ public class ConnectSLQ {
             infoUser[1] = role;
         }else{
             nolog = "fail";
-            infoUser[3] = nolog;
+            infoUser[2] = nolog;
         }
         return infoUser;
     }

@@ -2,7 +2,6 @@ package org.reprojet4.javadomo;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.sql.*;
 
 public class TableAdd {
@@ -11,9 +10,6 @@ public class TableAdd {
         JTable table = new JTable();
         DefaultTableModel aModel = (DefaultTableModel) table.getModel();
         aModel.setColumnIdentifiers(t);
-        JScrollPane jsp = new JScrollPane(table);
-        Dimension dimension = new Dimension(500, 300);
-        jsp.setPreferredSize(dimension);
         String request = req;
         try {
             Statement statement = co.createStatement();

@@ -1,8 +1,13 @@
 package org.reprojet4.javadomo;
 
-public class Food {
+import javax.swing.*;
+import java.sql.Connection;
 
-    public void Request(int id){
+public class Food {
+    TableAdd tableAdd = new TableAdd();
+    JTable table = new JTable();
+
+    public JTable Request(int id, Connection co, String role){
         String request = "SELECT food_id, R.room_name, food_name, food_perempt, food_quantity " +
                 "FROM food AS F " +
                 "LEFT JOIN room AS R " +
@@ -10,6 +15,8 @@ public class Food {
                 "WHERE R.room_user_id = " + id +
                 " ORDER BY food_id ASC;";
         String[] t = {"id", "salle", "nom", "péremption", "quantité"};
+        table = tableAdd.Table(co, t, request);
+        return table;
     }
 
     public void Update(int id){
