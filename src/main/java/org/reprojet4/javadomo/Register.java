@@ -12,7 +12,7 @@ public class Register {
     public String Register(JTextField addlname, JTextField addfname, JTextField addlog, JPasswordField addpass, JPasswordField repass, JTextField address, JTextField zip, JTextField phone, Connection co) throws SQLException {
         check = true;
         if (check == true){
-            if (addlname.getText().isEmpty() || addfname.getText().isEmpty() || addlog.getText().isEmpty() || addpass.getText().isEmpty() || repass.getText().isEmpty() || address.getText().isEmpty() || zip.getText().isEmpty() || phone.getText().isEmpty()){
+            if (addlname.getText().isEmpty() || addfname.getText().isEmpty() || addlog.getText().isEmpty() || addpass.getText().isEmpty() || repass.getText().isEmpty() || address.getText().isEmpty() || zip.getText().isEmpty() || phone.getText().isEmpty() || addpass.getText() != repass.getText()){
                 val = "Complete all info";
                 check = false;
             }

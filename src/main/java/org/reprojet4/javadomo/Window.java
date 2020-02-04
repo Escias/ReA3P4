@@ -27,15 +27,15 @@ public class Window{
     Box wincol1 = Box.createVerticalBox();
     JCheckBox check = new JCheckBox();
     CreateIni createIni = new CreateIni();
-    int id;
-    String role;
-    String nolog;
-    String lastname;
-    String firstname;
-    String mail;
-    String phonenumber;
-    String adre;
-    String ZIP;
+    public int id;
+    public String role;
+    public String nolog;
+    public String lastname;
+    public String firstname;
+    public String mail;
+    public String phonenumber;
+    public String adre;
+    public String ZIP;
     public String[] infoUser = {"0", "role", "nolog", "lastname", "firstname", "mail", "phone", "address", "ZIP"};
 
     protected void Window() throws SQLException {
@@ -79,7 +79,7 @@ public class Window{
                         window.add(label);
                         window.setVisible(true);
                     }else{
-                        Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP);
+                        Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -119,8 +119,9 @@ public class Window{
     Register register = new Register();
     String val;
 
-    public void Register(Connection co){
+    private void Register(Connection co){
         RemoveAll();
+        ResetRegister();
         win1.add(new JLabel("Lastname"));
         win1.add(addlname);
         win1.add(new JLabel("Firstname"));
@@ -185,7 +186,7 @@ public class Window{
     JButton bprofil = new JButton("profile");
     JButton bmanage = new JButton("Management");
 
-    private void Menu(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP){
+    private void Menu(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
         win1.add(bprofil, BorderLayout.PAGE_START);
         win2.add(bmanage, BorderLayout.CENTER);
@@ -198,7 +199,7 @@ public class Window{
         bprofil.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Profile(role, lastname, firstname, mail, phonenumber, adre, ZIP);
+                Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
         bmanage.addActionListener(new ActionListener() {
@@ -278,8 +279,9 @@ public class Window{
     }
 
     JButton bsupprofile = new JButton("Delete Profile");
+    JButton buppass = new JButton("Change password");
 
-    private void Profile(String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP){
+    private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
         win1.add(new JLabel(lastname + "  "));
         win1.add(new JLabel(firstname));
@@ -288,7 +290,9 @@ public class Window{
         win4.add(new JLabel(adre + ",    "));
         win4.add(new JLabel(ZIP));
         win5.add(bupdate);
+        win5.add(buppass);
         win5.add(bsupprofile);
+        win5.add(breturn);
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win3);
@@ -296,7 +300,196 @@ public class Window{
         wincol1.add(win5);
         panel.add(wincol1);
         window.add(panel);
+        bupdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UpdateProfile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+            }
+        });
+        buppass.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UpdatePassword(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+            }
+        });
+        bsupprofile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SupProfile(id, co);
+            }
+        });
+        breturn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+            }
+        });
         window.setVisible(true);
+    }
+
+    private void ResetRegister(){
+        addlname.setText(null);
+        addfname.setText(null);
+        addlog.setText(null);
+        addpass.setText(null);
+        repass.setText(null);
+        address.setText(null);
+        zip.setText(null);
+        phone.setText(null);
+    }
+
+    UpProfile upProfile = new UpProfile();
+    String[] upcheck = {"lastname", "firstname", "mail", "phonenumber", "adre", "zip", "val"};
+    String valupdate;
+    public String last;
+    public String first;
+    public String email;
+    public String number;
+    public String adress;
+    public String code;
+
+    private void UpdatePassword(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
+        RemoveAll();
+        ResetRegister();
+        win1.add(new JLabel("Password"));
+        win1.add(addpass);
+        win2.add(new JLabel("Repeat Password"));
+        win2.add(repass);
+        win3.add(bvalid);
+        win3.add(breturn);
+        wincol1.add(win1);
+        wincol1.add(win2);
+        wincol1.add(win3);
+        wincol1.add(win7);
+        panel.add(wincol1);
+        window.add(panel);
+        bvalid.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String uppass = "yes";
+                try {
+                    upcheck = upProfile.UpProfile(id, addlname, addfname, addlog, address, zip, phone, addpass, repass, co, uppass);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                valupdate = upcheck[6];
+                System.out.println(valupdate);
+                if (valupdate == "ok"){
+                    Profile(id, role, last, first, email, number, adress, code, co);
+                }
+                win7.removeAll();
+                win7.add(new JLabel(valupdate));
+                window.revalidate();
+                window.repaint();
+            }
+        });
+        breturn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        window.setVisible(true);
+    }
+
+    private void UpdateProfile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
+        RemoveAll();
+        ResetRegister();
+        win1.add(new JLabel("Lastname"));
+        addlname.setText(lastname);
+        win1.add(addlname);
+        win1.add(new JLabel("Firstname"));
+        addfname.setText(firstname);
+        win1.add(addfname);
+        win2.add(new JLabel("Mail"));
+        addlog.setText(mail);
+        win2.add(addlog);
+        win4.add(new JLabel("Adress"));
+        address.setText(adre);
+        win4.add(address);
+        win4.add(new JLabel("ZIP"));
+        zip.setText(ZIP);
+        win4.add(zip);
+        win5.add(new JLabel("Phone number"));
+        phone.setText(phonenumber);
+        win5.add(phone);
+        win6.add(bvalid);
+        win6.add(breturn);
+        wincol1.add(win1);
+        wincol1.add(win2);
+        wincol1.add(win4);
+        wincol1.add(win5);
+        wincol1.add(win6);
+        wincol1.add(win7);
+        panel.add(wincol1);
+        window.add(panel);
+        bvalid.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String uppass = "";
+                    upcheck = upProfile.UpProfile(id, addlname, addfname, addlog, address, zip, phone, addpass, repass, co, uppass);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                last = upcheck[0];
+                first = upcheck[1];
+                email = upcheck[2];
+                number = upcheck[3];
+                adress = upcheck[4];
+                code = upcheck[5];
+                valupdate = upcheck[6];
+                if (valupdate == "ok"){
+                        Profile(id, role, last, first, email, number, adress, code, co);
+                }
+                win7.removeAll();
+                win7.add(new JLabel(valupdate));
+                window.revalidate();
+                window.repaint();
+            }
+        });
+        breturn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+            }
+        });
+        window.setVisible(true);
+    }
+
+    private void SupProfile(int id, Connection co){
+        DiscoRemove();
+        discoFrame.setTitle("Javadomo");
+        discoFrame.setSize(500,200);
+        discoFrame.setLayout(new FlowLayout());
+        dis1.add(new JLabel("Are you sure that you"));
+        dis2.add(new JLabel("want to delete your profile ?"));
+        dis3.add(byes);
+        dis3.add(bno);
+        discol1.add(dis1);
+        discol1.add(dis2);
+        discol1.add(dis3);
+        newpanel.add(discol1);
+        discoFrame.add(newpanel);
+        byes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                discoFrame.dispose();
+                try {
+                    upProfile.DelProfile(id, co);
+                    Disconnect();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        bno.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                discoFrame.dispose();
+            }
+        });
+        discoFrame.setVisible(true);
     }
 
     private void Request(int id, String role, Connection co){
