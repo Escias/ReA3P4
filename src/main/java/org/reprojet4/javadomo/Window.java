@@ -205,7 +205,7 @@ public class Window{
         bmanage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Management(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
         bdisconnect.addActionListener(new ActionListener() {
@@ -492,61 +492,138 @@ public class Window{
         discoFrame.setVisible(true);
     }
 
-    private void Request(int id, String role, Connection co){
+    JButton bdelitem = new JButton("Delete an Item");
+    JButton badditem = new JButton("Add Item");
+    JButton blistitem = new JButton("List Items");
+    JButton bupitem = new JButton("Update Items");
+
+    private void Management(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
-        win1.add(brequest);
-        win1.add(bupdate);
-        win1.add(binsert);
-        win1.add(bdelete);
-        win2.add(bdisconnect);
+        win1.add(bdelitem);
+        win2.add(badditem);
+        win3.add(blistitem);
+        win4.add(bupitem);
+        win5.add(breturn);
         wincol1.add(win1);
         wincol1.add(win2);
+        wincol1.add(win3);
+        wincol1.add(win4);
+        wincol1.add(win5);
         panel.add(wincol1);
         window.add(panel);
-        brequest.addActionListener(new ActionListener() {
+        bdelitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                buttext = brequest.getText();
-                SelectTab(id, role , co, buttext);
+
             }
         });
-        bupdate.addActionListener(new ActionListener() {
+        badditem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                buttext = bupdate.getText();
-                SelectTab(id, role , co, buttext);
+
             }
         });
-        binsert.addActionListener(new ActionListener() {
+        blistitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                buttext = binsert.getText();
-                SelectTab(id, role , co, buttext);
+                ListItem(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
-        bdelete.addActionListener(new ActionListener() {
+        bupitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                buttext = bdelete.getText();
-                SelectTab(id, role , co, buttext);
+
             }
         });
-        bdisconnect.addActionListener(new ActionListener() {
+        breturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Disconnect();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
         window.setVisible(true);
     }
 
-    private void SelectTab(int id, String role, Connection co, String buttext){
+    private void DelItem(){
+
+    }
+
+    private void AddItem(){
+
+    }
+
+    private void ListItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
+        String buttext = "Request";
+        SelectTab(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co, buttext);
+    }
+
+    private void UpItem(){
+
+    }
+
+//    private void Request(int id, String role, Connection co){
+//        RemoveAll();
+//        win1.add(brequest);
+//        win1.add(bupdate);
+//        win1.add(binsert);
+//        win1.add(bdelete);
+//        win2.add(bdisconnect);
+//        wincol1.add(win1);
+//        wincol1.add(win2);
+//        panel.add(wincol1);
+//        window.add(panel);
+//        brequest.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                buttext = brequest.getText();
+//                SelectTab(id, role , co, buttext);
+//            }
+//        });
+//        bupdate.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                buttext = bupdate.getText();
+//                SelectTab(id, role , co, buttext);
+//            }
+//        });
+//        binsert.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                buttext = binsert.getText();
+//                SelectTab(id, role , co, buttext);
+//            }
+//        });
+//        bdelete.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                buttext = bdelete.getText();
+//                SelectTab(id, role , co, buttext);
+//            }
+//        });
+//        bdisconnect.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                try {
+//                    Disconnect();
+//                } catch (SQLException ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//        });
+//        window.setVisible(true);
+//    }
+
+    JButton bre = new JButton("return");
+
+    private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co, String buttext){
         RemoveAll();
-        ScrollTable();
+        win1.add(scroll);
+        win1.add(bvalid);
+        win2.add(bre);
+        wincol1.add(win1);
+        wincol1.add(win2);
+        panel.add(wincol1);
+        window.add(panel);
         bvalid.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -565,10 +642,10 @@ public class Window{
                 }
             }
         });
-        breturn.addActionListener(new ActionListener() {
+        bre.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ReturnToRequest(id, role, co);
+                Management(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
     }
@@ -595,10 +672,10 @@ public class Window{
         window.add(panel);
     }
 
-    private void ReturnToRequest(int id, String role, Connection co){
-        RemoveAll();
-        Request(id, role, co);
-    }
+//    private void ReturnToRequest(int id, String role, Connection co){
+//        RemoveAll();
+//        Request(id, role, co);
+//    }
 
     private void Disconnect() throws SQLException {
         RemoveAll();
