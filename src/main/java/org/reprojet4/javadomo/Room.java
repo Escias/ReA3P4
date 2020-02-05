@@ -7,10 +7,9 @@ public class Room {
     TableAdd tableAdd = new TableAdd();
     JTable table = new JTable();
 
-    public JTable Request(int id, Connection co, String role){
+    public JTable Request(Connection co, int orderby){
         String request = "SELECT room_name, room_description " +
                 "FROM room " +
-                "WHERE room_user_id = " + id +
                 " ORDER BY room_name ASC;";
         String[] t = {"name", "description"};
         table = tableAdd.Table(co, t, request);
