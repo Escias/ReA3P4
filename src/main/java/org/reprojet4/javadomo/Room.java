@@ -5,12 +5,31 @@ import java.sql.Connection;
 
 public class Room {
     TableAdd tableAdd = new TableAdd();
-    JTable table = new JTable();
+    JScrollPane table = new JScrollPane();
+    boolean check = true;
+    String order;
 
-    public JTable Request(Connection co, int orderby){
-        String request = "SELECT room_name, room_description " +
+    public JScrollPane Request(Connection co, int orderby){
+        switch (orderby){
+            case 0:
+                if (check == true){
+                    order = "room_id";
+                }
+                break;
+            case 1:
+                if (check == true){
+                    order = "room_name";
+                }
+                break;
+            case 2:
+                if (check == true){
+                    order = "room_user_id";
+                }
+                break;
+        }
+        String request = "SELECT room_id, room_name, room_user_id, room_description " +
                 "FROM room " +
-                " ORDER BY room_name ASC;";
+                " ORDER BY " + order +" ASC;";
         String[] t = {"name", "description"};
         table = tableAdd.Table(co, t, request);
         return table;

@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -43,7 +41,7 @@ public class Window{
     protected void Window() throws SQLException {
         Connection co = DriverManager.getConnection("jdbc:mysql://localhost:8889/projet4", "root", "root");
         window.setTitle("Javadomo");
-        window.setSize(700,500);
+        window.setSize(1000,600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(new FlowLayout());
         win1.add(new JLabel("login"));
@@ -571,58 +569,6 @@ public class Window{
 
     }
 
-//    private void Request(int id, String role, Connection co){
-//        RemoveAll();
-//        win1.add(brequest);
-//        win1.add(bupdate);
-//        win1.add(binsert);
-//        win1.add(bdelete);
-//        win2.add(bdisconnect);
-//        wincol1.add(win1);
-//        wincol1.add(win2);
-//        panel.add(wincol1);
-//        window.add(panel);
-//        brequest.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                buttext = brequest.getText();
-//                SelectTab(id, role , co, buttext);
-//            }
-//        });
-//        bupdate.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                buttext = bupdate.getText();
-//                SelectTab(id, role , co, buttext);
-//            }
-//        });
-//        binsert.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                buttext = binsert.getText();
-//                SelectTab(id, role , co, buttext);
-//            }
-//        });
-//        bdelete.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                buttext = bdelete.getText();
-//                SelectTab(id, role , co, buttext);
-//            }
-//        });
-//        bdisconnect.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                try {
-//                    Disconnect();
-//                } catch (SQLException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        });
-//        window.setVisible(true);
-//    }
-
     JButton bre = new JButton("return");
     JButton bvalid4 = new JButton("Validate");
     int orderby;
@@ -630,7 +576,7 @@ public class Window{
     private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co, String buttext){
         RemoveAll();
         win1.add(scroll);
-        win1.add(listAmpConnect);
+        win1.add(ListScroll);
         win1.add(bvalid4);
         win2.add(bre);
         wincol1.add(win1);
@@ -663,10 +609,9 @@ public class Window{
             @Override
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
-                orderby = listAmpConnect.getSelectedIndex();
+                orderby = ListScroll.getSelectedIndex();
                 switch (buttext){
                     case "Request":
-                        System.out.println(orderby);
                         DTable = request.Request(id, role, co, table, orderby);
                         DisplayTable(DTable);
                         break;
@@ -700,78 +645,68 @@ public class Window{
     String[] orderRoom = {"order add", "name", "user"};
     String[] orderSensor = {"order add", "name", "room", "status", "interval"};
     String[] orderThermoIntel = {"order add", "room", "name", "thermo 1", "thermo 2", "temperature target", "status"};
-    JComboBox listAmpConnect = new JComboBox(orderAmpConnect);
-//    JComboBox listCamInstall = new JComboBox(orderCamInstall);
-//    JComboBox listDatAmp = new JComboBox(orderDatAmp);
-//    JComboBox listDataTemp = new JComboBox(orderDataTemp);
-//    JComboBox listFood = new JComboBox(orderFood);
-//    JComboBox listPersonalUser = new JComboBox(orderPersonalUser);
-//    JComboBox listPhoto = new JComboBox(orderPhoto);
-//    JComboBox listRoom = new JComboBox(orderRoom);
-//    JComboBox listSensor = new JComboBox(orderSensor);
-//    JComboBox listThermoIntel = new JComboBox(orderThermoIntel);
-    int order;
+    JComboBox ListScroll = new JComboBox(orderAmpConnect);
 
     private void ListOption(int table){
         switch (table){
             case 0:
-                listAmpConnect = new JComboBox(orderAmpConnect);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderAmpConnect);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 1:
-                listAmpConnect = new JComboBox(orderCamInstall);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderCamInstall);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 2:
-                listAmpConnect = new JComboBox(orderDatAmp);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderDatAmp);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 3:
-                listAmpConnect = new JComboBox(orderDataTemp);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderDataTemp);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 4:
-                listAmpConnect = new JComboBox(orderFood);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderFood);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 5:
-                listAmpConnect = new JComboBox(orderPersonalUser);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderPersonalUser);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 6:
-                listAmpConnect = new JComboBox(orderPhoto);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderPhoto);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 7:
-                listAmpConnect = new JComboBox(orderRoom);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderRoom);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 8:
-                listAmpConnect = new JComboBox(orderSensor);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderSensor);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             case 9:
-                listAmpConnect = new JComboBox(orderThermoIntel);
-                win1.remove(listAmpConnect);
-                win1.add(listAmpConnect);
+                ListScroll = new JComboBox(orderThermoIntel);
+                win1.remove(ListScroll);
+                win1.add(ListScroll);
                 break;
             default:
                 break;
         }
     }
 
-    JTable DTable = new JTable();
+    JScrollPane DTable = new JScrollPane();
 
-    private void DisplayTable(JTable DTable){
+    private void DisplayTable(JScrollPane DTable){
         RemoveTable();
         win3.add(DTable);
         wincol1.add(win3);
@@ -780,21 +715,6 @@ public class Window{
         window.repaint();
         window.setVisible(true);
     }
-
-//    private void ScrollTable(){
-//        win1.add(scroll);
-//        win1.add(bvalid);
-//        win2.add(breturn);
-//        wincol1.add(win1);
-//        wincol1.add(win2);
-//        panel.add(wincol1);
-//        window.add(panel);
-//    }
-
-//    private void ReturnToRequest(int id, String role, Connection co){
-//        RemoveAll();
-//        Request(id, role, co);
-//    }
 
     private void Disconnect() throws SQLException {
         RemoveAll();
