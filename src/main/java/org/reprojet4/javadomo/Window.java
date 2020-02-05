@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -99,8 +101,8 @@ public class Window{
     JButton binsert = new JButton("Insert");
     JButton bdelete = new JButton("Delete");
     JButton bdisconnect = new JButton("Disconnect");
-    JButton bvalid = new JButton("Validate");
-    JButton breturn = new JButton("Return");
+    JButton bvalid1 = new JButton("Validate");
+    JButton breturn1 = new JButton("Return");
     private String[] req = {"Ampoule Connectée", "Caméra installée", "Donnée Ampoule", "Donnée Thermos", "Nourriture", "Info personnel", "Photo", "Salle", "Capteur", "Thermostats"};
     JComboBox scroll = new JComboBox(req);
     int table;
@@ -138,8 +140,8 @@ public class Window{
         win4.add(zip);
         win5.add(new JLabel("Phone number"));
         win5.add(phone);
-        win6.add(bvalid);
-        win6.add(breturn);
+        win6.add(bvalid1);
+        win6.add(breturn1);
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win3);
@@ -149,7 +151,7 @@ public class Window{
         wincol1.add(win7);
         panel.add(wincol1);
         window.add(panel);
-        bvalid.addActionListener(new ActionListener() {
+        bvalid1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -170,7 +172,7 @@ public class Window{
                 window.repaint();
             }
         });
-        breturn.addActionListener(new ActionListener() {
+        breturn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -280,6 +282,7 @@ public class Window{
 
     JButton bsupprofile = new JButton("Delete Profile");
     JButton buppass = new JButton("Change password");
+    JButton breturn2 = new JButton("Return");
 
     private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
@@ -292,7 +295,7 @@ public class Window{
         win5.add(bupdate);
         win5.add(buppass);
         win5.add(bsupprofile);
-        win5.add(breturn);
+        win5.add(breturn2);
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win3);
@@ -318,7 +321,7 @@ public class Window{
                 SupProfile(id, co);
             }
         });
-        breturn.addActionListener(new ActionListener() {
+        breturn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
@@ -339,6 +342,8 @@ public class Window{
     }
 
     UpProfile upProfile = new UpProfile();
+    JButton breturn3 = new JButton("Return");
+    JButton bvalid2 = new JButton("Validate");
     String[] upcheck = {"lastname", "firstname", "mail", "phonenumber", "adre", "zip", "val"};
     String valupdate;
     public String last;
@@ -355,15 +360,15 @@ public class Window{
         win1.add(addpass);
         win2.add(new JLabel("Repeat Password"));
         win2.add(repass);
-        win3.add(bvalid);
-        win3.add(breturn);
+        win3.add(bvalid2);
+        win3.add(breturn3);
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win3);
         wincol1.add(win7);
         panel.add(wincol1);
         window.add(panel);
-        bvalid.addActionListener(new ActionListener() {
+        bvalid2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String uppass = "yes";
@@ -375,7 +380,7 @@ public class Window{
                 valupdate = upcheck[6];
                 System.out.println(valupdate);
                 if (valupdate == "ok"){
-                    Profile(id, role, last, first, email, number, adress, code, co);
+                    Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
                 }
                 win7.removeAll();
                 win7.add(new JLabel(valupdate));
@@ -383,14 +388,17 @@ public class Window{
                 window.repaint();
             }
         });
-        breturn.addActionListener(new ActionListener() {
+        breturn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
         window.setVisible(true);
     }
+
+    JButton breturn4 = new JButton("Return");
+    JButton bvalid3 = new JButton("Validate");
 
     private void UpdateProfile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
@@ -413,8 +421,8 @@ public class Window{
         win5.add(new JLabel("Phone number"));
         phone.setText(phonenumber);
         win5.add(phone);
-        win6.add(bvalid);
-        win6.add(breturn);
+        win6.add(bvalid3);
+        win6.add(breturn4);
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win4);
@@ -423,7 +431,7 @@ public class Window{
         wincol1.add(win7);
         panel.add(wincol1);
         window.add(panel);
-        bvalid.addActionListener(new ActionListener() {
+        bvalid3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -438,6 +446,7 @@ public class Window{
                 number = upcheck[3];
                 adress = upcheck[4];
                 code = upcheck[5];
+                System.out.println(adress);
                 valupdate = upcheck[6];
                 if (valupdate == "ok"){
                         Profile(id, role, last, first, email, number, adress, code, co);
@@ -448,7 +457,7 @@ public class Window{
                 window.repaint();
             }
         });
-        breturn.addActionListener(new ActionListener() {
+        breturn4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
@@ -496,6 +505,7 @@ public class Window{
     JButton badditem = new JButton("Add Item");
     JButton blistitem = new JButton("List Items");
     JButton bupitem = new JButton("Update Items");
+    JButton breturn5 = new JButton("Return");
 
     private void Management(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
@@ -503,7 +513,7 @@ public class Window{
         win2.add(badditem);
         win3.add(blistitem);
         win4.add(bupitem);
-        win5.add(breturn);
+        win5.add(breturn5);
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win3);
@@ -535,7 +545,7 @@ public class Window{
 
             }
         });
-        breturn.addActionListener(new ActionListener() {
+        breturn5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
@@ -614,23 +624,50 @@ public class Window{
 //    }
 
     JButton bre = new JButton("return");
+    JButton bvalid4 = new JButton("Validate");
+    int orderby;
 
     private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co, String buttext){
         RemoveAll();
         win1.add(scroll);
-        win1.add(bvalid);
+        win1.add(listAmpConnect);
+        win1.add(bvalid4);
         win2.add(bre);
         wincol1.add(win1);
         wincol1.add(win2);
         panel.add(wincol1);
         window.add(panel);
-        bvalid.addActionListener(new ActionListener() {
+        scroll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (buttext){
+                    case "Request":
+                        table = scroll.getSelectedIndex();
+                        win1.removeAll();
+                        win1.add(scroll);
+                        ListOption(table);
+                        win1.add(bvalid4);
+                        window.revalidate();
+                        window.repaint();
+                        break;
+                    case "Update":
+                        break;
+                    case "Insert":
+                        break;
+                    case "Delete":
+                        break;
+                }
+            }
+        });
+        bvalid4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
+                orderby = listAmpConnect.getSelectedIndex();
                 switch (buttext){
                     case "Request":
-                        DTable = request.Request(id, role, co, table);
+                        System.out.println(orderby);
+                        DTable = request.Request(id, role, co, table, orderby);
                         DisplayTable(DTable);
                         break;
                     case "Update":
@@ -648,6 +685,88 @@ public class Window{
                 Management(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
+        window.revalidate();
+        window.repaint();
+        window.setVisible(true);
+    }
+
+    String[] orderAmpConnect = {"order add", "name", "room", "status", "color", "time on", "time off"};
+    String[] orderCamInstall = {"order add", "name", "room", "status", "activation distance", "begin", "end"};
+    String[] orderDatAmp = {"order add", "bulb", "action", "date and hour"};
+    String[] orderDataTemp = {"order add", "sensor", "temperature", "date of capture"};
+    String[] orderFood = {"order add", "room", "name", "expiration", "quantity"};
+    String[] orderPersonalUser = {"order add", "lastname", "firstname"};
+    String[] orderPhoto = {"order add", "camera", "date of capture"};
+    String[] orderRoom = {"order add", "name", "user"};
+    String[] orderSensor = {"order add", "name", "room", "status", "interval"};
+    String[] orderThermoIntel = {"order add", "room", "name", "thermo 1", "thermo 2", "temperature target", "status"};
+    JComboBox listAmpConnect = new JComboBox(orderAmpConnect);
+//    JComboBox listCamInstall = new JComboBox(orderCamInstall);
+//    JComboBox listDatAmp = new JComboBox(orderDatAmp);
+//    JComboBox listDataTemp = new JComboBox(orderDataTemp);
+//    JComboBox listFood = new JComboBox(orderFood);
+//    JComboBox listPersonalUser = new JComboBox(orderPersonalUser);
+//    JComboBox listPhoto = new JComboBox(orderPhoto);
+//    JComboBox listRoom = new JComboBox(orderRoom);
+//    JComboBox listSensor = new JComboBox(orderSensor);
+//    JComboBox listThermoIntel = new JComboBox(orderThermoIntel);
+    int order;
+
+    private void ListOption(int table){
+        switch (table){
+            case 0:
+                listAmpConnect = new JComboBox(orderAmpConnect);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 1:
+                listAmpConnect = new JComboBox(orderCamInstall);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 2:
+                listAmpConnect = new JComboBox(orderDatAmp);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 3:
+                listAmpConnect = new JComboBox(orderDataTemp);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 4:
+                listAmpConnect = new JComboBox(orderFood);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 5:
+                listAmpConnect = new JComboBox(orderPersonalUser);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 6:
+                listAmpConnect = new JComboBox(orderPhoto);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 7:
+                listAmpConnect = new JComboBox(orderRoom);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 8:
+                listAmpConnect = new JComboBox(orderSensor);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            case 9:
+                listAmpConnect = new JComboBox(orderThermoIntel);
+                win1.remove(listAmpConnect);
+                win1.add(listAmpConnect);
+                break;
+            default:
+                break;
+        }
     }
 
     JTable DTable = new JTable();
@@ -662,15 +781,15 @@ public class Window{
         window.setVisible(true);
     }
 
-    private void ScrollTable(){
-        win1.add(scroll);
-        win1.add(bvalid);
-        win2.add(breturn);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        panel.add(wincol1);
-        window.add(panel);
-    }
+//    private void ScrollTable(){
+//        win1.add(scroll);
+//        win1.add(bvalid);
+//        win2.add(breturn);
+//        wincol1.add(win1);
+//        wincol1.add(win2);
+//        panel.add(wincol1);
+//        window.add(panel);
+//    }
 
 //    private void ReturnToRequest(int id, String role, Connection co){
 //        RemoveAll();

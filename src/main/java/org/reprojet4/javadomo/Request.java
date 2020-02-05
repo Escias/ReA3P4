@@ -19,40 +19,40 @@ public class Request {
     Sensor sensor = new Sensor();
     ThermoIntel thermoIntel = new ThermoIntel();
 
-    public JTable Request(int id, String role, Connection co, int table){
+    public JTable Request(int id, String role, Connection co, int table, int orderby){
         DTable.removeAll();
         DTable.revalidate();
         DTable.repaint();
         switch (table){
             case 0:
-                DTable = ampConnect.Request(id, co, role);
+                DTable = ampConnect.Request(co, orderby);
                 break;
             case 1:
-                DTable = camInstall.Request(id, co, role);
+                DTable = camInstall.Request(co, orderby);
                 break;
             case 2:
-                DTable = datamp.Request(id, co, role);
+                DTable = datamp.Request(co, orderby);
                 break;
             case 3:
-                DTable = datatemp.Request(id, co, role);
+                DTable = datatemp.Request(co, orderby);
                 break;
             case 4:
-                DTable = food.Request(id, co, role);
+                DTable = food.Request(co, orderby);
                 break;
             case 5:
-                DTable = personalUser.Request(id, co, role);
+                DTable = personalUser.Request(co, orderby);
                 break;
             case 6:
-                DTable = photo.Request(id, co, role);
+                DTable = photo.Request(co, orderby);
                 break;
             case 7:
-                DTable = room.Request(id, co, role);
+                DTable = room.Request(co, orderby);
                 break;
             case 8:
-                DTable = sensor.Request(id, co, role);
+                DTable = sensor.Request(co, orderby);
                 break;
             case 9:
-                DTable = thermoIntel.Request(id, co, role);
+                DTable = thermoIntel.Request(co, orderby);
                 break;
             default:
                 break;

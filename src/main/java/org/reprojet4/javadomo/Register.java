@@ -11,8 +11,16 @@ public class Register {
 
     public String Register(JTextField addlname, JTextField addfname, JTextField addlog, JPasswordField addpass, JPasswordField repass, JTextField address, JTextField zip, JTextField phone, Connection co) throws SQLException {
         check = true;
+        System.out.println(addlname.getText().length());
+        System.out.println(addfname.getText().length());
+        System.out.println(addlog.getText().length());
+        System.out.println(addpass.getText().length());
+        System.out.println(repass.getText().length());
+        System.out.println(address.getText().length());
+        System.out.println(zip.getText().length());
+        System.out.println(phone.getText().length());
         if (check == true){
-            if (addlname.getText().isEmpty() || addfname.getText().isEmpty() || addlog.getText().isEmpty() || addpass.getText().isEmpty() || repass.getText().isEmpty() || address.getText().isEmpty() || zip.getText().isEmpty() || phone.getText().isEmpty() || addpass.getText() != repass.getText()){
+            if (addlname.getText().length() == 0 || addfname.getText().length() == 0 || addlog.getText().length() == 0 || addpass.getText().length() == 0 || repass.getText().length() == 0 || address.getText().length() == 0 || zip.getText().length() == 0 || phone.getText().length() == 0){
                 val = "Complete all info";
                 check = false;
             }
