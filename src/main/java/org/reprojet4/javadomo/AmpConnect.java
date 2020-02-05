@@ -5,11 +5,11 @@ import java.sql.Connection;
 
 public class AmpConnect {
     TableAdd tableAdd = new TableAdd();
-    JTable table = new JTable();
+    JScrollPane table = new JScrollPane();
     boolean check = true;
     String order;
 
-    public JTable Request(Connection co, int orderby){
+    public JScrollPane Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){

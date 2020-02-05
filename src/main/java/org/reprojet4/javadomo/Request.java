@@ -1,12 +1,10 @@
 package org.reprojet4.javadomo;
 
-import org.graalvm.compiler.api.replacements.Fold;
-
 import javax.swing.*;
 import java.sql.Connection;
 
 public class Request {
-    JTable DTable = new JTable();
+    JScrollPane DTable = new JScrollPane();
 
     AmpConnect ampConnect = new AmpConnect();
     CamInstall camInstall = new CamInstall();
@@ -19,7 +17,7 @@ public class Request {
     Sensor sensor = new Sensor();
     ThermoIntel thermoIntel = new ThermoIntel();
 
-    public JTable Request(int id, String role, Connection co, int table, int orderby){
+    public JScrollPane Request(int id, String role, Connection co, int table, int orderby){
         DTable.removeAll();
         DTable.revalidate();
         DTable.repaint();

@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class TableAdd {
 
-    public JTable Table(Connection co, String[] t, String req) {
+    public JScrollPane Table(Connection co, String[] t, String req) {
         JTable table = new JTable();
         DefaultTableModel aModel = (DefaultTableModel) table.getModel();
         aModel.setColumnIdentifiers(t);
@@ -27,6 +27,7 @@ public class TableAdd {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return table;
+        JScrollPane js = new JScrollPane(table);
+        return js;
     }
 }
