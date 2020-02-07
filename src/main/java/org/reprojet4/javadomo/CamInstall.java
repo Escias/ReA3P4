@@ -76,7 +76,7 @@ public class CamInstall {
         }else if (obj1.equals(2)){
             stat = "off";
         }
-        String request = "INSERT INTO caminstall (cam_name, cam_room_id, cam_status, cam_dist, cam_time_begin, cam_time_end)" +
+        String request = "INSERT INTO caminstall (cam_name, cam_room_id, cam_status, cam_dist, cam_time_begin, cam_time_end) " +
                 "VALUES ('"+value1+"', '"+selection1+"', '"+stat+"', '"+value2+"', NOW(), NOW() + INTERVAL 5 DAY)";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);

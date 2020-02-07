@@ -49,7 +49,7 @@ public class PersonalUser {
         }else if (obj1.equals(2)){
             type = "normal";
         }
-        String request = "INSERT INTO personal_user (user_lastname, user_firstname, user_mail, user_phone, user_adress, user_ZIP, user_type, user_password)" +
+        String request = "INSERT INTO personal_user (user_lastname, user_firstname, user_mail, user_phone, user_adress, user_ZIP, user_type, user_password) " +
                 "VALUES ('" + value1 + "', '" + value2 + "', '" + value3 + "', '" + value4 + "', '" + value5 + "', '" + value6 + "', '" + type + "', '" + value7 + "')";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
