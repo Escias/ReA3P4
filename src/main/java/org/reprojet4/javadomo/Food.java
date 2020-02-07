@@ -2,6 +2,11 @@ package org.reprojet4.javadomo;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Food {
     TableAdd tableAdd = new TableAdd();
@@ -51,8 +56,35 @@ public class Food {
 
     }
 
-    public void Insert(int id){
+    List<String> ls = new ArrayList<>();
 
+    public void Insert(int selection1, String value1, String value2, String value3, Connection co) throws SQLException {
+        String request = "INSERT INTO food (food_room_id, food_name, food_perempt, food_quantity, food_perempt_open, food_open)" +
+                "VALUES ('"+selection1+"', '"+value1+"', '"+value2+"', '"+value3+"', NOW() + INTERVAL 30 DAY, NOW())";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
+    }
+    public List InsertAdd(int id, Connection co, String role) throws SQLException {
+        System.out.println(role);
+        if (role.equals("admin")){
+            String request = "SELECT room_id, room_name " +
+                    "FROM room;";
+            Statement stm = co.createStatement();
+            ResultSet rslt = stm.executeQuery(request);
+            while (rslt.next()){
+                ls.add(rslt.getString(2));
+            }
+        }else{
+            String request = "SELECT room_id, room_name " +
+                    "FROM room " +
+                    "WHERE room_user_id = " + id + ";";
+            Statement stm = co.createStatement();
+            ResultSet rslt = stm.executeQuery(request);
+            while (rslt.next()){
+                ls.add(rslt.getString(2));
+            }
+        }
+        return ls;
     }
 
     public void Delete(int id){

@@ -2,6 +2,11 @@ package org.reprojet4.javadomo;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ThermoIntel {
     TableAdd tableAdd = new TableAdd();
@@ -65,8 +70,69 @@ public class ThermoIntel {
 
     }
 
-    public void Insert(int id){
+    List<String> ls = new ArrayList<>();
+    List<String> ls1 = new ArrayList<>();
+    String stat;
 
+    public void Insert(int selection1, int selection2, int selection3, int selection4, String value1, String value2, Connection co) throws SQLException {
+        Integer obj1 = selection4;
+        if (obj1.equals(1)){
+            stat = "inactif";
+        }else if (obj1.equals(2)){
+            stat = "chaud";
+        }else if (obj1.equals(3)){
+            stat = "froid";
+        }
+        String request = "INSERT INTO thermointel (thermo_room_id, thermo_name, thermo_id_1, thermo_id_2, thermo_temp_target, thermo_status)" +
+                "VALUES ('"+selection1+"', '"+value1+"', '"+selection2+"', '"+selection3+"', '"+value2+"', '"+stat+"')";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
+    }
+    public List InsertAdd(int id, Connection co, String role) throws SQLException {
+        if (role.equals("admin")){
+            String request = "SELECT room_id, room_name " +
+                    "FROM room;";
+            Statement stm = co.createStatement();
+            ResultSet rslt = stm.executeQuery(request);
+            while (rslt.next()){
+                ls.add(rslt.getString(2));
+            }
+        }else{
+            String request = "SELECT room_id, room_name " +
+                    "FROM room " +
+                    "WHERE room_user_id = " + id + ";";
+            Statement stm = co.createStatement();
+            ResultSet rslt = stm.executeQuery(request);
+            while (rslt.next()){
+                ls.add(rslt.getString(2));
+            }
+        }
+        return ls;
+    }
+    public List InsertAdd1(int id, Connection co, String role) throws SQLException {
+        if (role.equals("admin")){
+            String request = "SELECT sensor_id, sensor_name " +
+                    "FROM sensor AS S " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = S.sensor_room_id;";
+            Statement stm = co.createStatement();
+            ResultSet rslt = stm.executeQuery(request);
+            while (rslt.next()){
+                ls1.add(rslt.getString(2));
+            }
+        }else{
+            String request = "SELECT sensor_id, sensor_name " +
+                    "FROM sensor AS S " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = S.sensor_room_id " +
+                    "WHERE R.room_user_id = " + id +";";
+            Statement stm = co.createStatement();
+            ResultSet rslt = stm.executeQuery(request);
+            while (rslt.next()){
+                ls1.add(rslt.getString(2));
+            }
+        }
+        return ls1;
     }
 
     public void Delete(int id){
