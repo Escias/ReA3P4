@@ -66,7 +66,7 @@ public class Sensor {
         }else if (obj1.equals(2)){
             stat = "off";
         }
-        String request = "INSERT INTO sensor (sensor_name, sensor_room_id, sensor_status, sensor_interval, sensor_temp_min, sensor_temp_max)" +
+        String request = "INSERT INTO sensor (sensor_name, sensor_room_id, sensor_status, sensor_interval, sensor_temp_min, sensor_temp_max) " +
                 "VALUES ('"+value1+"', '"+selection1+"', '"+stat+"', '"+value2+"', '"+value3+"', '"+value4+"')";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);

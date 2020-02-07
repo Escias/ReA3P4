@@ -59,7 +59,7 @@ public class Food {
     List<String> ls = new ArrayList<>();
 
     public void Insert(int selection1, String value1, String value2, String value3, Connection co) throws SQLException {
-        String request = "INSERT INTO food (food_room_id, food_name, food_perempt, food_quantity, food_perempt_open, food_open)" +
+        String request = "INSERT INTO food (food_room_id, food_name, food_perempt, food_quantity, food_perempt_open, food_open) " +
                 "VALUES ('"+selection1+"', '"+value1+"', '"+value2+"', '"+value3+"', NOW() + INTERVAL 30 DAY, NOW())";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);

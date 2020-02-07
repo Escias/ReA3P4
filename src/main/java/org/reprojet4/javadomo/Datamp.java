@@ -63,7 +63,7 @@ public class Datamp {
         }else if (obj1.equals(2)){
             stat = "éteindre";
         }
-        String request = "INSERT INTO datamp (datamp_amp_id, datamp_action, datamp_datetime)" +
+        String request = "INSERT INTO datamp (datamp_amp_id, datamp_action, datamp_datetime) " +
                 "VALUES ('"+selection1+"', '"+stat+"', NOW())";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);

@@ -56,7 +56,7 @@ public class Datatemp {
     List<String> ls = new ArrayList<>();
 
     public void Insert(int selection1, String value1, Connection co) throws SQLException {
-        String request = "INSERT INTO datatemp (datatemp_sensor_id, datatemp_temp, datatemp_time)" +
+        String request = "INSERT INTO datatemp (datatemp_sensor_id, datatemp_temp, datatemp_time) " +
                 "VALUES ('"+selection1+"', '"+value1+"', NOW())";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);

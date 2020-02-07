@@ -42,7 +42,7 @@ public class Room {
     }
 
     public void Insert(int id, String value1, String value2, Connection co) throws SQLException {
-        String request = "INSERT INTO room (room_name, room_user_id, room_description)" +
+        String request = "INSERT INTO room (room_name, room_user_id, room_description) " +
                 "VALUES ('"+value1+"', '"+id+"', '"+value2+"')";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);

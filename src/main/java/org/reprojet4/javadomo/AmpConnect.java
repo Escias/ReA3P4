@@ -78,7 +78,7 @@ public class AmpConnect {
         }else if (obj1.equals(3)){
             stat = "scheduled";
         }
-        String request = "INSERT INTO ampconnect (amp_name, amp_room_id, amp_status, amp_color, amp_time_on, amp_time_off)" +
+        String request = "INSERT INTO ampconnect (amp_name, amp_room_id, amp_status, amp_color, amp_time_on, amp_time_off) " +
                     "VALUES ('"+value1+"', '"+selection1+"', '"+stat+"', '"+value2+"', NOW(), NOW() + INTERVAL 5 HOUR)";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);

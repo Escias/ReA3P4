@@ -83,7 +83,7 @@ public class ThermoIntel {
         }else if (obj1.equals(3)){
             stat = "froid";
         }
-        String request = "INSERT INTO thermointel (thermo_room_id, thermo_name, thermo_id_1, thermo_id_2, thermo_temp_target, thermo_status)" +
+        String request = "INSERT INTO thermointel (thermo_room_id, thermo_name, thermo_id_1, thermo_id_2, thermo_temp_target, thermo_status) " +
                 "VALUES ('"+selection1+"', '"+value1+"', '"+selection2+"', '"+selection3+"', '"+value2+"', '"+stat+"')";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
