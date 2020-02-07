@@ -2,6 +2,8 @@ package org.reprojet4.javadomo;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Room {
     TableAdd tableAdd = new TableAdd();
@@ -39,8 +41,11 @@ public class Room {
 
     }
 
-    public void Insert(int id){
-
+    public void Insert(int id, String value1, String value2, Connection co) throws SQLException {
+        String request = "INSERT INTO room (room_name, room_user_id, room_description)" +
+                "VALUES ('"+value1+"', '"+id+"', '"+value2+"')";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
     }
 
     public void Delete(int id){

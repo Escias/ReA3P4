@@ -2,6 +2,11 @@ package org.reprojet4.javadomo;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AmpConnect {
     TableAdd tableAdd = new TableAdd();
@@ -56,15 +61,51 @@ public class AmpConnect {
         table = tableAdd.Table(co, t, request);
         return table;
     }
-
+//
     public void Update(int id){
 
     }
+//
+    List<String> ls = new ArrayList<>();
+    String stat;
 
-    public void Insert(int id){
-
+    public void Insert(String value1, String value2, int selection1, int selection2, Connection co) throws SQLException {
+        Integer obj1 = selection2;
+        if (obj1.equals(1)){
+            stat = "on";
+        }else if (obj1.equals(2)){
+            stat = "off";
+        }else if (obj1.equals(3)){
+            stat = "scheduled";
+        }
+        String request = "INSERT INTO ampconnect (amp_name, amp_room_id, amp_status, amp_color, amp_time_on, amp_time_off)" +
+                    "VALUES ('"+value1+"', '"+selection1+"', '"+stat+"', '"+value2+"', NOW(), NOW() + INTERVAL 5 HOUR)";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
     }
-
+    public List InsertAdd(int id, Connection co, String role) throws SQLException {
+        System.out.println(role);
+        if (role.equals("admin")){
+            String request = "SELECT room_id, room_name " +
+                    "FROM room;";
+            Statement stm = co.createStatement();
+            ResultSet rslt = stm.executeQuery(request);
+            while (rslt.next()){
+                ls.add(rslt.getString(2));
+            }
+        }else{
+            String request = "SELECT room_id, room_name " +
+                    "FROM room " +
+                    "WHERE room_user_id = " + id + ";";
+            Statement stm = co.createStatement();
+            ResultSet rslt = stm.executeQuery(request);
+            while (rslt.next()){
+                ls.add(rslt.getString(2));
+            }
+        }
+        return ls;
+    }
+//
     public void Delete(int id){
 
     }

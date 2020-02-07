@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 
 public class Register {
     boolean check = true;
@@ -26,11 +27,16 @@ public class Register {
             }
         }
         if (check == true){
-            String request = "INSERT INTO personal_user (user_lastname, user_firstname, user_mail, user_password, user_adress, user_ZIP, user_phone, user_type) " +
-                    "VALUES ('" + addlname.getText() + "', '" + addfname.getText() + "', '" + addlog.getText() + "', '" + addpass.getText() + "', '" + address.getText() + "', '" + zip.getText() + "', '" + phone.getText() + "', 'normal')";
-            Statement stm = co.createStatement();
-            stm.executeUpdate(request);
-            val = "ok";
+            if (Arrays.equals(addpass.getPassword(), repass.getPassword())){
+                String request = "INSERT INTO personal_user (user_lastname, user_firstname, user_mail, user_password, user_adress, user_ZIP, user_phone, user_type) " +
+                        "VALUES ('" + addlname.getText() + "', '" + addfname.getText() + "', '" + addlog.getText() + "', '" + addpass.getText() + "', '" + address.getText() + "', '" + zip.getText() + "', '" + phone.getText() + "', 'normal')";
+                Statement stm = co.createStatement();
+                stm.executeUpdate(request);
+                val = "ok";
+            }
+            else{
+                val = "Wrong password";
+            }
         }
         return val;
     }

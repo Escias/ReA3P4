@@ -2,6 +2,11 @@ package org.reprojet4.javadomo;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Photo {
     TableAdd tableAdd = new TableAdd();
@@ -40,10 +45,6 @@ public class Photo {
     }
 
     public void Update(int id){
-
-    }
-
-    public void Insert(int id){
 
     }
 

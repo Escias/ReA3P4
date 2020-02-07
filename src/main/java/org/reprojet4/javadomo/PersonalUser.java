@@ -2,6 +2,8 @@ package org.reprojet4.javadomo;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class PersonalUser {
     TableAdd tableAdd = new TableAdd();
@@ -38,8 +40,19 @@ public class PersonalUser {
 
     }
 
-    public void Insert(int id){
+    String type;
 
+    public void Insert(String value1, String value2, String value3, String value4, String value5, String value6, String value7, int selection1, Connection co) throws SQLException {
+        Integer obj1 = selection1;
+        if (obj1.equals(1)){
+            type = "admin";
+        }else if (obj1.equals(2)){
+            type = "normal";
+        }
+        String request = "INSERT INTO personal_user (user_lastname, user_firstname, user_mail, user_phone, user_adress, user_ZIP, user_type, user_password)" +
+                "VALUES ('" + value1 + "', '" + value2 + "', '" + value3 + "', '" + value4 + "', '" + value5 + "', '" + value6 + "', '" + type + "', '" + value7 + "')";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
     }
 
     public void Delete(int id){
