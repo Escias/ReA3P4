@@ -55,7 +55,19 @@ public class PersonalUser {
         stm.executeUpdate(request);
     }
 
+    JTable tab = new JTable();
+
     public void Delete(int id){
 
+    }
+    public JTable DeleteAdd(String role, Connection co){
+        if (role.equals("admin")) {
+            String request = "SELECT user_id, user_lastname, user_firstname, user_mail, user_phone, user_adress, user_ZIP, user_type " +
+                    "FROM personal_user " +
+                    "WHERE user_type != 'admin';";
+            String[] t = {"id", "nom", "prénom", "mail", "téléphone", "adresse", "ZIP", "type"};
+            tab = tableAdd.Tab(co, t, request);
+        }
+        return tab;
     }
 }

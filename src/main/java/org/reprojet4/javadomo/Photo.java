@@ -48,7 +48,22 @@ public class Photo {
 
     }
 
+    JTable tab = new JTable();
+
     public void Delete(int id){
 
+    }
+    public JTable DeleteAdd(String role, Connection co){
+        if (role.equals("admin")) {
+            String request = "SELECT photo_id, C.cam_name, photo_image, photo_date " +
+                    "FROM photo AS P " +
+                    "LEFT JOIN caminstall AS C " +
+                    "ON C.cam_id = P.photo_cam_id " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = C.cam_room_id;";
+            String[] t = {"id", "camera", "path", "date"};
+            tab = tableAdd.Tab(co, t, request);
+        }
+        return tab;
     }
 }

@@ -589,6 +589,9 @@ public class Window{
     int selection2;
     int selection3;
     int selection4;
+    int row;
+    int valuetab;
+    String valtab;
     Integer obj1;
 
     private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co, String buttext){
@@ -607,12 +610,16 @@ public class Window{
             win1.add(therm1);
             win1.add(therm2);
             win1.add(AddPlusScroll);
+        }else if (buttext == "Delete"){
+            delTable = new JScrollPane(delTab);
+            win2.add(delTable);
         }
         win1.add(bvalid4);
         win3.add(bre);
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win3);
+        wincol1.add(win4);
         panel.add(wincol1);
         window.add(panel);
         scroll.addActionListener(new ActionListener() {
@@ -661,6 +668,16 @@ public class Window{
                         window.repaint();
                         break;
                     case "Delete":
+                        win2.removeAll();
+                        try {
+                            DelOption(table, id, role, co);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                        win2.revalidate();
+                        win2.repaint();
+                        window.revalidate();
+                        window.repaint();
                         break;
                 }
             }
@@ -674,6 +691,7 @@ public class Window{
                 selection2 = AddPlusScroll.getSelectedIndex() + 1;
                 selection3 = therm1.getSelectedIndex() + 1;
                 selection4 = therm2.getSelectedIndex() + 1;
+                row = delTab.getSelectedRow();
                 switch (buttext){
                     case "Request":
                         DTable = request.Request(id, role, co, table, orderby);
@@ -689,6 +707,28 @@ public class Window{
                         }
                         break;
                     case "Delete":
+                        win4.removeAll();
+                        if (row > 0){
+                            valtab = delTab.getValueAt(row, 0).toString();
+                            valuetab = Integer.parseInt(valtab);
+
+                            win2.removeAll();
+                            try {
+                                DelOption(table, id, role, co);
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                            win2.revalidate();
+                            win2.repaint();
+                            window.revalidate();
+                            window.repaint();
+                        }else{
+                            win4.add(new JLabel("Select an element to delete"));
+                            win4.revalidate();
+                            win4.repaint();
+                            window.revalidate();
+                            window.repaint();
+                        }
                         break;
                 }
             }
@@ -702,6 +742,75 @@ public class Window{
         window.revalidate();
         window.repaint();
         window.setVisible(true);
+    }
+
+    JTable delTab = new JTable();
+    JScrollPane delTable = new JScrollPane();
+    PersonalUser personalUser = new PersonalUser();
+    Photo photo = new Photo();
+    Room room = new Room();
+
+    private void DelOption(int table, int id, String role, Connection co) throws SQLException {
+        switch (table){
+            case 0:
+                delTab = ampConnect.DeleteAdd(id, role, co);
+                delTable = new JScrollPane(delTab);
+                win2.add(delTable);
+                break;
+            case 1:
+                delTab = camInstall.DeleteAdd(id, role, co);
+                delTable = new JScrollPane(delTab);
+                win2.add(delTable);
+                break;
+            case 2:
+                delTab = datamp.DeleteAdd(id, role, co);
+                delTable = new JScrollPane(delTab);
+                win2.add(delTable);
+                break;
+            case 3:
+                delTab = datatemp.DeleteAdd(id, role, co);
+                delTable = new JScrollPane(delTab);
+                win2.add(delTable);
+                break;
+            case 4:
+                delTab = food.DeleteAdd(id, role, co);
+                delTable = new JScrollPane(delTab);
+                win2.add(delTable);
+                break;
+            case 5:
+                if (role.equals("admin")){
+                    delTab = personalUser.DeleteAdd(role, co);
+                    delTable = new JScrollPane(delTab);
+                    win2.add(delTable);
+                }else{
+                    win2.add(new JLabel("You can't delete other user"));
+                }
+                break;
+            case 6:
+                if (role.equals("admin")){
+                    delTab = photo.DeleteAdd(role, co);
+                    delTable = new JScrollPane(delTab);
+                    win2.add(delTable);
+                }else{
+                    win2.add(new JLabel("You can't delete any photo"));
+                }
+                break;
+            case 7:
+                delTab = room.DeleteAdd(id, role, co);
+                delTable = new JScrollPane(delTab);
+                win2.add(delTable);
+                break;
+            case 8:
+                delTab = sensor.DeleteAdd(id, role, co);
+                delTable = new JScrollPane(delTab);
+                win2.add(delTable);
+                break;
+            case 9:
+                delTab = thermoIntel.DeleteAdd(id, role, co);
+                delTable = new JScrollPane(delTab);
+                win2.add(delTable);
+                break;
+        }
     }
 
     String[] orderAmpConnect = {"order add", "name", "room", "status", "color", "time on", "time off"};
