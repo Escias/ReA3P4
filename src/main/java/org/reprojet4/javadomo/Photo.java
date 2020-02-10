@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Photo {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -40,7 +40,7 @@ public class Photo {
                 "ON R.room_id = C.cam_room_id " +
                 " ORDER BY " + order +" ASC;";
         String[] t = {"id", "camera", "path", "date"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 

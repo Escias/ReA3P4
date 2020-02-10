@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Request {
-    JScrollPane DTable = new JScrollPane();
+    JTable DTable = new JTable();
 
     AmpConnect ampConnect = new AmpConnect();
     CamInstall camInstall = new CamInstall();
@@ -18,7 +18,7 @@ public class Request {
     Sensor sensor = new Sensor();
     ThermoIntel thermoIntel = new ThermoIntel();
 
-    public JScrollPane Request(int id, String role, Connection co, int table, int orderby){
+    public JTable Request(int id, String role, Connection co, int table, int orderby){
         DTable.removeAll();
         DTable.revalidate();
         DTable.repaint();
@@ -127,10 +127,10 @@ public class Request {
         }
     }
 
-    public void Delete(int table, int id, int valuetab, String role, Connection co){
+    public void Delete(int table, int valuetab, Connection co) throws SQLException {
         switch (table){
             case 0:
-                ampConnect.Delete(id);
+                ampConnect.Delete(valuetab, co);
                 break;
             case 1:
                 break;

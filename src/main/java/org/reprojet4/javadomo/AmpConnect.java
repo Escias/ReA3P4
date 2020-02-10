@@ -10,11 +10,11 @@ import java.util.List;
 
 public class AmpConnect {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -58,7 +58,7 @@ public class AmpConnect {
                 "ON R.room_id = A.amp_room_id " +
                 " ORDER BY "+ order +" ASC;";
         String[] t = {"id", "name", "room", "status", "color", "activation time", "extinction time"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 //
@@ -108,8 +108,10 @@ public class AmpConnect {
 //
     JTable tab = new JTable();
 
-    public void Delete(int id){
-
+    public void Delete(int id, Connection co) throws SQLException {
+        String request = "DELETE FROM ampconnect WHERE amp_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
     }
     public JTable DeleteAdd(int id, String role, Connection co){
         if (role.equals("admin")) {

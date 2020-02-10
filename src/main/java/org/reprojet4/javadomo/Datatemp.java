@@ -12,11 +12,11 @@ import java.util.List;
 
 public class Datatemp {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -47,7 +47,7 @@ public class Datatemp {
                 "ON R.room_id = S.sensor_room_id " +
                 " ORDER BY " + order +" ASC;";
         String[] t = {"id", "capteur", "température", "date et heure"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 

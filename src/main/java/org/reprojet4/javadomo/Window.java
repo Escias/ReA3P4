@@ -509,18 +509,14 @@ public class Window{
         discoFrame.setVisible(true);
     }
 
-    JButton bdelitem = new JButton("Delete an Item");
     JButton badditem = new JButton("Add Item");
-    JButton blistitem = new JButton("List Items");
-    JButton bupitem = new JButton("Update Items");
+    JButton blistitem = new JButton("Item management");
     JButton breturn5 = new JButton("Return");
 
     private void Management(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
-        win1.add(bdelitem);
         win2.add(badditem);
         win3.add(blistitem);
-        win4.add(bupitem);
         win5.add(breturn5);
         wincol1.add(win1);
         wincol1.add(win2);
@@ -529,28 +525,16 @@ public class Window{
         wincol1.add(win5);
         panel.add(wincol1);
         window.add(panel);
-        bdelitem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DelItem(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
-            }
-        });
         badditem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddItem(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                InsertItem(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
         blistitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ListItem(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
-            }
-        });
-        bupitem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                UpItem(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                SelectTab(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co, buttext);
             }
         });
         breturn5.addActionListener(new ActionListener() {
@@ -562,28 +546,13 @@ public class Window{
         window.setVisible(true);
     }
 
-    private void DelItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        String buttext = "Delete";
-        SelectTab(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co, buttext);
-    }
-
-    private void AddItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        String buttext = "Insert";
-        SelectTab(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co, buttext);
-    }
-
-    private void ListItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        String buttext = "Request";
-        SelectTab(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co, buttext);
-    }
-
-    private void UpItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        String buttext = "Update";
-        SelectTab(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co, buttext);
-    }
-
     JButton bre = new JButton("return");
-    JButton bvalid4 = new JButton("Validate");
+    JButton bre2 = new JButton("return");
+    JButton bselectitem = new JButton("Select Table");
+    JButton bdeleteitem = new JButton("Delete selected item");
+    JButton bupdateitem = new JButton("Update selected item");
+    JButton bvaliditem = new JButton("Update selected item");
+    JButton baddnewitem = new JButton("Validate");
     int orderby;
     int selection1;
     int selection2;
@@ -594,28 +563,21 @@ public class Window{
     String valtab;
     Integer obj1;
 
-    private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co, String buttext){
+    private void InsertItem (int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
         win1.add(scroll);
-        if (buttext == "Request"){
-            win1.add(ListScroll);
-        }else if (buttext == "Insert"){
-            DefaultTableModel aModel = (DefaultTableModel) tableAdd.getModel();
-            aModel.setColumnIdentifiers(column);
-            tableAdd.setModel(aModel);
-            paneAdd = new JScrollPane(tableAdd);
-            paneAdd.setSize(5, 10);
-            win2.add(paneAdd);
-            win1.add(AddScroll);
-            win1.add(therm1);
-            win1.add(therm2);
-            win1.add(AddPlusScroll);
-        }else if (buttext == "Delete"){
-            delTable = new JScrollPane(delTab);
-            win2.add(delTable);
-        }
-        win1.add(bvalid4);
-        win3.add(bre);
+        DefaultTableModel aModel = (DefaultTableModel) tableAdd.getModel();
+        aModel.setColumnIdentifiers(column);
+        tableAdd.setModel(aModel);
+        paneAdd = new JScrollPane(tableAdd);
+        paneAdd.setSize(5, 10);
+        win2.add(paneAdd);
+        win1.add(AddScroll);
+        win1.add(therm1);
+        win1.add(therm2);
+        win1.add(AddPlusScroll);
+        win1.add(baddnewitem);
+        win3.add(bre2);
         wincol1.add(win1);
         wincol1.add(win2);
         wincol1.add(win3);
@@ -627,62 +589,33 @@ public class Window{
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
                 obj1 = table;
-                switch (buttext){
-                    case "Request":
-                        table = scroll.getSelectedIndex();
-                        win1.removeAll();
-                        win2.removeAll();
-                        win1.add(scroll);
-                        ListOption(table);
-                        win1.add(bvalid4);
-                        win2.add(paneAdd);
-                        window.revalidate();
-                        window.repaint();
-                        break;
-                    case "Update":
-                        break;
-                    case "Insert":
-                        table = scroll.getSelectedIndex();
-                        win1.removeAll();
-                        win2.removeAll();
-                        win1.add(scroll);
-                        try {
-                            column = AddOption(id, co, role, table);
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
-                        DefaultTableModel aModel = (DefaultTableModel) tableAdd.getModel();
-                        aModel.setColumnIdentifiers(column);
-                        tableAdd.setModel(aModel);
-                        paneAdd = new JScrollPane(tableAdd);
-                        paneAdd.setSize(5, 10);
-                        if (obj1.equals(0) || obj1.equals(1) || obj1.equals(3) || obj1.equals(4) || obj1.equals(5) || obj1.equals(7) || obj1.equals(8) || obj1.equals(9)){
-                            win2.add(paneAdd);
-                        }
-                        win1.add(bvalid4);
-                        win1.revalidate();
-                        win1.repaint();
-                        win2.revalidate();
-                        win2.repaint();
-                        window.revalidate();
-                        window.repaint();
-                        break;
-                    case "Delete":
-                        win2.removeAll();
-                        try {
-                            DelOption(table, id, role, co);
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
-                        win2.revalidate();
-                        win2.repaint();
-                        window.revalidate();
-                        window.repaint();
-                        break;
+                table = scroll.getSelectedIndex();
+                win1.removeAll();
+                win2.removeAll();
+                win1.add(scroll);
+                try {
+                    column = AddOption(id, co, role, table);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
+                DefaultTableModel aModel = (DefaultTableModel) tableAdd.getModel();
+                aModel.setColumnIdentifiers(column);
+                tableAdd.setModel(aModel);
+                paneAdd = new JScrollPane(tableAdd);
+                paneAdd.setSize(5, 10);
+                if (obj1.equals(0) || obj1.equals(1) || obj1.equals(3) || obj1.equals(4) || obj1.equals(5) || obj1.equals(7) || obj1.equals(8) || obj1.equals(9)){
+                    win2.add(paneAdd);
+                }
+                win1.add(baddnewitem);
+                win1.revalidate();
+                win1.repaint();
+                win2.revalidate();
+                win2.repaint();
+                window.revalidate();
+                window.repaint();
             }
         });
-        bvalid4.addActionListener(new ActionListener() {
+        baddnewitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
@@ -691,45 +624,114 @@ public class Window{
                 selection2 = AddPlusScroll.getSelectedIndex() + 1;
                 selection3 = therm1.getSelectedIndex() + 1;
                 selection4 = therm2.getSelectedIndex() + 1;
-                row = delTab.getSelectedRow();
-                switch (buttext){
-                    case "Request":
-                        DTable = request.Request(id, role, co, table, orderby);
-                        DisplayTable(DTable);
-                        break;
-                    case "Update":
-                        break;
-                    case "Insert":
+                row = tablist.getSelectedRow();
+                try {
+                    request.Insert(id, role, co, table, tableAdd, selection1, selection2, selection3, selection4);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        bre2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Management(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+            }
+        });
+        window.revalidate();
+        window.repaint();
+        window.setVisible(true);
+    }
+
+    JTable tablist = new JTable();
+
+    private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co, String buttext){
+        RemoveAll();
+        win1.add(scroll);
+        win1.add(ListScroll);
+        win1.add(bselectitem);
+        win1.add(bupdateitem);
+        win1.add(bdeleteitem);
+        tablist = request.Request(id, role, co, table, orderby);
+        DisplayTable(tablist);
+        win2.add(DTable);
+        win3.add(bre);
+        wincol1.add(win1);
+        wincol1.add(win2);
+        wincol1.add(win3);
+        wincol1.add(win4);
+        panel.add(wincol1);
+        window.add(panel);
+        scroll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                table = scroll.getSelectedIndex();
+                orderby = ListScroll.getSelectedIndex();
+                tablist = request.Request(id, role, co, table, orderby);
+                win1.removeAll();
+                win2.removeAll();
+                win1.add(scroll);
+                ListOption(table);
+                win1.add(bselectitem);
+                win1.add(bupdateitem);
+                win1.add(bdeleteitem);
+                win3.add(bre);
+                DisplayTable(tablist);
+                window.revalidate();
+                window.repaint();
+            }
+        });
+        bselectitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                win2.removeAll();
+                table = scroll.getSelectedIndex();
+                orderby = ListScroll.getSelectedIndex();
+                row = tablist.getSelectedRow();
+                tablist = request.Request(id, role, co, table, orderby);
+                DisplayTable(tablist);
+            }
+        });
+        bupdateitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        bdeleteitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                row = tablist.getSelectedRow();
+                orderby = ListScroll.getSelectedIndex();
+                win4.removeAll();
+                if (role.equals("admin")){
+                    if (row > 0){
+                        valtab = tablist.getValueAt(row, 0).toString();
+                        valuetab = Integer.parseInt(valtab);
                         try {
-                            request.Insert(id, role, co, table, tableAdd, selection1, selection2, selection3, selection4);
+                            request.Delete(table, valuetab, co);
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
-                        break;
-                    case "Delete":
-                        win4.removeAll();
-                        if (row > 0){
-                            valtab = delTab.getValueAt(row, 0).toString();
-                            valuetab = Integer.parseInt(valtab);
-
-                            win2.removeAll();
-                            try {
-                                DelOption(table, id, role, co);
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                            }
-                            win2.revalidate();
-                            win2.repaint();
-                            window.revalidate();
-                            window.repaint();
-                        }else{
-                            win4.add(new JLabel("Select an element to delete"));
-                            win4.revalidate();
-                            win4.repaint();
-                            window.revalidate();
-                            window.repaint();
+                        win2.removeAll();
+                        try {
+                            DelOption(table, role, co, orderby);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
                         }
-                        break;
+                        win2.revalidate();
+                        win2.repaint();
+                        window.revalidate();
+                        window.repaint();
+                    }else{
+                        win4.add(new JLabel("Select an element to delete"));
+                        win4.revalidate();
+                        win4.repaint();
+                        window.revalidate();
+                        window.repaint();
+                    }
+                }else{
+                    win4.add(new JLabel("Ask an admin to delete an element"));
                 }
             }
         });
@@ -744,71 +746,71 @@ public class Window{
         window.setVisible(true);
     }
 
-    JTable delTab = new JTable();
-    JScrollPane delTable = new JScrollPane();
     PersonalUser personalUser = new PersonalUser();
     Photo photo = new Photo();
     Room room = new Room();
 
-    private void DelOption(int table, int id, String role, Connection co) throws SQLException {
+    private void DelOption(int table, String role, Connection co, int orderby) throws SQLException {
         switch (table){
             case 0:
-                delTab = ampConnect.DeleteAdd(id, role, co);
-                delTable = new JScrollPane(delTab);
-                win2.add(delTable);
+                tablist = ampConnect.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 1:
-                delTab = camInstall.DeleteAdd(id, role, co);
-                delTable = new JScrollPane(delTab);
-                win2.add(delTable);
+                tablist = camInstall.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 2:
-                delTab = datamp.DeleteAdd(id, role, co);
-                delTable = new JScrollPane(delTab);
-                win2.add(delTable);
+                tablist = datamp.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 3:
-                delTab = datatemp.DeleteAdd(id, role, co);
-                delTable = new JScrollPane(delTab);
-                win2.add(delTable);
+                tablist = datatemp.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 4:
-                delTab = food.DeleteAdd(id, role, co);
-                delTable = new JScrollPane(delTab);
-                win2.add(delTable);
+                tablist = food.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 5:
-                if (role.equals("admin")){
-                    delTab = personalUser.DeleteAdd(role, co);
-                    delTable = new JScrollPane(delTab);
-                    win2.add(delTable);
-                }else{
-                    win2.add(new JLabel("You can't delete other user"));
-                }
+                tablist = personalUser.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 6:
-                if (role.equals("admin")){
-                    delTab = photo.DeleteAdd(role, co);
-                    delTable = new JScrollPane(delTab);
-                    win2.add(delTable);
-                }else{
-                    win2.add(new JLabel("You can't delete any photo"));
-                }
+                tablist = photo.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 7:
-                delTab = room.DeleteAdd(id, role, co);
-                delTable = new JScrollPane(delTab);
-                win2.add(delTable);
+                tablist = room.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 8:
-                delTab = sensor.DeleteAdd(id, role, co);
-                delTable = new JScrollPane(delTab);
-                win2.add(delTable);
+                tablist = sensor.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
             case 9:
-                delTab = thermoIntel.DeleteAdd(id, role, co);
-                delTable = new JScrollPane(delTab);
-                win2.add(delTable);
+                tablist = thermoIntel.Request(co, orderby);
+                DisplayTable(tablist);
+                win2.removeAll();
+                win2.add(DTable);
                 break;
         }
     }
@@ -1069,10 +1071,11 @@ public class Window{
 
     JScrollPane DTable = new JScrollPane();
 
-    private void DisplayTable(JScrollPane DTable){
+    private void DisplayTable(JTable tablist){
         RemoveTable();
-        win3.add(DTable);
-        wincol1.add(win3);
+        DTable = new JScrollPane(tablist);
+        win2.add(DTable);
+        wincol1.add(win2);
         panel.add(wincol1);
         window.revalidate();
         window.repaint();

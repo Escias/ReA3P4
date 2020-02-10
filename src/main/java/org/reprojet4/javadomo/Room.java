@@ -7,11 +7,11 @@ import java.sql.Statement;
 
 public class Room {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -33,7 +33,7 @@ public class Room {
                 "FROM room " +
                 " ORDER BY " + order +" ASC;";
         String[] t = {"id", "name", "user", "description"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 

@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Food {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -48,7 +48,7 @@ public class Food {
                 "ON R.room_id = F.food_room_id " +
                 " ORDER BY " + order +" ASC;";
         String[] t = {"id", "salle", "nom", "péremption", "quantité"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 
