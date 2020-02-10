@@ -135,36 +135,9 @@ public class ThermoIntel {
         return ls1;
     }
 
-    JTable tab = new JTable();
-
-    public void Delete(int id){
-
-    }
-    public JTable DeleteAdd(int id, String role, Connection co){
-        if (role.equals("admin")) {
-            String request = "SELECT thermo_id, R.room_name, thermo_name, thermo_temp_target, thermo_status, " +
-                    "(SELECT sensor_name FROM sensor as S WHERE S.sensor_id = T.thermo_id_1) as nom_1, " +
-                    "(SELECT sensor_name FROM sensor as S WHERE S.sensor_id = T.thermo_id_2) as nom_2 " +
-                    "FROM thermointel as T " +
-                    "LEFT JOIN sensor as S " +
-                    "ON T.thermo_name = S.sensor_name " +
-                    "LEFT JOIN room as R " +
-                    "ON R.room_id = T.thermo_room_id;";
-            String[] t = {"id", "room", "name", "temp. target", "status", "sensor 1", "sensor 2"};
-            tab = tableAdd.Tab(co, t, request);
-        } else {
-            String request = "SELECT thermo_id, R.room_name, thermo_name, thermo_temp_target, thermo_status, " +
-                    "(SELECT sensor_name FROM sensor as S WHERE S.sensor_id = T.thermo_id_1) as nom_1, " +
-                    "(SELECT sensor_name FROM sensor as S WHERE S.sensor_id = T.thermo_id_2) as nom_2 " +
-                    "FROM thermointel as T " +
-                    "LEFT JOIN sensor as S " +
-                    "ON T.thermo_name = S.sensor_name " +
-                    "LEFT JOIN room as R " +
-                    "ON R.room_id = T.thermo_room_id " +
-                    "WHERE R.room_user_id = " + id + ";";
-            String[] t = {"id", "room", "name", "temp. target", "status", "sensor 1", "sensor 2"};
-            tab = tableAdd.Tab(co, t, request);
-        }
-        return tab;
+    public void Delete(int id, Connection co) throws SQLException {
+        String request = "DELETE FROM thermointel WHERE thermo_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
     }
 }

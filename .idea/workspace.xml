@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="160fceb7-af8d-46f4-9dfb-873d56164528" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Request.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/AmpConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/AmpConnect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/CamInstall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/CamInstall.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Datamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Datamp.java" afterDir="false" />
@@ -14,11 +9,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Food.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/PersonalUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/PersonalUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Photo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Sensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Sensor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/ThermoIntel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/ThermoIntel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +99,7 @@
       <workItem from="1580890015397" duration="22126000" />
       <workItem from="1580976554998" duration="21450000" />
       <workItem from="1581062099225" duration="19625000" />
-      <workItem from="1581322262522" duration="7171000" />
+      <workItem from="1581322262522" duration="7751000" />
     </task>
     <servers />
   </component>

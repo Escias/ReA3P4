@@ -93,28 +93,9 @@ public class Sensor {
         return ls;
     }
 
-    JTable tab = new JTable();
-
-    public void Delete(int id){
-
-    }
-    public JTable DeleteAdd(int id, String role, Connection co){
-        if (role.equals("admin")) {
-            String request = "SELECT sensor_id, sensor_name, R.room_name, sensor_status, sensor_interval, sensor_temp_min, sensor_temp_max " +
-                    "FROM sensor AS S " +
-                    "LEFT JOIN room AS R " +
-                    "ON R.room_id = S.sensor_room_id;";
-            String[] t = {"id", "name", "room", "status", "interval (s)", "temp. min", "temp. max"};
-            tab = tableAdd.Tab(co, t, request);
-        } else {
-            String request = "SELECT sensor_id, sensor_name, R.room_name, sensor_status, sensor_interval, sensor_temp_min, sensor_temp_max " +
-                    "FROM sensor AS S " +
-                    "LEFT JOIN room AS R " +
-                    "ON R.room_id = S.sensor_room_id " +
-                    "WHERE R.room_user_id = " + id + ";";
-            String[] t = {"id", "name", "room", "status", "interval (s)", "temp. min", "temp. max"};
-            tab = tableAdd.Tab(co, t, request);
-        }
-        return tab;
+    public void Delete(int id, Connection co) throws SQLException {
+        String request = "DELETE FROM sensor WHERE sensor_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
     }
 }

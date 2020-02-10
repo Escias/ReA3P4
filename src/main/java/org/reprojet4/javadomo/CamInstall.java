@@ -103,28 +103,9 @@ public class CamInstall {
         return ls;
     }
 
-    JTable tab = new JTable();
-
-    public void Delete(int id){
-
-    }
-    public JTable DeleteAdd(int id, String role, Connection co){
-        if (role.equals("admin")) {
-            String request = "SELECT cam_id, cam_name " +
-                    "FROM caminstall AS C " +
-                    "LEFT JOIN room AS R " +
-                    "ON R.room_id = C.cam_room_id;";
-            String[] t = {"id", "name"};
-            tab = tableAdd.Tab(co, t, request);
-        } else {
-            String request = "SELECT cam_id, cam_name " +
-                    "FROM caminstall AS C " +
-                    "LEFT JOIN room AS R " +
-                    "ON R.room_id = C.cam_room_id " +
-                    "WHERE R.room_user_id = " + id + ";";
-            String[] t = {"id", "name"};
-            tab = tableAdd.Tab(co, t, request);
-        }
-        return tab;
+    public void Delete(int id, Connection co) throws SQLException {
+        String request = "DELETE FROM caminstall WHERE cam_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
     }
 }

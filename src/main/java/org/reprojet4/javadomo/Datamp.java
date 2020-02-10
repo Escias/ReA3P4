@@ -94,32 +94,9 @@ public class Datamp {
         return ls;
     }
 
-    JTable tab = new JTable();
-
-    public void Delete(int id){
-
-    }
-    public JTable DeleteAdd(int id, String role, Connection co){
-        if (role.equals("admin")) {
-            String request = "SELECT datamp_id, A.amp_name, datamp_action, datamp_datetime " +
-                    "FROM datamp AS D " +
-                    "LEFT JOIN ampconnect AS A " +
-                    "ON A.amp_id = D.datamp_amp_id " +
-                    "LEFT JOIN room AS R " +
-                    "ON R.room_id = A.amp_room_id;";
-            String[] t = {"id", "bulb", "action", "date and hour"};
-            tab = tableAdd.Tab(co, t, request);
-        } else {
-            String request = "SELECT datamp_id, A.amp_name, datamp_action, datamp_datetime " +
-                    "FROM datamp AS D " +
-                    "LEFT JOIN ampconnect AS A " +
-                    "ON A.amp_id = D.datamp_amp_id " +
-                    "LEFT JOIN room AS R " +
-                    "ON R.room_id = A.amp_room_id " +
-                    "WHERE R.room_user_id = " + id + ";";
-            String[] t = {"id", "bulb", "action", "date and hour"};
-            tab = tableAdd.Tab(co, t, request);
-        }
-        return tab;
+    public void Delete(int id, Connection co) throws SQLException {
+        String request = "DELETE FROM datamp WHERE datamp_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
     }
 }
