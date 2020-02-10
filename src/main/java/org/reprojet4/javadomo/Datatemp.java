@@ -51,10 +51,6 @@ public class Datatemp {
         return table;
     }
 
-    public void Update(int id){
-
-    }
-
     List<String> ls = new ArrayList<>();
 
     public void Insert(int selection1, String value1, Connection co) throws SQLException {

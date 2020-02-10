@@ -62,8 +62,37 @@ public class AmpConnect {
         return table;
     }
 //
-    public void Update(int id){
-
+    public void Update(int id, Connection co, String value1, String value2, String value3, String value4, int selection1, int selection2) throws SQLException {
+        Integer obj1 = selection2;
+        if (obj1.equals(1)){
+            stat = "on";
+        }else if (obj1.equals(2)){
+            stat = "off";
+        }else if (obj1.equals(3)){
+            stat = "scheduled";
+        }
+        String request = "Update ampconnect " +
+                "SET amp_name = '"+value1+"', amp_room_id = '"+selection1+"', amp_status = '"+stat+"', amp_color = '"+value2+"', amp_time_on = '"+value3+"', amp_time_off = '"+value4+"' " +
+                "WHERE amp_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
+    }
+    public JTable UpdateAdd(Connection co, int id, String role){
+        if (role.equals("admin")){
+            String request = "SELECT amp_id, amp_name, amp_color, amp_time_on, amp_time_off " +
+                    "FROM ampconnect;";
+            String[] t = {"id", "name", "color", "activation time", "extinction time"};
+            table = tableAdd.Tab(co, t, request);
+        }else{
+            String request = "SELECT amp_id, amp_name, amp_color, amp_time_on, amp_time_off " +
+                    "FROM ampconnect AS A " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = A.amp_room_id " +
+                    "WHERE R.room_user_id = "+id+";";
+            String[] t = {"id", "name", "color", "activation time", "extinction time"};
+            table = tableAdd.Tab(co, t, request);
+        }
+        return table;
     }
 //
     List<String> ls = new ArrayList<>();

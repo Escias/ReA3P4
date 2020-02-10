@@ -44,10 +44,6 @@ public class Photo {
         return table;
     }
 
-    public void Update(int id){
-
-    }
-
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM photo WHERE photo_id = "+id+";";
         Statement stm = co.createStatement();
