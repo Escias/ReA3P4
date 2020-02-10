@@ -106,30 +106,10 @@ public class AmpConnect {
         return ls;
     }
 //
-    JTable tab = new JTable();
 
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM ampconnect WHERE amp_id = "+id+";";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
-    }
-    public JTable DeleteAdd(int id, String role, Connection co){
-        if (role.equals("admin")) {
-            String request = "SELECT amp_id, amp_name " +
-                    "FROM ampconnect AS A " +
-                    "LEFT JOIN room AS R " +
-                    "ON R.room_id = A.amp_room_id;";
-            String[] t = {"id", "name"};
-            tab = tableAdd.Tab(co, t, request);
-        } else {
-            String request = "SELECT amp_id, amp_name " +
-                    "FROM ampconnect AS A " +
-                    "LEFT JOIN room AS R " +
-                    "ON R.room_id = A.amp_room_id " +
-                    "WHERE R.room_user_id = " + id + ";";
-            String[] t = {"id", "name"};
-            tab = tableAdd.Tab(co, t, request);
-        }
-        return tab;
     }
 }
