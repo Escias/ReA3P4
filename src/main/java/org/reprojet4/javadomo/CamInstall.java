@@ -10,11 +10,11 @@ import java.util.List;
 
 public class CamInstall {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -58,7 +58,7 @@ public class CamInstall {
                 "ON R.room_id = C.cam_room_id " +
                 " ORDER BY "+ order +" ASC;";
         String[] t = {"id", "name", "room", "status", "distance", "begin", "end"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 
@@ -103,7 +103,28 @@ public class CamInstall {
         return ls;
     }
 
+    JTable tab = new JTable();
+
     public void Delete(int id){
 
+    }
+    public JTable DeleteAdd(int id, String role, Connection co){
+        if (role.equals("admin")) {
+            String request = "SELECT cam_id, cam_name " +
+                    "FROM caminstall AS C " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = C.cam_room_id;";
+            String[] t = {"id", "name"};
+            tab = tableAdd.Tab(co, t, request);
+        } else {
+            String request = "SELECT cam_id, cam_name " +
+                    "FROM caminstall AS C " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = C.cam_room_id " +
+                    "WHERE R.room_user_id = " + id + ";";
+            String[] t = {"id", "name"};
+            tab = tableAdd.Tab(co, t, request);
+        }
+        return tab;
     }
 }

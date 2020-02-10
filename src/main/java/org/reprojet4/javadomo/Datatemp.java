@@ -1,5 +1,7 @@
 package org.reprojet4.javadomo;
 
+import jdk.nashorn.internal.runtime.JSType;
+
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,11 +12,11 @@ import java.util.List;
 
 public class Datatemp {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -45,7 +47,7 @@ public class Datatemp {
                 "ON R.room_id = S.sensor_room_id " +
                 " ORDER BY " + order +" ASC;";
         String[] t = {"id", "capteur", "température", "date et heure"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 
@@ -88,7 +90,32 @@ public class Datatemp {
         return ls;
     }
 
+    JTable tab = new JTable();
+
     public void Delete(int id){
 
+    }
+    public JTable DeleteAdd(int id, String role, Connection co){
+        if (role.equals("admin")) {
+            String request = "SELECT datatemp_id, S.sensor_name, datatemp_temp, datatemp_time " +
+                    "FROM datatemp AS D " +
+                    "LEFT JOIN sensor AS S " +
+                    "ON S.sensor_id = D.datatemp_sensor_id " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = S.sensor_room_id;";
+            String[] t = {"id", "capteur", "température", "date et heure"};
+            tab = tableAdd.Tab(co, t, request);
+        } else {
+            String request = "SELECT datatemp_id, S.sensor_name, datatemp_temp, datatemp_time " +
+                    "FROM datatemp AS D " +
+                    "LEFT JOIN sensor AS S " +
+                    "ON S.sensor_id = D.datatemp_sensor_id " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = S.sensor_room_id " +
+                    "WHERE R.room_user_id = " + id + ";";
+            String[] t = {"id", "capteur", "température", "date et heure"};
+            tab = tableAdd.Tab(co, t, request);
+        }
+        return tab;
     }
 }

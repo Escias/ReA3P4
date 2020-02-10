@@ -7,11 +7,11 @@ import java.sql.Statement;
 
 public class PersonalUser {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -32,7 +32,7 @@ public class PersonalUser {
                 "FROM personal_user " +
                 " ORDER BY " + order +" ASC;";
         String[] t = {"id", "nom", "prénom", "mail", "téléphone", "adresse", "ZIP", "type"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 
@@ -55,7 +55,19 @@ public class PersonalUser {
         stm.executeUpdate(request);
     }
 
+    JTable tab = new JTable();
+
     public void Delete(int id){
 
+    }
+    public JTable DeleteAdd(String role, Connection co){
+        if (role.equals("admin")) {
+            String request = "SELECT user_id, user_lastname, user_firstname, user_mail, user_phone, user_adress, user_ZIP, user_type " +
+                    "FROM personal_user " +
+                    "WHERE user_type != 'admin';";
+            String[] t = {"id", "nom", "prénom", "mail", "téléphone", "adresse", "ZIP", "type"};
+            tab = tableAdd.Tab(co, t, request);
+        }
+        return tab;
     }
 }

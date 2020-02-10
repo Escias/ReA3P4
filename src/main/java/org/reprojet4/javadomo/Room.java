@@ -7,11 +7,11 @@ import java.sql.Statement;
 
 public class Room {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -32,8 +32,8 @@ public class Room {
         String request = "SELECT room_id, room_name, room_user_id, room_description " +
                 "FROM room " +
                 " ORDER BY " + order +" ASC;";
-        String[] t = {"name", "description"};
-        table = tableAdd.Table(co, t, request);
+        String[] t = {"id", "name", "user", "description"};
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 
@@ -48,7 +48,24 @@ public class Room {
         stm.executeUpdate(request);
     }
 
+    JTable tab = new JTable();
+
     public void Delete(int id){
 
+    }
+    public JTable DeleteAdd(int id, String role, Connection co){
+        if (role.equals("admin")) {
+            String request = "SELECT room_id, room_name, room_user_id, room_description " +
+                    "FROM room;";
+            String[] t = {"id", "name", "user", "description"};
+            tab = tableAdd.Tab(co, t, request);
+        } else {
+            String request = "SELECT room_id, room_name, room_user_id, room_description " +
+                    "FROM room " +
+                    "WHERE R.room_user_id = " + id + ";";
+            String[] t = {"id", "name", "user", "description"};
+            tab = tableAdd.Tab(co, t, request);
+        }
+        return tab;
     }
 }

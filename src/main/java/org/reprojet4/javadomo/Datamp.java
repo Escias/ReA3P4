@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Datamp {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -45,7 +45,7 @@ public class Datamp {
                 "ON R.room_id = A.amp_room_id " +
                 " ORDER BY "+ order +" ASC;";
         String[] t = {"id", "bulb", "action", "date and hour"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 
@@ -94,7 +94,32 @@ public class Datamp {
         return ls;
     }
 
+    JTable tab = new JTable();
+
     public void Delete(int id){
 
+    }
+    public JTable DeleteAdd(int id, String role, Connection co){
+        if (role.equals("admin")) {
+            String request = "SELECT datamp_id, A.amp_name, datamp_action, datamp_datetime " +
+                    "FROM datamp AS D " +
+                    "LEFT JOIN ampconnect AS A " +
+                    "ON A.amp_id = D.datamp_amp_id " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = A.amp_room_id;";
+            String[] t = {"id", "bulb", "action", "date and hour"};
+            tab = tableAdd.Tab(co, t, request);
+        } else {
+            String request = "SELECT datamp_id, A.amp_name, datamp_action, datamp_datetime " +
+                    "FROM datamp AS D " +
+                    "LEFT JOIN ampconnect AS A " +
+                    "ON A.amp_id = D.datamp_amp_id " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = A.amp_room_id " +
+                    "WHERE R.room_user_id = " + id + ";";
+            String[] t = {"id", "bulb", "action", "date and hour"};
+            tab = tableAdd.Tab(co, t, request);
+        }
+        return tab;
     }
 }

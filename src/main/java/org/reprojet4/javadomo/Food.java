@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Food {
     TableAdd tableAdd = new TableAdd();
-    JScrollPane table = new JScrollPane();
+    JTable table = new JTable();
     boolean check = true;
     String order;
 
-    public JScrollPane Request(Connection co, int orderby){
+    public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
                 if (check == true){
@@ -48,7 +48,7 @@ public class Food {
                 "ON R.room_id = F.food_room_id " +
                 " ORDER BY " + order +" ASC;";
         String[] t = {"id", "salle", "nom", "péremption", "quantité"};
-        table = tableAdd.Table(co, t, request);
+        table = tableAdd.Tab(co, t, request);
         return table;
     }
 
@@ -87,7 +87,29 @@ public class Food {
         return ls;
     }
 
+    JTable tab = new JTable();
+
     public void Delete(int id){
 
+    }
+    public JTable DeleteAdd(int id, String role, Connection co){
+        if (role.equals("admin")) {
+            String request = "SELECT food_id, R.room_name, food_name, food_perempt, food_quantity " +
+                    "FROM food AS F " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = F.food_room_id;";
+            String[] t = {"id", "salle", "nom", "péremption", "quantité"};
+            tab = tableAdd.Tab(co, t, request);
+
+        } else {
+            String request = "SELECT food_id, R.room_name, food_name, food_perempt, food_quantity " +
+                    "FROM food AS F " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = F.food_room_id " +
+                    "WHERE R.room_user_id = " + id + ";";
+            String[] t = {"id", "salle", "nom", "péremption", "quantité"};
+            tab = tableAdd.Tab(co, t, request);
+        }
+        return tab;
     }
 }
