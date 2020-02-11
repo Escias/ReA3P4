@@ -316,24 +316,6 @@ public class Window{
         return image;
     }
 
-    String path;
-
-    private void DisplayImage() {
-        try {
-            File file = new File("C:\\demo\\demofile.txt");
-            if (!Desktop.isDesktopSupported()) {
-                System.out.println("not supported");
-                return;
-            }
-            Desktop desktop = Desktop.getDesktop();
-            if (file.exists()) {
-                desktop.open(file);
-            }
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
         boolean checkimg = true;

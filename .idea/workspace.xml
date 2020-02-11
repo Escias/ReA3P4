@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="160fceb7-af8d-46f4-9dfb-873d56164528" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +91,7 @@
       <workItem from="1580976554998" duration="21450000" />
       <workItem from="1581062099225" duration="19625000" />
       <workItem from="1581322262522" duration="23129000" />
-      <workItem from="1581408375863" duration="3492000" />
+      <workItem from="1581408375863" duration="3749000" />
     </task>
     <servers />
   </component>
