@@ -1,10 +1,14 @@
 package org.reprojet4.javadomo;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -106,20 +110,14 @@ public class Window{
         });
         window.setVisible(true);
     }
-    JButton brequest = new JButton("Request");
     JButton bupdate = new JButton("Update");
-    JButton binsert = new JButton("Insert");
-    JButton bdelete = new JButton("Delete");
     JButton bdisconnect = new JButton("Disconnect");
     JButton bvalid1 = new JButton("Validate");
     JButton breturn1 = new JButton("Return");
     private String[] req = {"Ampoule Connectée", "Caméra installée", "Donnée Ampoule", "Donnée Thermos", "Nourriture", "Info personnel", "Photo", "Salle", "Capteur", "Thermostats"};
     JComboBox scroll = new JComboBox(req);
     int table;
-    String buttext;
     Request request = new Request();
-
-
     JTextField addlname = new JTextField(10);
     JTextField addfname = new JTextField(10);
     JTextField addlog = new JTextField(20);
@@ -293,10 +291,55 @@ public class Window{
     JButton bsupprofile = new JButton("Delete Profile");
     JButton buppass = new JButton("Change password");
     JButton breturn2 = new JButton("Return");
+    ImageIcon img = new ImageIcon();
+
+    private ImageIcon DisplayImageProfile(boolean checkimg){
+        BufferedImage img = null;
+        ImageIcon image;
+        if (checkimg == true){
+            try {
+                img = ImageIO.read(new File("image/mickey.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Image dimg = img.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+            image = new ImageIcon(dimg);
+        }else {
+            try {
+                img = ImageIO.read(new File("image/mickey.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Image dimg = img.getScaledInstance(800, 350, Image.SCALE_SMOOTH);
+            image = new ImageIcon(dimg);
+        }
+        return image;
+    }
+
+    String path;
+
+    private void DisplayImage() {
+        try {
+            File file = new File("C:\\demo\\demofile.txt");
+            if (!Desktop.isDesktopSupported()) {
+                System.out.println("not supported");
+                return;
+            }
+            Desktop desktop = Desktop.getDesktop();
+            if (file.exists()) {
+                desktop.open(file);
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
-        win1.add(new JLabel(lastname + "  "));
+        boolean checkimg = true;
+        img = DisplayImageProfile(checkimg);
+        win1.add(new JLabel(img));
+        win1.add(new JLabel("   "+lastname + "  "));
         win1.add(new JLabel(firstname));
         win2.add(new JLabel(mail));
         win3.add(new JLabel(phonenumber));
@@ -511,12 +554,14 @@ public class Window{
 
     JButton badditem = new JButton("Add Item");
     JButton blistitem = new JButton("Item management");
+    JButton bupitem = new JButton("Update Item");
     JButton breturn5 = new JButton("Return");
 
     private void Management(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
-        win2.add(badditem);
-        win3.add(blistitem);
+        win2.add(blistitem);
+        win3.add(bupitem);
+        win4.add(badditem);
         win5.add(breturn5);
         wincol1.add(win1);
         wincol1.add(win2);
@@ -534,7 +579,13 @@ public class Window{
         blistitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SelectTab(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co, buttext);
+                SelectTab(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+            }
+        });
+        bupitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UpdateItem(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
             }
         });
         breturn5.addActionListener(new ActionListener() {
@@ -551,7 +602,6 @@ public class Window{
     JButton bselectitem = new JButton("Select Table");
     JButton bdeleteitem = new JButton("Delete selected item");
     JButton bupdateitem = new JButton("Update selected item");
-    JButton bvaliditem = new JButton("Update selected item");
     JButton baddnewitem = new JButton("Validate");
     int orderby;
     int selection1;
@@ -562,6 +612,211 @@ public class Window{
     int valuetab;
     String valtab;
     Integer obj1;
+    JTable tabupdate = new JTable();
+    JButton breturn6 = new JButton("return");
+
+    private void UpdateItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
+        RemoveAll();
+        win1.add(scroll);
+        tabupdate = ampConnect.UpdateAdd(co, id, role);
+        DisplayTable(tabupdate);
+        win1.add(AddScroll);
+        win1.add(therm1);
+        win1.add(therm2);
+        win1.add(AddPlusScroll);
+        win1.add(bupdateitem);
+        win3.add(breturn6);
+        wincol1.add(win1);
+        wincol1.add(win2);
+        wincol1.add(win3);
+        wincol1.add(win4);
+        panel.add(wincol1);
+        window.add(panel);
+        scroll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                table = scroll.getSelectedIndex();
+                obj1 = table;
+                table = scroll.getSelectedIndex();
+                win1.removeAll();
+                win2.removeAll();
+                win1.add(scroll);
+                try {
+                    tabupdate = UpdateOption(table, role, id , co);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                if (obj1.equals(0) || obj1.equals(1) || obj1.equals(3) || obj1.equals(4) || obj1.equals(5) || obj1.equals(7) || obj1.equals(8) || obj1.equals(9)){
+                    DisplayTable(tabupdate);
+                }
+                win1.add(bupdateitem);
+                win1.revalidate();
+                win1.repaint();
+                win2.revalidate();
+                win2.repaint();
+                window.revalidate();
+                window.repaint();
+            }
+        });
+        bupdateitem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                table = scroll.getSelectedIndex();
+                selection1 = AddScroll.getSelectedIndex() + 1;
+                selection2 = AddPlusScroll.getSelectedIndex() + 1;
+                selection3 = therm1.getSelectedIndex() + 1;
+                selection4 = therm2.getSelectedIndex() + 1;
+                row = tablist.getSelectedRow();
+                valtab = tablist.getValueAt(row, 0).toString();
+                valuetab = Integer.parseInt(valtab);
+                try {
+                    request.Update(id, role, co, table, selection1, selection2, selection3, selection4, tabupdate, valuetab);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        breturn6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Management(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+            }
+        });
+        window.revalidate();
+        window.repaint();
+        window.setVisible(true);
+    }
+
+    private JTable UpdateOption(int table, String role, int id, Connection co) throws SQLException {
+        element = null;
+        plus = null;
+        ther1 = null;
+        ther2 = null;
+        ls.clear();
+        thermo1.clear();
+        thermo2.clear();
+        switch (table){
+            case 0: // AmpConnect
+                ls = ampConnect.InsertAdd(id, co, role);
+                element = ls.toArray(new String[ls.size()]);
+                AddScroll = new JComboBox(element);
+                tabupdate = ampConnect.UpdateAdd(co, id, role);
+                plus = new String[3];
+                plus[0] = "on";
+                plus[1] = "off";
+                plus[2] = "scheduled";
+                AddPlusScroll = new JComboBox(plus);
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                win1.add(AddScroll);
+                win1.add(AddPlusScroll);
+                break;
+            case 1: // CamInstall
+                ls = camInstall.InsertAdd(id, co, role);
+                element = ls.toArray(new String[ls.size()]);
+                AddScroll = new JComboBox(element);
+                tabupdate = camInstall.UpdateAdd(co, id, role);
+                plus = new String[2];
+                plus[0] = "on";
+                plus[1] = "off";
+                AddPlusScroll = new JComboBox(plus);
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                win1.add(AddScroll);
+                win1.add(AddPlusScroll);
+                break;
+            case 2: // Datamp
+                win1.remove(tableAdd);
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                win2.add(new JLabel("Unable to change data (Security)"));
+                break;
+            case 3: // Datatemp
+                win2.removeAll();
+                win1.remove(tableAdd);
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                win2.add(new JLabel("Unable to change data (Security)"));
+                break;
+            case 4: // Food
+                ls = food.InsertAdd(id, co, role);
+                element = ls.toArray(new String[ls.size()]);
+                AddScroll = new JComboBox(element);
+                tabupdate = food.UpdateAdd(co, id, role);
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                win1.add(AddScroll);
+                break;
+            case 5: //PersonalUser
+                if (role.equals("admin")){
+                    plus = new String[2];
+                    plus[0] = "admin";
+                    plus[1] = "normal";
+                    AddPlusScroll = new JComboBox(plus);
+                    tabupdate = personalUser.UpdateAdd(co, role);
+                    win1.remove(AddPlusScroll);
+                    win1.remove(AddScroll);
+                    win1.remove(AddPlusScroll);
+                    win1.add(AddPlusScroll);
+                }else {
+                    win1.remove(AddScroll);
+                    win1.remove(AddPlusScroll);
+                    win2.add(new JLabel("Go to your profile to update it"));
+                }
+                break;
+            case 6: // Photo
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                win2.add(new JLabel("Unable to modify photo"));
+                break;
+            case 7: // Room
+                tabupdate = room.UpdateAdd(co, id, role);
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                break;
+            case 8: // Sensor
+                ls = sensor.InsertAdd(id, co, role);
+                element = ls.toArray(new String[ls.size()]);
+                AddScroll = new JComboBox(element);
+                tabupdate = sensor.UpdateAdd(co, id, role);
+                plus = new String[2];
+                plus[0] = "on";
+                plus[1] = "off";
+                AddPlusScroll = new JComboBox(plus);
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                win1.add(AddScroll);
+                win1.add(AddPlusScroll);
+                break;
+            case 9: // ThermoIntel
+                ls = thermoIntel.InsertAdd(id, co, role);
+                element = ls.toArray(new String[ls.size()]);
+                AddScroll = new JComboBox(element);
+                thermo1 = thermoIntel.InsertAdd1(id, co, role);
+                ther1 = thermo1.toArray(new String[thermo1.size()]);
+                therm1 = new JComboBox(ther1);
+                thermo2 = thermoIntel.InsertAdd1(id, co, role);
+                ther2 = thermo2.toArray(new String[thermo2.size()]);
+                therm2 = new JComboBox(ther2);
+                tabupdate = thermoIntel.UpdateAdd(co, id, role);
+                plus = new String[3];
+                plus[0] = "inactif";
+                plus[1] = "chaud";
+                plus[2] = "froid";
+                AddPlusScroll = new JComboBox(plus);
+                win1.remove(AddScroll);
+                win1.remove(AddPlusScroll);
+                win1.add(AddScroll);
+                win1.add(therm1);
+                win1.add(therm2);
+                win1.add(AddPlusScroll);
+                break;
+            default:
+                break;
+        }
+        return tabupdate;
+    }
 
     private void InsertItem (int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
@@ -645,17 +900,24 @@ public class Window{
     }
 
     JTable tablist = new JTable();
+    JButton bphoto = new JButton("Show Photo");
+    String pathimg;
+    Integer obj2;
 
-    private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co, String buttext){
+    private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
         win1.add(scroll);
         win1.add(ListScroll);
         win1.add(bselectitem);
-        win1.add(bupdateitem);
         win1.add(bdeleteitem);
-        tablist = request.Request(id, role, co, table, orderby);
+        tablist = request.Request(co, table, orderby);
         DisplayTable(tablist);
         win2.add(DTable);
+        table = scroll.getSelectedIndex();
+        obj2 = table;
+        if (obj2.equals(2)){
+            win3.add(bphoto);
+        }
         win3.add(bre);
         wincol1.add(win1);
         wincol1.add(win2);
@@ -668,13 +930,12 @@ public class Window{
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
                 orderby = ListScroll.getSelectedIndex();
-                tablist = request.Request(id, role, co, table, orderby);
+                tablist = request.Request(co, table, orderby);
                 win1.removeAll();
                 win2.removeAll();
                 win1.add(scroll);
                 ListOption(table);
                 win1.add(bselectitem);
-                win1.add(bupdateitem);
                 win1.add(bdeleteitem);
                 win3.add(bre);
                 DisplayTable(tablist);
@@ -689,13 +950,8 @@ public class Window{
                 table = scroll.getSelectedIndex();
                 orderby = ListScroll.getSelectedIndex();
                 row = tablist.getSelectedRow();
-                tablist = request.Request(id, role, co, table, orderby);
+                tablist = request.Request(co, table, orderby);
                 DisplayTable(tablist);
-            }
-        });
-        bupdateitem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
             }
         });
         bdeleteitem.addActionListener(new ActionListener() {
@@ -732,6 +988,36 @@ public class Window{
                     }
                 }else{
                     win4.add(new JLabel("Ask an admin to delete an element"));
+                }
+            }
+        });
+        bphoto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                table = scroll.getSelectedIndex();
+                obj2 = table;
+                if (obj2.equals(6)){
+                    row = tablist.getSelectedRow();
+                    valtab = tablist.getValueAt(row, 0).toString();
+                    valuetab = Integer.parseInt(valtab);
+                    try {
+                        pathimg = photo.TakePath(valuetab, co);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    File file = new File(pathimg);
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(file.exists()) {
+                        try {
+                            desktop.open(file);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                 }
             }
         });
@@ -834,51 +1120,62 @@ public class Window{
             case 0:
                 ListScroll = new JComboBox(orderAmpConnect);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 1:
                 ListScroll = new JComboBox(orderCamInstall);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 2:
                 ListScroll = new JComboBox(orderDatAmp);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 3:
                 ListScroll = new JComboBox(orderDataTemp);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 4:
                 ListScroll = new JComboBox(orderFood);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 5:
                 ListScroll = new JComboBox(orderPersonalUser);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 6:
                 ListScroll = new JComboBox(orderPhoto);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
+                win3.add(bphoto);
                 break;
             case 7:
                 ListScroll = new JComboBox(orderRoom);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 8:
                 ListScroll = new JComboBox(orderSensor);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 9:
                 ListScroll = new JComboBox(orderThermoIntel);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             default:
@@ -1088,10 +1385,10 @@ public class Window{
     }
 
     private void RemoveTable(){
-        win3.removeAll();
-        win3.revalidate();
-        win3.repaint();
-        wincol1.remove(win3);
+        win2.removeAll();
+        win2.revalidate();
+        win2.repaint();
+        wincol1.remove(win2);
         wincol1.revalidate();
         wincol1.repaint();
     }

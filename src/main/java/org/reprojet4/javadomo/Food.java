@@ -52,8 +52,29 @@ public class Food {
         return table;
     }
 
-    public void Update(int id){
-
+    public void Update(int id, Connection co, String value1, String value2, String value3, int selection1) throws SQLException {
+        String request = "Update food " +
+                "SET food_room_id = '"+selection1+"', food_name = '"+value1+"', food_perempt = '"+value2+"', food_quantity = '"+value3+"' " +
+                "WHERE food_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
+    }
+    public JTable UpdateAdd(Connection co, int id, String role){
+        if (role.equals("admin")){
+            String request = "SELECT food_id, food_name, food_perempt, food_quantity " +
+                    "FROM food;";
+            String[] t = {"id", "name", "péremption", "quantité"};
+            table = tableAdd.Tab(co, t, request);
+        }else{
+            String request = "SELECT food_id, food_name, food_perempt, food_quantity " +
+                    "FROM food AS F " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = F.food_room_id " +
+                    "WHERE R.room_user_id = "+id+";";
+            String[] t = {"id", "name", "péremption", "quantité"};
+            table = tableAdd.Tab(co, t, request);
+        }
+        return table;
     }
 
     List<String> ls = new ArrayList<>();

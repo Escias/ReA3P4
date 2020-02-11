@@ -62,8 +62,35 @@ public class CamInstall {
         return table;
     }
 
-    public void Update(int id){
-
+    public void Update(int id, Connection co, String value1, String value2, String value3, String value4, int selection1, int selection2) throws SQLException {
+        Integer obj1 = selection2;
+        if (obj1.equals(1)){
+            stat = "on";
+        }else if (obj1.equals(2)){
+            stat = "off";
+        }
+        String request = "Update caminstall " +
+                "SET cam_name = '"+value1+"', cam_room_id = '"+selection1+"', cam_status = '"+stat+"', cam_dist = '"+value2+"', cam_time_begin = '"+value3+"', cam_time_end = '"+value4+"' " +
+                "WHERE cam_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
+    }
+    public JTable UpdateAdd(Connection co, int id, String role){
+        if (role.equals("admin")){
+            String request = "SELECT cam_id, cam_name, cam_dist, cam_time_begin, cam_time_end " +
+                    "FROM caminstall AS C;";
+            String[] t = {"id", "name", "distance", "begin", "end"};
+            table = tableAdd.Tab(co, t, request);
+        }else{
+            String request = "SELECT cam_id, cam_name, R.room_name, cam_status, cam_dist, cam_time_begin, cam_time_end " +
+                    "FROM caminstall AS C " +
+                    "LEFT JOIN room AS R " +
+                    "ON R.room_id = C.cam_room_id " +
+                    "WHERE R.room_user_id = "+id+";";
+            String[] t = {"id", "name", "distance", "begin", "end"};
+            table = tableAdd.Tab(co, t, request);
+        }
+        return table;
     }
 
     List<String> ls = new ArrayList<>();

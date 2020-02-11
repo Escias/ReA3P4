@@ -49,10 +49,6 @@ public class Datamp {
         return table;
     }
 
-    public void Update(int id){
-
-    }
-
     List<String> ls = new ArrayList<>();
     String stat;
 

@@ -37,8 +37,27 @@ public class Room {
         return table;
     }
 
-    public void Update(int id){
-
+    public void Update(int id, Connection co, String value1, String value2, String value3) throws SQLException {
+        String request = "UPDATE room "+
+                "SET room_name = '"+value1+"', room_user_id = '"+value2+"', room_description = '"+value3+"' "+
+                "WHERE room_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
+    }
+    public JTable UpdateAdd(Connection co, int id, String role){
+        if (role.equals("admin")){
+            String request = "SELECT room_id, room_name, room_user_id, room_description " +
+                    "FROM room;";
+            String[] t = {"id", "name", "user", "description"};
+            table = tableAdd.Tab(co, t, request);
+        }else{
+            String request = "SELECT room_id, room_name, room_description " +
+                    "FROM room " +
+                    "WHERE room_user_id = "+id+";";
+            String[] t = {"id", "name", "description"};
+            table = tableAdd.Tab(co, t, request);
+        }
+        return table;
     }
 
     public void Insert(int id, String value1, String value2, Connection co) throws SQLException {

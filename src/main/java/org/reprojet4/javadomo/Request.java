@@ -18,7 +18,7 @@ public class Request {
     Sensor sensor = new Sensor();
     ThermoIntel thermoIntel = new ThermoIntel();
 
-    public JTable Request(int id, String role, Connection co, int table, int orderby){
+    public JTable Request(Connection co, int table, int orderby){
         DTable.removeAll();
         DTable.revalidate();
         DTable.repaint();
@@ -133,24 +133,85 @@ public class Request {
                 ampConnect.Delete(valuetab, co);
                 break;
             case 1:
+                camInstall.Delete(valuetab, co);
                 break;
             case 2:
+                datamp.Delete(valuetab, co);
                 break;
             case 3:
+                datatemp.Delete(valuetab, co);
                 break;
             case 4:
+                food.Delete(valuetab, co);
                 break;
             case 5:
+                personalUser.Delete(valuetab, co);
                 break;
             case 6:
+                photo.Delete(valuetab, co);
                 break;
             case 7:
+                room.Delete(valuetab, co);
                 break;
             case 8:
+                sensor.Delete(valuetab, co);
                 break;
             case 9:
+                thermoIntel.Delete(valuetab, co);
                 break;
         }
+    }
 
+    public void Update(int id, String role, Connection co, int table, int selection1, int selection2, int selection3, int selection4, JTable tabList, int valuetab) throws SQLException {
+        switch (table){
+            case 0:
+                value1 = tabList.getModel().getValueAt(0, 1).toString();
+                value2 = tabList.getModel().getValueAt(0, 2).toString();
+                value3 = tabList.getModel().getValueAt(0, 3).toString();
+                value4 = tabList.getModel().getValueAt(0, 4).toString();
+                ampConnect.Update(valuetab, co, value1, value2, value3, value4, selection1, selection2);
+                break;
+            case 1:
+                value1 = tabList.getModel().getValueAt(0, 1).toString();
+                value2 = tabList.getModel().getValueAt(0, 2).toString();
+                value3 = tabList.getModel().getValueAt(0, 3).toString();
+                value4 = tabList.getModel().getValueAt(0, 4).toString();
+                camInstall.Update(valuetab, co, value1, value2, value3, value4, selection1, selection2);
+                break;
+            case 4:
+                value1 = tabList.getModel().getValueAt(0, 1).toString();
+                value2 = tabList.getModel().getValueAt(0, 2).toString();
+                value3 = tabList.getModel().getValueAt(0, 3).toString();
+                food.Update(valuetab, co, value1, value2, value3, selection1);
+                break;
+            case 5:
+                value1 = tabList.getModel().getValueAt(0, 1).toString();
+                value2 = tabList.getModel().getValueAt(0, 2).toString();
+                value3 = tabList.getModel().getValueAt(0, 3).toString();
+                value4 = tabList.getModel().getValueAt(0, 4).toString();
+                value5 = tabList.getModel().getValueAt(0, 5).toString();
+                value6 = tabList.getModel().getValueAt(0, 6).toString();
+                value7 = tabList.getModel().getValueAt(0, 7).toString();
+                personalUser.Update(valuetab, co, value1, value2 , value3, value4, value5, value6, value7, selection1);
+                break;
+            case 7:
+                value1 = tabList.getModel().getValueAt(0, 1).toString();
+                value2 = tabList.getModel().getValueAt(0, 2).toString();
+                value3 = tabList.getModel().getValueAt(0, 3).toString();
+                room.Update(valuetab, co, value1, value2, value3);
+                break;
+            case 8:
+                value1 = tabList.getModel().getValueAt(0, 1).toString();
+                value2 = tabList.getModel().getValueAt(0, 2).toString();
+                value3 = tabList.getModel().getValueAt(0, 3).toString();
+                value4 = tabList.getModel().getValueAt(0, 4).toString();
+                sensor.Update(valuetab, co, value1, value2, value3, value4, selection1, selection2);
+                break;
+            case 9:
+                value1 = tabList.getModel().getValueAt(0, 1).toString();
+                value2 = tabList.getModel().getValueAt(0, 2).toString();
+                thermoIntel.Update(valuetab, co, value1, value2, selection1, selection2, selection3, selection4);
+                break;
+        }
     }
 }

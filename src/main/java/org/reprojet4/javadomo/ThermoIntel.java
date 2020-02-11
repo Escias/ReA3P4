@@ -66,8 +66,39 @@ public class ThermoIntel {
         return table;
     }
 
-    public void Update(int id){
-
+    public void Update(int id, Connection co, String value1, String value2, int selection1, int selection2, int selection3, int selection4) throws SQLException {
+        Integer obj1 = selection4;
+        if (obj1.equals(1)){
+            stat = "inactif";
+        }else if (obj1.equals(2)){
+            stat = "chaud";
+        }else if (obj1.equals(3)){
+            stat = "froid";
+        }
+        String request = "UPDATE thermointel "+
+                "SET thermo_room_id = '"+selection1+"', thermo_name = '"+value1+"', thermo_id_1 = '"+selection2+"', thermo_id_2 = '"+selection3+"', thermo_temp_target = '"+value2+"', thermo_status = '"+stat+"' "+
+                "WHERE thermo_id = "+id+";";
+        Statement stm = co.createStatement();
+        stm.executeUpdate(request);
+    }
+    public JTable UpdateAdd(Connection co, int id, String role){
+        if (role.equals("admin")){
+            String request = "SELECT thermo_id, thermo_name, thermo_temp_target " +
+                    "FROM thermointel;";
+            String[] t = {"id", "name", "temp. target"};
+            table = tableAdd.Tab(co, t, request);
+        }else{
+            String request = "SELECT thermo_id, thermo_name, thermo_temp_target " +
+                    "FROM thermointel as T " +
+                    "LEFT JOIN sensor as S " +
+                    "ON T.thermo_name = S.sensor_name " +
+                    "LEFT JOIN room as R " +
+                    "ON R.room_id = T.thermo_room_id " +
+                    "WHERE R.room_user_id = "+id+";";
+            String[] t = {"id", "name", "temp. target"};
+            table = tableAdd.Tab(co, t, request);
+        }
+        return table;
     }
 
     List<String> ls = new ArrayList<>();
