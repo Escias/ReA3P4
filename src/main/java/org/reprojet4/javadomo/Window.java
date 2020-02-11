@@ -970,11 +970,7 @@ public class Window{
                             ex.printStackTrace();
                         }
                         win2.removeAll();
-                        try {
-                            DelOption(table, role, co, orderby);
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
+                        DelOption(table, co, orderby);
                         win2.revalidate();
                         win2.repaint();
                         window.revalidate();
@@ -1036,7 +1032,7 @@ public class Window{
     Photo photo = new Photo();
     Room room = new Room();
 
-    private void DelOption(int table, String role, Connection co, int orderby) throws SQLException {
+    private void DelOption(int table, Connection co, int orderby){
         switch (table){
             case 0:
                 tablist = ampConnect.Request(co, orderby);

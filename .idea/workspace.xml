@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="160fceb7-af8d-46f4-9dfb-873d56164528" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/reprojet4/javadomo/Window.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Photo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/reprojet4/javadomo/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +92,7 @@
       <workItem from="1580976554998" duration="21450000" />
       <workItem from="1581062099225" duration="19625000" />
       <workItem from="1581322262522" duration="23129000" />
-      <workItem from="1581408375863" duration="2756000" />
+      <workItem from="1581408375863" duration="3492000" />
     </task>
     <servers />
   </component>
