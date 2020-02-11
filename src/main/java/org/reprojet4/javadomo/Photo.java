@@ -49,4 +49,18 @@ public class Photo {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    String imgpath;
+
+    public String TakePath(int id, Connection co) throws SQLException {
+        String request = "SELECT photo_id, photo_image " +
+                "FROM photo " +
+                "WHERE photo_id = "+id+";";
+        Statement stm = co.createStatement();
+        ResultSet rslt = stm.executeQuery(request);
+        if (rslt.next()){
+            imgpath = rslt.getString(2);
+        }
+        return imgpath;
+    }
 }

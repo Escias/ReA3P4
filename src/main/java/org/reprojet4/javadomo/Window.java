@@ -1,10 +1,14 @@
 package org.reprojet4.javadomo;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -106,20 +110,14 @@ public class Window{
         });
         window.setVisible(true);
     }
-    JButton brequest = new JButton("Request");
     JButton bupdate = new JButton("Update");
-    JButton binsert = new JButton("Insert");
-    JButton bdelete = new JButton("Delete");
     JButton bdisconnect = new JButton("Disconnect");
     JButton bvalid1 = new JButton("Validate");
     JButton breturn1 = new JButton("Return");
     private String[] req = {"Ampoule Connectée", "Caméra installée", "Donnée Ampoule", "Donnée Thermos", "Nourriture", "Info personnel", "Photo", "Salle", "Capteur", "Thermostats"};
     JComboBox scroll = new JComboBox(req);
     int table;
-    String buttext;
     Request request = new Request();
-
-
     JTextField addlname = new JTextField(10);
     JTextField addfname = new JTextField(10);
     JTextField addlog = new JTextField(20);
@@ -293,10 +291,55 @@ public class Window{
     JButton bsupprofile = new JButton("Delete Profile");
     JButton buppass = new JButton("Change password");
     JButton breturn2 = new JButton("Return");
+    ImageIcon img = new ImageIcon();
+
+    private ImageIcon DisplayImageProfile(boolean checkimg){
+        BufferedImage img = null;
+        ImageIcon image;
+        if (checkimg == true){
+            try {
+                img = ImageIO.read(new File("image/mickey.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Image dimg = img.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+            image = new ImageIcon(dimg);
+        }else {
+            try {
+                img = ImageIO.read(new File("image/mickey.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Image dimg = img.getScaledInstance(800, 350, Image.SCALE_SMOOTH);
+            image = new ImageIcon(dimg);
+        }
+        return image;
+    }
+
+    String path;
+
+    private void DisplayImage() {
+        try {
+            File file = new File("C:\\demo\\demofile.txt");
+            if (!Desktop.isDesktopSupported()) {
+                System.out.println("not supported");
+                return;
+            }
+            Desktop desktop = Desktop.getDesktop();
+            if (file.exists()) {
+                desktop.open(file);
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
-        win1.add(new JLabel(lastname + "  "));
+        boolean checkimg = true;
+        img = DisplayImageProfile(checkimg);
+        win1.add(new JLabel(img));
+        win1.add(new JLabel("   "+lastname + "  "));
         win1.add(new JLabel(firstname));
         win2.add(new JLabel(mail));
         win3.add(new JLabel(phonenumber));
@@ -857,6 +900,9 @@ public class Window{
     }
 
     JTable tablist = new JTable();
+    JButton bphoto = new JButton("Show Photo");
+    String pathimg;
+    Integer obj2;
 
     private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
@@ -867,6 +913,11 @@ public class Window{
         tablist = request.Request(co, table, orderby);
         DisplayTable(tablist);
         win2.add(DTable);
+        table = scroll.getSelectedIndex();
+        obj2 = table;
+        if (obj2.equals(2)){
+            win3.add(bphoto);
+        }
         win3.add(bre);
         wincol1.add(win1);
         wincol1.add(win2);
@@ -937,6 +988,36 @@ public class Window{
                     }
                 }else{
                     win4.add(new JLabel("Ask an admin to delete an element"));
+                }
+            }
+        });
+        bphoto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                table = scroll.getSelectedIndex();
+                obj2 = table;
+                if (obj2.equals(6)){
+                    row = tablist.getSelectedRow();
+                    valtab = tablist.getValueAt(row, 0).toString();
+                    valuetab = Integer.parseInt(valtab);
+                    try {
+                        pathimg = photo.TakePath(valuetab, co);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    File file = new File(pathimg);
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("Desktop is not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(file.exists()) {
+                        try {
+                            desktop.open(file);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                 }
             }
         });
@@ -1039,51 +1120,62 @@ public class Window{
             case 0:
                 ListScroll = new JComboBox(orderAmpConnect);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 1:
                 ListScroll = new JComboBox(orderCamInstall);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 2:
                 ListScroll = new JComboBox(orderDatAmp);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 3:
                 ListScroll = new JComboBox(orderDataTemp);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 4:
                 ListScroll = new JComboBox(orderFood);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 5:
                 ListScroll = new JComboBox(orderPersonalUser);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 6:
                 ListScroll = new JComboBox(orderPhoto);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
+                win3.add(bphoto);
                 break;
             case 7:
                 ListScroll = new JComboBox(orderRoom);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 8:
                 ListScroll = new JComboBox(orderSensor);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             case 9:
                 ListScroll = new JComboBox(orderThermoIntel);
                 win1.remove(ListScroll);
+                win3.remove(bphoto);
                 win1.add(ListScroll);
                 break;
             default:
