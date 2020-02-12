@@ -14,8 +14,6 @@ public class CreateIni {
             if(check.isSelected()){
                 file.createNewFile();
                 Wini ini = new Wini(file);
-                ini.put("Identifiant", "ip", username.getText());
-                ini.put("Identifiant", "bdd", username.getText());
                 ini.put("Identifiant", "mail", username.getText());
                 ini.put("Identifiant", "password", password.getText());
                 ini.store();
