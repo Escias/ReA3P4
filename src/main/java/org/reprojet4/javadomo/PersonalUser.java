@@ -2,6 +2,7 @@ package org.reprojet4.javadomo;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -79,5 +80,17 @@ public class PersonalUser {
         String request = "DELETE FROM personal_user WHERE user_id = "+id+";";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
+    }
+
+    String imgpath;
+
+    public String TakeImg(int id, Connection co) throws SQLException {
+        String request = "SELECT icon FROM personal_user WHERE user_id = "+id+";";
+        Statement stm = co.createStatement();
+        ResultSet rslt = stm.executeQuery(request);
+        if (rslt.next()){
+            imgpath = rslt.getString(1);
+        }
+        return imgpath;
     }
 }
