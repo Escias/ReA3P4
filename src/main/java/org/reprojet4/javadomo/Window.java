@@ -51,7 +51,7 @@ public class Window{
         window.setTitle("Javadomo");
         window.setSize(1000,600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLayout(new FlowLayout());
+        panel.setLayout(new BorderLayout());
         win1.add(new JLabel("login"));
         win1.add(login);
         win2.add(new JLabel("password"));
@@ -66,7 +66,7 @@ public class Window{
         wincol1.add(win3);
         wincol1.add(win4);
         wincol1.add(win5);
-        panel.add(wincol1);
+        panel.add(wincol1, BorderLayout.WEST);
         panel.setLayout(new FlowLayout());
         window.add(panel, BorderLayout.NORTH);
         createIni.Check(login, password);
@@ -195,21 +195,57 @@ public class Window{
 
     JButton bprofil = new JButton("profile");
     JButton bmanage = new JButton("Management");
+    Box menu1 = Box.createHorizontalBox();
+    Box menu2 = Box.createHorizontalBox();
+    Box menu3 = Box.createHorizontalBox();
+    Box menucol = Box.createVerticalBox();
+    JPanel pcontent = new JPanel();
+
+    private void RemoveMenu(){
+        menu1.removeAll();
+        menu1.revalidate();
+        menu1.repaint();
+        menu2.removeAll();
+        menu2.revalidate();
+        menu2.repaint();
+        menu3.removeAll();
+        menu3.revalidate();
+        menu3.repaint();
+        menucol.removeAll();
+        menucol.revalidate();
+        menucol.repaint();
+        window.getContentPane().remove(pcontent);
+        window.add(pcontent);
+        window.revalidate();
+        window.repaint();
+    }
 
     private void Menu(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
-        win1.add(bprofil, BorderLayout.PAGE_START);
-        win2.add(bmanage, BorderLayout.CENTER);
-        win3.add(bdisconnect, BorderLayout.PAGE_END);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        wincol1.add(win3);
-        panel.add(wincol1);
-        window.add(panel);
+        RemoveMenu();
+        RemoveCenter();
+        RemoveRight();
+        pcontent.setSize(window.getWidth(), window.getHeight());
+        pcontent.setLayout(new BorderLayout());
+        menu1.add(bprofil);
+        menu2.add(bmanage);
+        menu3.add(bdisconnect);
+        menucol.add(menu1);
+        menucol.add(menu2);
+        menucol.add(menu3);
+        menucol.setOpaque(true);
+        menucol.setBackground(Color.BLUE);
+        pcontent.add(menucol, BorderLayout.LINE_START);
+        window.revalidate();
+        window.repaint();
         bprofil.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                try {
+                    Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         bmanage.addActionListener(new ActionListener() {
@@ -292,52 +328,86 @@ public class Window{
     JButton buppass = new JButton("Change password");
     JButton breturn2 = new JButton("Return");
     ImageIcon img = new ImageIcon();
+    ImageIcon image = new ImageIcon();
 
-    private ImageIcon DisplayImageProfile(boolean checkimg){
+    private ImageIcon DisplayImageProfile(String imgpath){
         BufferedImage img = null;
-        ImageIcon image;
-        if (checkimg == true){
-            try {
-                img = ImageIO.read(new File("image/mickey.jpg"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Image dimg = img.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-            image = new ImageIcon(dimg);
-        }else {
-            try {
-                img = ImageIO.read(new File("image/mickey.jpg"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Image dimg = img.getScaledInstance(800, 350, Image.SCALE_SMOOTH);
-            image = new ImageIcon(dimg);
+        try {
+            img = ImageIO.read(new File(imgpath));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        Image dimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        image = new ImageIcon(dimg);
         return image;
     }
 
-    private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        RemoveAll();
-        boolean checkimg = true;
-        img = DisplayImageProfile(checkimg);
-        win1.add(new JLabel(img));
-        win1.add(new JLabel("   "+lastname + "  "));
-        win1.add(new JLabel(firstname));
-        win2.add(new JLabel(mail));
-        win3.add(new JLabel(phonenumber));
-        win4.add(new JLabel(adre + ",    "));
-        win4.add(new JLabel(ZIP));
-        win5.add(bupdate);
-        win5.add(buppass);
-        win5.add(bsupprofile);
-        win5.add(breturn2);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        wincol1.add(win3);
-        wincol1.add(win4);
-        wincol1.add(win5);
-        panel.add(wincol1);
-        window.add(panel);
+    String imgpath;
+    Box center1 = Box.createHorizontalBox();
+    Box center2 = Box.createHorizontalBox();
+    Box center3 = Box.createHorizontalBox();
+    Box center4 = Box.createHorizontalBox();
+    Box center5 = Box.createHorizontalBox();
+    Box center6 = Box.createHorizontalBox();
+    Box center7 = Box.createHorizontalBox();
+    Box centercol = Box.createVerticalBox();
+
+    private void RemoveCenter(){
+        center1.removeAll();
+        center1.revalidate();
+        center1.repaint();
+        center2.removeAll();
+        center2.revalidate();
+        center2.repaint();
+        center3.removeAll();
+        center3.revalidate();
+        center3.repaint();
+        center4.removeAll();
+        center4.revalidate();
+        center4.repaint();
+        center5.removeAll();
+        center5.revalidate();
+        center5.repaint();
+        center6.removeAll();
+        center6.revalidate();
+        center6.repaint();
+        center7.removeAll();
+        center7.revalidate();
+        center7.repaint();
+        centercol.removeAll();
+        centercol.revalidate();
+        centercol.repaint();
+        pcontent.remove(centercol);
+    }
+
+    private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co) throws SQLException {
+        RemoveCenter();
+        RemoveRight();
+        imgpath = personalUser.TakeImg(id, co);
+        img = DisplayImageProfile(imgpath);
+        center1.add(new JLabel(img));
+        center1.add(new JLabel("   "+lastname + "  "));
+        center1.add(new JLabel(firstname));
+        center2.add(new JLabel(mail));
+        center3.add(new JLabel(phonenumber));
+        center4.add(new JLabel(adre + ",    "));
+        center4.add(new JLabel(ZIP));
+        center5.add(bupdate);
+        center5.add(buppass);
+        center5.add(bsupprofile);
+        center5.add(breturn2);
+        centercol.add(center1);
+        centercol.add(center2);
+        centercol.add(center3);
+        centercol.add(center4);
+        centercol.add(center5);
+        centercol.setOpaque(true);
+        centercol.setBackground(Color.WHITE);
+        pcontent.add(centercol, BorderLayout.CENTER);
+        pcontent.revalidate();
+        pcontent.repaint();
+        window.revalidate();
+        window.repaint();
         bupdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -389,20 +459,20 @@ public class Window{
     public String code;
 
     private void UpdatePassword(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        RemoveAll();
+        RemoveCenter();
         ResetRegister();
-        win1.add(new JLabel("Password"));
-        win1.add(addpass);
-        win2.add(new JLabel("Repeat Password"));
-        win2.add(repass);
-        win3.add(bvalid2);
-        win3.add(breturn3);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        wincol1.add(win3);
-        wincol1.add(win7);
-        panel.add(wincol1);
-        window.add(panel);
+        center1.add(new JLabel("Password"));
+        center1.add(addpass);
+        center2.add(new JLabel("Repeat Password"));
+        center2.add(repass);
+        center3.add(bvalid2);
+        center3.add(breturn3);
+        centercol.add(center1);
+        centercol.add(center2);
+        centercol.add(center3);
+        centercol.add(center5);
+        centercol.add(win7);
+        pcontent.add(centercol, BorderLayout.CENTER);
         bvalid2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -414,10 +484,14 @@ public class Window{
                 }
                 valupdate = upcheck[6];
                 if (valupdate == "ok"){
-                    Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                    try {
+                        Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
                 }
-                win7.removeAll();
-                win7.add(new JLabel(valupdate));
+                center5.removeAll();
+                center5.add(new JLabel(valupdate));
                 window.revalidate();
                 window.repaint();
             }
@@ -425,7 +499,11 @@ public class Window{
         breturn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                try {
+                    Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         window.setVisible(true);
@@ -435,36 +513,39 @@ public class Window{
     JButton bvalid3 = new JButton("Validate");
 
     private void UpdateProfile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        RemoveAll();
+        RemoveCenter();
         ResetRegister();
-        win1.add(new JLabel("Lastname"));
+        center1.add(new JLabel("Lastname"));
         addlname.setText(lastname);
-        win1.add(addlname);
-        win1.add(new JLabel("Firstname"));
+        center1.add(addlname);
+        center1.add(new JLabel("Firstname"));
         addfname.setText(firstname);
-        win1.add(addfname);
-        win2.add(new JLabel("Mail"));
+        center1.add(addfname);
+        center2.add(new JLabel("Mail"));
         addlog.setText(mail);
-        win2.add(addlog);
-        win4.add(new JLabel("Adress"));
+        center2.add(addlog);
+        center4.add(new JLabel("Adress"));
         address.setText(adre);
-        win4.add(address);
-        win4.add(new JLabel("ZIP"));
+        center4.add(address);
+        center4.add(new JLabel("ZIP"));
         zip.setText(ZIP);
-        win4.add(zip);
-        win5.add(new JLabel("Phone number"));
+        center4.add(zip);
+        center5.add(new JLabel("Phone number"));
         phone.setText(phonenumber);
-        win5.add(phone);
-        win6.add(bvalid3);
-        win6.add(breturn4);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        wincol1.add(win4);
-        wincol1.add(win5);
-        wincol1.add(win6);
-        wincol1.add(win7);
-        panel.add(wincol1);
-        window.add(panel);
+        center5.add(phone);
+        center6.add(bvalid3);
+        center6.add(breturn4);
+        centercol.add(center1);
+        centercol.add(center2);
+        centercol.add(center4);
+        centercol.add(center5);
+        centercol.add(center6);
+        centercol.add(center7);
+        pcontent.add(centercol, BorderLayout.CENTER);
+        pcontent.revalidate();
+        pcontent.repaint();
+        window.revalidate();
+        window.repaint();
         bvalid3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -482,10 +563,14 @@ public class Window{
                 code = upcheck[5];
                 valupdate = upcheck[6];
                 if (valupdate == "ok"){
+                    try {
                         Profile(id, role, last, first, email, number, adress, code, co);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
                 }
-                win7.removeAll();
-                win7.add(new JLabel(valupdate));
+                center7.removeAll();
+                center7.add(new JLabel(valupdate));
                 window.revalidate();
                 window.repaint();
             }
@@ -493,7 +578,11 @@ public class Window{
         breturn4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                try {
+                    Profile(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         window.setVisible(true);
@@ -538,20 +627,49 @@ public class Window{
     JButton blistitem = new JButton("Item management");
     JButton bupitem = new JButton("Update Item");
     JButton breturn5 = new JButton("Return");
+    Box right1 = Box.createHorizontalBox();
+    Box right2 = Box.createHorizontalBox();
+    Box right3 = Box.createHorizontalBox();
+    Box right4 = Box.createHorizontalBox();
+    Box rightcol = Box.createVerticalBox();
+
+    private void RemoveRight(){
+        right1.removeAll();
+        right1.revalidate();
+        right1.repaint();
+        right2.removeAll();
+        right2.revalidate();
+        right2.repaint();
+        right3.removeAll();
+        right3.revalidate();
+        right3.repaint();
+        right4.removeAll();
+        right4.revalidate();
+        right4.repaint();
+        rightcol.removeAll();
+        rightcol.revalidate();
+        rightcol.repaint();
+        pcontent.remove(rightcol);
+    }
 
     private void Management(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        RemoveAll();
-        win2.add(blistitem);
-        win3.add(bupitem);
-        win4.add(badditem);
-        win5.add(breturn5);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        wincol1.add(win3);
-        wincol1.add(win4);
-        wincol1.add(win5);
-        panel.add(wincol1);
-        window.add(panel);
+        RemoveRight();
+        RemoveCenter();
+        right1.add(blistitem);
+        right2.add(bupitem);
+        right3.add(badditem);
+        right4.add(breturn5);
+        rightcol.add(right1);
+        rightcol.add(right2);
+        rightcol.add(right3);
+        rightcol.add(right4);
+        rightcol.setOpaque(true);
+        rightcol.setBackground(Color.RED);
+        pcontent.add(rightcol, BorderLayout.LINE_END);
+        pcontent.revalidate();
+        pcontent.repaint();
+        window.revalidate();
+        window.repaint();
         badditem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -598,31 +716,34 @@ public class Window{
     JButton breturn6 = new JButton("return");
 
     private void UpdateItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        RemoveAll();
-        win1.add(scroll);
+        RemoveCenter();
+        center1.add(scroll);
         tabupdate = ampConnect.UpdateAdd(co, id, role);
         DisplayTable(tabupdate);
-        win1.add(AddScroll);
-        win1.add(therm1);
-        win1.add(therm2);
-        win1.add(AddPlusScroll);
-        win1.add(bupdateitem);
-        win3.add(breturn6);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        wincol1.add(win3);
-        wincol1.add(win4);
-        panel.add(wincol1);
-        window.add(panel);
+        center1.add(AddScroll);
+        center1.add(therm1);
+        center1.add(therm2);
+        center1.add(AddPlusScroll);
+        center1.add(bupdateitem);
+        center3.add(breturn6);
+        centercol.add(center1);
+        centercol.add(center2);
+        centercol.add(center3);
+        centercol.add(center4);
+        pcontent.add(centercol, BorderLayout.CENTER);
+        pcontent.revalidate();
+        pcontent.repaint();
+        window.revalidate();
+        window.repaint();
         scroll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
                 obj1 = table;
                 table = scroll.getSelectedIndex();
-                win1.removeAll();
-                win2.removeAll();
-                win1.add(scroll);
+                center1.removeAll();
+                center2.removeAll();
+                center1.add(scroll);
                 try {
                     tabupdate = UpdateOption(table, role, id , co);
                 } catch (SQLException ex) {
@@ -631,11 +752,11 @@ public class Window{
                 if (obj1.equals(0) || obj1.equals(1) || obj1.equals(3) || obj1.equals(4) || obj1.equals(5) || obj1.equals(7) || obj1.equals(8) || obj1.equals(9)){
                     DisplayTable(tabupdate);
                 }
-                win1.add(bupdateitem);
-                win1.revalidate();
-                win1.repaint();
-                win2.revalidate();
-                win2.repaint();
+                center1.add(bupdateitem);
+                center1.revalidate();
+                center1.repaint();
+                center2.revalidate();
+                center2.repaint();
                 window.revalidate();
                 window.repaint();
             }
@@ -689,10 +810,10 @@ public class Window{
                 plus[1] = "off";
                 plus[2] = "scheduled";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(AddPlusScroll);
                 break;
             case 1: // CamInstall
                 ls = camInstall.InsertAdd(id, co, role);
@@ -703,32 +824,32 @@ public class Window{
                 plus[0] = "on";
                 plus[1] = "off";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(AddPlusScroll);
                 break;
             case 2: // Datamp
-                win1.remove(tableAdd);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win2.add(new JLabel("Unable to change data (Security)"));
+                center1.remove(tableAdd);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center2.add(new JLabel("Unable to change data (Security)"));
                 break;
             case 3: // Datatemp
-                win2.removeAll();
-                win1.remove(tableAdd);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win2.add(new JLabel("Unable to change data (Security)"));
+                center2.removeAll();
+                center1.remove(tableAdd);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center2.add(new JLabel("Unable to change data (Security)"));
                 break;
             case 4: // Food
                 ls = food.InsertAdd(id, co, role);
                 element = ls.toArray(new String[ls.size()]);
                 AddScroll = new JComboBox(element);
                 tabupdate = food.UpdateAdd(co, id, role);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
                 break;
             case 5: //PersonalUser
                 if (role.equals("admin")){
@@ -737,25 +858,25 @@ public class Window{
                     plus[1] = "normal";
                     AddPlusScroll = new JComboBox(plus);
                     tabupdate = personalUser.UpdateAdd(co, role);
-                    win1.remove(AddPlusScroll);
-                    win1.remove(AddScroll);
-                    win1.remove(AddPlusScroll);
-                    win1.add(AddPlusScroll);
+                    center1.remove(AddPlusScroll);
+                    center1.remove(AddScroll);
+                    center1.remove(AddPlusScroll);
+                    center1.add(AddPlusScroll);
                 }else {
-                    win1.remove(AddScroll);
-                    win1.remove(AddPlusScroll);
-                    win2.add(new JLabel("Go to your profile to update it"));
+                    center1.remove(AddScroll);
+                    center1.remove(AddPlusScroll);
+                    center2.add(new JLabel("Go to your profile to update it"));
                 }
                 break;
             case 6: // Photo
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win2.add(new JLabel("Unable to modify photo"));
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center2.add(new JLabel("Unable to modify photo"));
                 break;
             case 7: // Room
                 tabupdate = room.UpdateAdd(co, id, role);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
                 break;
             case 8: // Sensor
                 ls = sensor.InsertAdd(id, co, role);
@@ -766,10 +887,10 @@ public class Window{
                 plus[0] = "on";
                 plus[1] = "off";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(AddPlusScroll);
                 break;
             case 9: // ThermoIntel
                 ls = thermoIntel.InsertAdd(id, co, role);
@@ -787,12 +908,12 @@ public class Window{
                 plus[1] = "chaud";
                 plus[2] = "froid";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(therm1);
-                win1.add(therm2);
-                win1.add(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(therm1);
+                center1.add(therm2);
+                center1.add(AddPlusScroll);
                 break;
             default:
                 break;
@@ -801,35 +922,38 @@ public class Window{
     }
 
     private void InsertItem (int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        RemoveAll();
-        win1.add(scroll);
+        RemoveCenter();
+        center1.add(scroll);
         DefaultTableModel aModel = (DefaultTableModel) tableAdd.getModel();
         aModel.setColumnIdentifiers(column);
         tableAdd.setModel(aModel);
         paneAdd = new JScrollPane(tableAdd);
         paneAdd.setSize(5, 10);
-        win2.add(paneAdd);
-        win1.add(AddScroll);
-        win1.add(therm1);
-        win1.add(therm2);
-        win1.add(AddPlusScroll);
-        win1.add(baddnewitem);
-        win3.add(bre2);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        wincol1.add(win3);
-        wincol1.add(win4);
-        panel.add(wincol1);
-        window.add(panel);
+        center2.add(paneAdd);
+        center1.add(AddScroll);
+        center1.add(therm1);
+        center1.add(therm2);
+        center1.add(AddPlusScroll);
+        center1.add(baddnewitem);
+        center3.add(bre2);
+        centercol.add(center1);
+        centercol.add(center2);
+        centercol.add(center3);
+        centercol.add(center4);
+        pcontent.add(centercol, BorderLayout.CENTER);
+        pcontent.revalidate();
+        pcontent.repaint();
+        window.revalidate();
+        window.repaint();
         scroll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
                 obj1 = table;
                 table = scroll.getSelectedIndex();
-                win1.removeAll();
-                win2.removeAll();
-                win1.add(scroll);
+                center1.removeAll();
+                center2.removeAll();
+                center1.add(scroll);
                 try {
                     column = AddOption(id, co, role, table);
                 } catch (SQLException ex) {
@@ -841,13 +965,13 @@ public class Window{
                 paneAdd = new JScrollPane(tableAdd);
                 paneAdd.setSize(5, 10);
                 if (obj1.equals(0) || obj1.equals(1) || obj1.equals(3) || obj1.equals(4) || obj1.equals(5) || obj1.equals(7) || obj1.equals(8) || obj1.equals(9)){
-                    win2.add(paneAdd);
+                    center2.add(paneAdd);
                 }
-                win1.add(baddnewitem);
-                win1.revalidate();
-                win1.repaint();
-                win2.revalidate();
-                win2.repaint();
+                center1.add(baddnewitem);
+                center1.revalidate();
+                center1.repaint();
+                center2.revalidate();
+                center2.repaint();
                 window.revalidate();
                 window.repaint();
             }
@@ -887,39 +1011,40 @@ public class Window{
     Integer obj2;
 
     private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
-        RemoveAll();
-        win1.add(scroll);
-        win1.add(ListScroll);
-        win1.add(bselectitem);
-        win1.add(bdeleteitem);
+        RemoveCenter();
+        center1.add(scroll);
+        center1.add(ListScroll);
+        center1.add(bselectitem);
+        center1.add(bdeleteitem);
         tablist = request.Request(co, table, orderby);
         DisplayTable(tablist);
-        win2.add(DTable);
+        center2.add(DTable);
         table = scroll.getSelectedIndex();
         obj2 = table;
         if (obj2.equals(2)){
-            win3.add(bphoto);
+            center3.add(bphoto);
         }
-        win3.add(bre);
-        wincol1.add(win1);
-        wincol1.add(win2);
-        wincol1.add(win3);
-        wincol1.add(win4);
-        panel.add(wincol1);
-        window.add(panel);
+        center3.add(bre);
+        centercol.add(center1);
+        centercol.add(center2);
+        centercol.add(center3);
+        centercol.add(center4);
+        pcontent.add(centercol, BorderLayout.CENTER);
+        pcontent.revalidate();
+        pcontent.repaint();
         scroll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 table = scroll.getSelectedIndex();
                 orderby = ListScroll.getSelectedIndex();
                 tablist = request.Request(co, table, orderby);
-                win1.removeAll();
-                win2.removeAll();
-                win1.add(scroll);
+                center1.removeAll();
+                center2.removeAll();
+                center1.add(scroll);
                 ListOption(table);
-                win1.add(bselectitem);
-                win1.add(bdeleteitem);
-                win3.add(bre);
+                center1.add(bselectitem);
+                center1.add(bdeleteitem);
+                center3.add(bre);
                 DisplayTable(tablist);
                 window.revalidate();
                 window.repaint();
@@ -928,7 +1053,7 @@ public class Window{
         bselectitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                win2.removeAll();
+                center2.removeAll();
                 table = scroll.getSelectedIndex();
                 orderby = ListScroll.getSelectedIndex();
                 row = tablist.getSelectedRow();
@@ -941,7 +1066,7 @@ public class Window{
             public void actionPerformed(ActionEvent e) {
                 row = tablist.getSelectedRow();
                 orderby = ListScroll.getSelectedIndex();
-                win4.removeAll();
+                center4.removeAll();
                 if (role.equals("admin")){
                     if (row > 0){
                         valtab = tablist.getValueAt(row, 0).toString();
@@ -951,21 +1076,21 @@ public class Window{
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
-                        win2.removeAll();
+                        center2.removeAll();
                         DelOption(table, co, orderby);
-                        win2.revalidate();
-                        win2.repaint();
+                        center2.revalidate();
+                        center2.repaint();
                         window.revalidate();
                         window.repaint();
                     }else{
-                        win4.add(new JLabel("Select an element to delete"));
-                        win4.revalidate();
-                        win4.repaint();
+                        center4.add(new JLabel("Select an element to delete"));
+                        center4.revalidate();
+                        center4.repaint();
                         window.revalidate();
                         window.repaint();
                     }
                 }else{
-                    win4.add(new JLabel("Ask an admin to delete an element"));
+                    center4.add(new JLabel("Ask an admin to delete an element"));
                 }
             }
         });
@@ -1019,62 +1144,62 @@ public class Window{
             case 0:
                 tablist = ampConnect.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 1:
                 tablist = camInstall.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 2:
                 tablist = datamp.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 3:
                 tablist = datatemp.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 4:
                 tablist = food.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 5:
                 tablist = personalUser.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 6:
                 tablist = photo.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 7:
                 tablist = room.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 8:
                 tablist = sensor.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
             case 9:
                 tablist = thermoIntel.Request(co, orderby);
                 DisplayTable(tablist);
-                win2.removeAll();
-                win2.add(DTable);
+                center2.removeAll();
+                center2.add(DTable);
                 break;
         }
     }
@@ -1097,64 +1222,64 @@ public class Window{
         switch (table){
             case 0:
                 ListScroll = new JComboBox(orderAmpConnect);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             case 1:
                 ListScroll = new JComboBox(orderCamInstall);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             case 2:
                 ListScroll = new JComboBox(orderDatAmp);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             case 3:
                 ListScroll = new JComboBox(orderDataTemp);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             case 4:
                 ListScroll = new JComboBox(orderFood);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             case 5:
                 ListScroll = new JComboBox(orderPersonalUser);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             case 6:
                 ListScroll = new JComboBox(orderPhoto);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
-                win3.add(bphoto);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
+                center3.add(bphoto);
                 break;
             case 7:
                 ListScroll = new JComboBox(orderRoom);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             case 8:
                 ListScroll = new JComboBox(orderSensor);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             case 9:
                 ListScroll = new JComboBox(orderThermoIntel);
-                win1.remove(ListScroll);
-                win3.remove(bphoto);
-                win1.add(ListScroll);
+                center1.remove(ListScroll);
+                center3.remove(bphoto);
+                center1.add(ListScroll);
                 break;
             default:
                 break;
@@ -1203,10 +1328,10 @@ public class Window{
                 plus[1] = "off";
                 plus[2] = "scheduled";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(AddPlusScroll);
                 break;
             case 1: // CamInstall
                 ls = camInstall.InsertAdd(id, co, role);
@@ -1219,10 +1344,10 @@ public class Window{
                 plus[0] = "on";
                 plus[1] = "off";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(AddPlusScroll);
                 break;
             case 2: // Datamp
                 ls = datamp.InsertAdd(id, co, role);
@@ -1232,11 +1357,11 @@ public class Window{
                 plus[0] = "allumer";
                 plus[1] = "éteindre";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(tableAdd);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(AddPlusScroll);
+                center1.remove(tableAdd);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(AddPlusScroll);
                 break;
             case 3: // Datatemp
                 ls = datatemp.InsertAdd(id, co, role);
@@ -1244,9 +1369,9 @@ public class Window{
                 AddScroll = new JComboBox(element);
                 column = new String[1];
                 column[0] = "temperature";
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
                 break;
             case 4: // Food
                 ls = food.InsertAdd(id, co, role);
@@ -1256,9 +1381,9 @@ public class Window{
                 column[0] = "name";
                 column[1] = "peremption";
                 column[2] = "quantity";
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
                 break;
             case 5: //PersonalUser
                 if (role.equals("admin")){
@@ -1274,26 +1399,26 @@ public class Window{
                     plus[0] = "admin";
                     plus[1] = "normal";
                     AddPlusScroll = new JComboBox(plus);
-                    win1.remove(AddPlusScroll);
-                    win1.remove(AddScroll);
-                    win1.remove(AddPlusScroll);
-                    win1.add(AddPlusScroll);
+                    center1.remove(AddPlusScroll);
+                    center1.remove(AddScroll);
+                    center1.remove(AddPlusScroll);
+                    center1.add(AddPlusScroll);
                 }else {
-                    win1.remove(AddScroll);
-                    win1.remove(AddPlusScroll);
-                    win1.add(new JLabel("You can't use this option"));
+                    center1.remove(AddScroll);
+                    center1.remove(AddPlusScroll);
+                    center1.add(new JLabel("You can't use this option"));
                 }
                 break;
             case 6: // Photo
-                win1.remove(AddScroll);
-                win1.add(new JLabel("Go to the list to view photo"));
+                center1.remove(AddScroll);
+                center1.add(new JLabel("Go to the list to view photo"));
                 break;
             case 7: // Room
                 column = new String[2];
                 column[0] = "Name";
                 column[1] = "Description";
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
                 break;
             case 8: // Sensor
                 ls = sensor.InsertAdd(id, co, role);
@@ -1308,10 +1433,10 @@ public class Window{
                 plus[0] = "on";
                 plus[1] = "off";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(AddPlusScroll);
                 break;
             case 9: // ThermoIntel
                 ls = thermoIntel.InsertAdd(id, co, role);
@@ -1331,12 +1456,12 @@ public class Window{
                 plus[1] = "chaud";
                 plus[2] = "froid";
                 AddPlusScroll = new JComboBox(plus);
-                win1.remove(AddScroll);
-                win1.remove(AddPlusScroll);
-                win1.add(AddScroll);
-                win1.add(therm1);
-                win1.add(therm2);
-                win1.add(AddPlusScroll);
+                center1.remove(AddScroll);
+                center1.remove(AddPlusScroll);
+                center1.add(AddScroll);
+                center1.add(therm1);
+                center1.add(therm2);
+                center1.add(AddPlusScroll);
                 break;
             default:
                 break;
@@ -1349,9 +1474,10 @@ public class Window{
     private void DisplayTable(JTable tablist){
         RemoveTable();
         DTable = new JScrollPane(tablist);
-        win2.add(DTable);
-        wincol1.add(win2);
-        panel.add(wincol1);
+        center2.add(DTable);
+        centercol.add(center2);
+        pcontent.revalidate();
+        pcontent.repaint();
         window.revalidate();
         window.repaint();
         window.setVisible(true);
@@ -1363,12 +1489,12 @@ public class Window{
     }
 
     private void RemoveTable(){
-        win2.removeAll();
-        win2.revalidate();
-        win2.repaint();
-        wincol1.remove(win2);
-        wincol1.revalidate();
-        wincol1.repaint();
+        center2.removeAll();
+        center2.revalidate();
+        center2.repaint();
+        centercol.remove(center2);
+        centercol.revalidate();
+        centercol.repaint();
     }
 
     private void RemoveAll(){
