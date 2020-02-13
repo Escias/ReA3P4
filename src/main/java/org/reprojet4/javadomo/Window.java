@@ -51,7 +51,6 @@ public class Window{
 
     protected void Window() throws SQLException {
         Connection co = DriverManager.getConnection("jdbc:mysql://localhost:8889/projet4", "root", "root");
-        //Connection co = DriverManager.getConnection("jdbc:mysql://192.168.43.136:3306/projet4", "root", "");
         window.setTitle("Javadomo");
         window.setSize(1000,600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
