@@ -45,9 +45,13 @@ public class Window{
     public String adre;
     public String ZIP;
     public String[] infoUser = {"0", "role", "nolog", "lastname", "firstname", "mail", "phone", "address", "ZIP"};
+    JPanel pleft = new JPanel();
+    JPanel pcenter = new JPanel();
+    JPanel pright = new JPanel();
 
     protected void Window() throws SQLException {
         Connection co = DriverManager.getConnection("jdbc:mysql://localhost:8889/projet4", "root", "root");
+        //Connection co = DriverManager.getConnection("jdbc:mysql://192.168.43.136:3306/projet4", "root", "");
         window.setTitle("Javadomo");
         window.setSize(1000,600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -195,25 +199,15 @@ public class Window{
 
     JButton bprofil = new JButton("profile");
     JButton bmanage = new JButton("Management");
-    Box menu1 = Box.createHorizontalBox();
-    Box menu2 = Box.createHorizontalBox();
-    Box menu3 = Box.createHorizontalBox();
-    Box menucol = Box.createVerticalBox();
     JPanel pcontent = new JPanel();
 
     private void RemoveMenu(){
-        menu1.removeAll();
-        menu1.revalidate();
-        menu1.repaint();
-        menu2.removeAll();
-        menu2.revalidate();
-        menu2.repaint();
-        menu3.removeAll();
-        menu3.revalidate();
-        menu3.repaint();
-        menucol.removeAll();
-        menucol.revalidate();
-        menucol.repaint();
+        pleft.removeAll();
+        pleft.revalidate();
+        pleft.repaint();
+        pcontent.remove(pleft);
+        pcontent.revalidate();
+        pcontent.repaint();
         window.getContentPane().remove(pcontent);
         window.add(pcontent);
         window.revalidate();
@@ -227,15 +221,12 @@ public class Window{
         RemoveRight();
         pcontent.setSize(window.getWidth(), window.getHeight());
         pcontent.setLayout(new BorderLayout());
-        menu1.add(bprofil);
-        menu2.add(bmanage);
-        menu3.add(bdisconnect);
-        menucol.add(menu1);
-        menucol.add(menu2);
-        menucol.add(menu3);
-        menucol.setOpaque(true);
-        menucol.setBackground(Color.BLUE);
-        pcontent.add(menucol, BorderLayout.LINE_START);
+        pleft.setLayout(new GridLayout(10, 1));
+        pleft.add(bprofil);
+        pleft.add(bmanage);
+        pleft.add(bdisconnect);
+        pleft.setBackground(Color.BLUE);
+        pcontent.add(pleft, BorderLayout.LINE_START);
         window.revalidate();
         window.repaint();
         bprofil.addActionListener(new ActionListener() {
@@ -377,7 +368,12 @@ public class Window{
         centercol.removeAll();
         centercol.revalidate();
         centercol.repaint();
-        pcontent.remove(centercol);
+        pcenter.removeAll();
+        pcenter.revalidate();
+        pcenter.repaint();
+        pcontent.remove(pcenter);
+        pcontent.revalidate();
+        pcontent.repaint();
     }
 
     private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co) throws SQLException {
@@ -385,6 +381,8 @@ public class Window{
         RemoveRight();
         imgpath = personalUser.TakeImg(id, co);
         img = DisplayImageProfile(imgpath);
+        pcenter.setLayout(new FlowLayout());
+        pcenter.setLayout(new GridBagLayout());
         center1.add(new JLabel(img));
         center1.add(new JLabel("   "+lastname + "  "));
         center1.add(new JLabel(firstname));
@@ -401,9 +399,9 @@ public class Window{
         centercol.add(center3);
         centercol.add(center4);
         centercol.add(center5);
-        centercol.setOpaque(true);
-        centercol.setBackground(Color.WHITE);
-        pcontent.add(centercol, BorderLayout.CENTER);
+        pcenter.add(centercol);
+        pcenter.setBackground(Color.WHITE);
+        pcontent.add(pcenter, BorderLayout.CENTER);
         pcontent.revalidate();
         pcontent.repaint();
         window.revalidate();
@@ -471,8 +469,9 @@ public class Window{
         centercol.add(center2);
         centercol.add(center3);
         centercol.add(center5);
-        centercol.add(win7);
-        pcontent.add(centercol, BorderLayout.CENTER);
+        centercol.add(center7);
+        pcenter.add(centercol);
+        pcontent.add(pcenter, BorderLayout.CENTER);
         bvalid2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -541,7 +540,8 @@ public class Window{
         centercol.add(center5);
         centercol.add(center6);
         centercol.add(center7);
-        pcontent.add(centercol, BorderLayout.CENTER);
+        pcenter.add(centercol);
+        pcontent.add(pcenter, BorderLayout.CENTER);
         pcontent.revalidate();
         pcontent.repaint();
         window.revalidate();
@@ -627,45 +627,24 @@ public class Window{
     JButton blistitem = new JButton("Item management");
     JButton bupitem = new JButton("Update Item");
     JButton breturn5 = new JButton("Return");
-    Box right1 = Box.createHorizontalBox();
-    Box right2 = Box.createHorizontalBox();
-    Box right3 = Box.createHorizontalBox();
-    Box right4 = Box.createHorizontalBox();
-    Box rightcol = Box.createVerticalBox();
 
     private void RemoveRight(){
-        right1.removeAll();
-        right1.revalidate();
-        right1.repaint();
-        right2.removeAll();
-        right2.revalidate();
-        right2.repaint();
-        right3.removeAll();
-        right3.revalidate();
-        right3.repaint();
-        right4.removeAll();
-        right4.revalidate();
-        right4.repaint();
-        rightcol.removeAll();
-        rightcol.revalidate();
-        rightcol.repaint();
-        pcontent.remove(rightcol);
+        pright.removeAll();
+        pright.revalidate();
+        pright.repaint();
+        pcontent.remove(pright);
     }
 
     private void Management(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveRight();
         RemoveCenter();
-        right1.add(blistitem);
-        right2.add(bupitem);
-        right3.add(badditem);
-        right4.add(breturn5);
-        rightcol.add(right1);
-        rightcol.add(right2);
-        rightcol.add(right3);
-        rightcol.add(right4);
-        rightcol.setOpaque(true);
-        rightcol.setBackground(Color.RED);
-        pcontent.add(rightcol, BorderLayout.LINE_END);
+        pright.setLayout(new GridLayout(10,1));
+        pright.setBackground(Color.RED);
+        pright.add(blistitem);
+        pright.add(bupitem);
+        pright.add(badditem);
+        pright.add(breturn5);
+        pcontent.add(pright, BorderLayout.LINE_END);
         pcontent.revalidate();
         pcontent.repaint();
         window.revalidate();
@@ -714,36 +693,39 @@ public class Window{
     Integer obj1;
     JTable tabupdate = new JTable();
     JButton breturn6 = new JButton("return");
+    private String[] requp = {"Ampoule Connectée", "Caméra installée", "Donnée Ampoule", "Donnée Thermos", "Nourriture", "Info personnel", "Photo", "Salle", "Capteur", "Thermostats"};
+    JComboBox scrollup = new JComboBox(requp);
 
     private void UpdateItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveCenter();
-        center1.add(scroll);
+        center1.add(scrollup);
         tabupdate = ampConnect.UpdateAdd(co, id, role);
         DisplayTable(tabupdate);
-        center1.add(AddScroll);
+        center1.add(upScroll);
         center1.add(therm1);
         center1.add(therm2);
-        center1.add(AddPlusScroll);
+        center1.add(upPlusScroll);
         center1.add(bupdateitem);
         center3.add(breturn6);
         centercol.add(center1);
         centercol.add(center2);
         centercol.add(center3);
         centercol.add(center4);
-        pcontent.add(centercol, BorderLayout.CENTER);
+        pcenter.add(centercol);
+        pcontent.add(pcenter, BorderLayout.CENTER);
         pcontent.revalidate();
         pcontent.repaint();
         window.revalidate();
         window.repaint();
-        scroll.addActionListener(new ActionListener() {
+        scrollup.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                table = scroll.getSelectedIndex();
+                table = scrollup.getSelectedIndex();
                 obj1 = table;
-                table = scroll.getSelectedIndex();
+                table = scrollup.getSelectedIndex();
                 center1.removeAll();
                 center2.removeAll();
-                center1.add(scroll);
+                center1.add(scrollup);
                 try {
                     tabupdate = UpdateOption(table, role, id , co);
                 } catch (SQLException ex) {
@@ -764,9 +746,9 @@ public class Window{
         bupdateitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                table = scroll.getSelectedIndex();
-                selection1 = AddScroll.getSelectedIndex() + 1;
-                selection2 = AddPlusScroll.getSelectedIndex() + 1;
+                table = scrollup.getSelectedIndex();
+                selection1 = upScroll.getSelectedIndex() + 1;
+                selection2 = upPlusScroll.getSelectedIndex() + 1;
                 selection3 = therm1.getSelectedIndex() + 1;
                 selection4 = therm2.getSelectedIndex() + 1;
                 row = tablist.getSelectedRow();
@@ -791,6 +773,9 @@ public class Window{
         window.setVisible(true);
     }
 
+    JComboBox upScroll = new JComboBox();
+    JComboBox upPlusScroll = new JComboBox();
+
     private JTable UpdateOption(int table, String role, int id, Connection co) throws SQLException {
         element = null;
         plus = null;
@@ -803,99 +788,101 @@ public class Window{
             case 0: // AmpConnect
                 ls = ampConnect.InsertAdd(id, co, role);
                 element = ls.toArray(new String[ls.size()]);
-                AddScroll = new JComboBox(element);
+                upScroll = new JComboBox(element);
                 tabupdate = ampConnect.UpdateAdd(co, id, role);
                 plus = new String[3];
                 plus[0] = "on";
                 plus[1] = "off";
                 plus[2] = "scheduled";
-                AddPlusScroll = new JComboBox(plus);
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
-                center1.add(AddScroll);
-                center1.add(AddPlusScroll);
+                upPlusScroll = new JComboBox(plus);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
+                center1.add(upScroll);
+                center1.add(upPlusScroll);
                 break;
             case 1: // CamInstall
                 ls = camInstall.InsertAdd(id, co, role);
                 element = ls.toArray(new String[ls.size()]);
-                AddScroll = new JComboBox(element);
+                upScroll = new JComboBox(element);
                 tabupdate = camInstall.UpdateAdd(co, id, role);
                 plus = new String[2];
                 plus[0] = "on";
                 plus[1] = "off";
-                AddPlusScroll = new JComboBox(plus);
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
-                center1.add(AddScroll);
-                center1.add(AddPlusScroll);
+                upPlusScroll = new JComboBox(plus);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
+                center1.add(upScroll);
+                center1.add(upPlusScroll);
                 break;
             case 2: // Datamp
                 center1.remove(tableAdd);
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
                 center2.add(new JLabel("Unable to change data (Security)"));
                 break;
             case 3: // Datatemp
                 center2.removeAll();
                 center1.remove(tableAdd);
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
                 center2.add(new JLabel("Unable to change data (Security)"));
+                center2.revalidate();
+                center2.repaint();
                 break;
             case 4: // Food
                 ls = food.InsertAdd(id, co, role);
                 element = ls.toArray(new String[ls.size()]);
-                AddScroll = new JComboBox(element);
+                upScroll = new JComboBox(element);
                 tabupdate = food.UpdateAdd(co, id, role);
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
-                center1.add(AddScroll);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
+                center1.add(upScroll);
                 break;
             case 5: //PersonalUser
                 if (role.equals("admin")){
                     plus = new String[2];
                     plus[0] = "admin";
                     plus[1] = "normal";
-                    AddPlusScroll = new JComboBox(plus);
+                    upPlusScroll = new JComboBox(plus);
                     tabupdate = personalUser.UpdateAdd(co, role);
-                    center1.remove(AddPlusScroll);
-                    center1.remove(AddScroll);
-                    center1.remove(AddPlusScroll);
-                    center1.add(AddPlusScroll);
+                    center1.remove(upPlusScroll);
+                    center1.remove(upScroll);
+                    center1.remove(upPlusScroll);
+                    center1.add(upPlusScroll);
                 }else {
-                    center1.remove(AddScroll);
-                    center1.remove(AddPlusScroll);
+                    center1.remove(upScroll);
+                    center1.remove(upPlusScroll);
                     center2.add(new JLabel("Go to your profile to update it"));
                 }
                 break;
             case 6: // Photo
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
                 center2.add(new JLabel("Unable to modify photo"));
                 break;
             case 7: // Room
                 tabupdate = room.UpdateAdd(co, id, role);
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
                 break;
             case 8: // Sensor
                 ls = sensor.InsertAdd(id, co, role);
                 element = ls.toArray(new String[ls.size()]);
-                AddScroll = new JComboBox(element);
+                upScroll = new JComboBox(element);
                 tabupdate = sensor.UpdateAdd(co, id, role);
                 plus = new String[2];
                 plus[0] = "on";
                 plus[1] = "off";
-                AddPlusScroll = new JComboBox(plus);
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
-                center1.add(AddScroll);
-                center1.add(AddPlusScroll);
+                upPlusScroll = new JComboBox(plus);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
+                center1.add(upScroll);
+                center1.add(upPlusScroll);
                 break;
             case 9: // ThermoIntel
                 ls = thermoIntel.InsertAdd(id, co, role);
                 element = ls.toArray(new String[ls.size()]);
-                AddScroll = new JComboBox(element);
+                upScroll = new JComboBox(element);
                 thermo1 = thermoIntel.InsertAdd1(id, co, role);
                 ther1 = thermo1.toArray(new String[thermo1.size()]);
                 therm1 = new JComboBox(ther1);
@@ -907,13 +894,13 @@ public class Window{
                 plus[0] = "inactif";
                 plus[1] = "chaud";
                 plus[2] = "froid";
-                AddPlusScroll = new JComboBox(plus);
-                center1.remove(AddScroll);
-                center1.remove(AddPlusScroll);
-                center1.add(AddScroll);
+                upPlusScroll = new JComboBox(plus);
+                center1.remove(upScroll);
+                center1.remove(upPlusScroll);
+                center1.add(upScroll);
                 center1.add(therm1);
                 center1.add(therm2);
-                center1.add(AddPlusScroll);
+                center1.add(upPlusScroll);
                 break;
             default:
                 break;
@@ -921,9 +908,12 @@ public class Window{
         return tabupdate;
     }
 
+    private String[] reqad = {"Ampoule Connectée", "Caméra installée", "Donnée Ampoule", "Donnée Thermos", "Nourriture", "Info personnel", "Photo", "Salle", "Capteur", "Thermostats"};
+    JComboBox scrollad = new JComboBox(reqad);
+
     private void InsertItem (int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveCenter();
-        center1.add(scroll);
+        center1.add(scrollad);
         DefaultTableModel aModel = (DefaultTableModel) tableAdd.getModel();
         aModel.setColumnIdentifiers(column);
         tableAdd.setModel(aModel);
@@ -940,20 +930,21 @@ public class Window{
         centercol.add(center2);
         centercol.add(center3);
         centercol.add(center4);
-        pcontent.add(centercol, BorderLayout.CENTER);
+        pcenter.add(centercol);
+        pcontent.add(pcenter, BorderLayout.CENTER);
         pcontent.revalidate();
         pcontent.repaint();
         window.revalidate();
         window.repaint();
-        scroll.addActionListener(new ActionListener() {
+        scrollad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                table = scroll.getSelectedIndex();
+                table = scrollad.getSelectedIndex();
                 obj1 = table;
-                table = scroll.getSelectedIndex();
+                table = scrollad.getSelectedIndex();
                 center1.removeAll();
                 center2.removeAll();
-                center1.add(scroll);
+                center1.add(scrollad);
                 try {
                     column = AddOption(id, co, role, table);
                 } catch (SQLException ex) {
@@ -979,7 +970,7 @@ public class Window{
         baddnewitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                table = scroll.getSelectedIndex();
+                table = scrollad.getSelectedIndex();
                 orderby = ListScroll.getSelectedIndex();
                 selection1 = AddScroll.getSelectedIndex() + 1;
                 selection2 = AddPlusScroll.getSelectedIndex() + 1;
@@ -1029,7 +1020,8 @@ public class Window{
         centercol.add(center2);
         centercol.add(center3);
         centercol.add(center4);
-        pcontent.add(centercol, BorderLayout.CENTER);
+        pcenter.add(centercol);
+        pcontent.add(pcenter, BorderLayout.CENTER);
         pcontent.revalidate();
         pcontent.repaint();
         scroll.addActionListener(new ActionListener() {
@@ -1044,8 +1036,8 @@ public class Window{
                 ListOption(table);
                 center1.add(bselectitem);
                 center1.add(bdeleteitem);
-                center3.add(bre);
                 DisplayTable(tablist);
+                center3.add(bre);
                 window.revalidate();
                 window.repaint();
             }
@@ -1054,11 +1046,17 @@ public class Window{
             @Override
             public void actionPerformed(ActionEvent e) {
                 center2.removeAll();
+                center3.removeAll();
                 table = scroll.getSelectedIndex();
+                obj2 = table;
                 orderby = ListScroll.getSelectedIndex();
                 row = tablist.getSelectedRow();
                 tablist = request.Request(co, table, orderby);
                 DisplayTable(tablist);
+                if (obj2.equals(6)){
+                    center3.add(bphoto);
+                }
+                center3.add(bre);
             }
         });
         bdeleteitem.addActionListener(new ActionListener() {
@@ -1215,8 +1213,6 @@ public class Window{
     String[] orderSensor = {"order add", "name", "room", "status", "interval"};
     String[] orderThermoIntel = {"order add", "room", "name", "thermo 1", "thermo 2", "temperature target", "status"};
     JComboBox ListScroll = new JComboBox(orderAmpConnect);
-    JComboBox AddScroll = new JComboBox();
-    JComboBox AddPlusScroll = new JComboBox();
 
     private void ListOption(int table){
         switch (table){
@@ -1294,7 +1290,7 @@ public class Window{
     AmpConnect ampConnect = new AmpConnect();
     CamInstall camInstall = new CamInstall();
     Datamp datamp = new Datamp();
-    Datatemp datatemp= new Datatemp();
+    Datatemp datatemp = new Datatemp();
     Food food = new Food();
     Sensor sensor = new Sensor();
     ThermoIntel thermoIntel = new ThermoIntel();
@@ -1305,6 +1301,8 @@ public class Window{
     String[] ther2;
     JComboBox therm1 = new JComboBox();
     JComboBox therm2 = new JComboBox();
+    JComboBox AddScroll = new JComboBox();
+    JComboBox AddPlusScroll = new JComboBox();
 
     private String[] AddOption(int id, Connection co, String role, int table) throws SQLException {
         element = null;
@@ -1466,6 +1464,8 @@ public class Window{
             default:
                 break;
         }
+        center1.revalidate();
+        center1.repaint();
         return column;
     }
 
