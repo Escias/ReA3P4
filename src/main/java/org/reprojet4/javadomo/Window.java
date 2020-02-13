@@ -79,24 +79,24 @@ public class Window{
             public void actionPerformed(ActionEvent e) {
                 try {
                     infoUser = connectSLQ.ConnectSQL(login, password, co, check);
-                    id = Integer.parseInt(infoUser[0]);
-                    role = infoUser[1];
-                    nolog = infoUser[2];
-                    lastname = infoUser[3];
-                    firstname = infoUser[4];
-                    mail = infoUser[5];
-                    phonenumber = infoUser[6];
-                    adre = infoUser[7];
-                    ZIP = infoUser[8];
-                    if(nolog == "fail"){
-                        window.getContentPane().remove(label);
-                        window.add(label);
-                        window.setVisible(true);
-                    }else{
-                        Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
-                    }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
+                }
+                id = Integer.parseInt(infoUser[0]);
+                role = infoUser[1];
+                nolog = infoUser[2];
+                lastname = infoUser[3];
+                firstname = infoUser[4];
+                mail = infoUser[5];
+                phonenumber = infoUser[6];
+                adre = infoUser[7];
+                ZIP = infoUser[8];
+                if(nolog == "fail"){
+                    window.getContentPane().remove(label);
+                    window.add(label);
+                    window.setVisible(true);
+                }else{
+                    Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
                 }
             }
         });
