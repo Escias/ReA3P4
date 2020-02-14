@@ -18,6 +18,13 @@ public class Request {
     Sensor sensor = new Sensor();
     ThermoIntel thermoIntel = new ThermoIntel();
 
+    /**
+     * Access to the corresponding SELECT request
+     * @param co
+     * @param table
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int table, int orderby){
         DTable.removeAll();
         DTable.revalidate();
@@ -67,6 +74,20 @@ public class Request {
     String value6;
     String value7;
 
+    /**
+     * Access to the corresponding INSERT request
+     * Get value in the table
+     * @param id
+     * @param role
+     * @param co
+     * @param table
+     * @param tableAdd
+     * @param selection1
+     * @param selection2
+     * @param selection3
+     * @param selection4
+     * @throws SQLException
+     */
     public void Insert(int id, String role, Connection co, int table, JTable tableAdd, int selection1, int selection2, int selection3, int selection4) throws SQLException {
         switch (table){
             case 0:
@@ -127,6 +148,13 @@ public class Request {
         }
     }
 
+    /**
+     * Access to the corresponding DELETE request
+     * @param table
+     * @param valuetab
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int table, int valuetab, Connection co) throws SQLException {
         switch (table){
             case 0:
@@ -162,6 +190,21 @@ public class Request {
         }
     }
 
+    /**
+     * Access to the corresponding UPDATE request
+     * Get value in the table
+     * @param id
+     * @param role
+     * @param co
+     * @param table
+     * @param selection1
+     * @param selection2
+     * @param selection3
+     * @param selection4
+     * @param tabList
+     * @param valuetab
+     * @throws SQLException
+     */
     public void Update(int id, String role, Connection co, int table, int selection1, int selection2, int selection3, int selection4, JTable tabList, int valuetab) throws SQLException {
         switch (table){
             case 0:

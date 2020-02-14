@@ -12,6 +12,12 @@ public class PersonalUser {
     boolean check = true;
     String order;
 
+    /**
+     * SELECT request
+     * @param co
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
@@ -37,6 +43,20 @@ public class PersonalUser {
         return table;
     }
 
+    /**
+     * UPDATE request
+     * @param id
+     * @param co
+     * @param value1
+     * @param value2
+     * @param value3
+     * @param value4
+     * @param value5
+     * @param value6
+     * @param value7
+     * @param selection1
+     * @throws SQLException
+     */
     public void Update(int id, Connection co, String value1, String value2, String value3, String value4, String value5, String value6, String value7, int selection1) throws SQLException {
         Integer obj1 = selection1;
         if (obj1.equals(1)){
@@ -50,6 +70,13 @@ public class PersonalUser {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get users information
+     * @param co
+     * @param role
+     * @return
+     */
     public JTable UpdateAdd(Connection co, String role){
         if (role.equals("admin")){
             String request = "SELECT user_id, user_lastname, user_firstname, user_mail, user_phone, user_adress, user_ZIP, user_password " +
@@ -63,6 +90,19 @@ public class PersonalUser {
 
     String type;
 
+    /**
+     * INSERT request
+     * @param value1
+     * @param value2
+     * @param value3
+     * @param value4
+     * @param value5
+     * @param value6
+     * @param value7
+     * @param selection1
+     * @param co
+     * @throws SQLException
+     */
     public void Insert(String value1, String value2, String value3, String value4, String value5, String value6, String value7, int selection1, Connection co) throws SQLException {
         Integer obj1 = selection1;
         if (obj1.equals(1)){
@@ -76,6 +116,12 @@ public class PersonalUser {
         stm.executeUpdate(request);
     }
 
+    /**
+     * DELETE request
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM personal_user WHERE user_id = "+id+";";
         Statement stm = co.createStatement();
@@ -84,6 +130,13 @@ public class PersonalUser {
 
     String imgpath;
 
+    /**
+     * Get path of image profile
+     * @param id
+     * @param co
+     * @return
+     * @throws SQLException
+     */
     public String TakeImg(int id, Connection co) throws SQLException {
         String request = "SELECT icon FROM personal_user WHERE user_id = "+id+";";
         Statement stm = co.createStatement();

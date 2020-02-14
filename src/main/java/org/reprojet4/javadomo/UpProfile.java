@@ -11,6 +11,22 @@ public class UpProfile {
     String[] upcheck = {"lastname", "firstname", "mail", "phonenumber", "adre", "zip", "val"};
     String val;
 
+    /**
+     * UPDATE request to update profile's information.
+     * @param id
+     * @param addlname
+     * @param addfname
+     * @param addlog
+     * @param address
+     * @param zip
+     * @param phone
+     * @param addpass
+     * @param repass
+     * @param co
+     * @param uppass
+     * @return
+     * @throws SQLException
+     */
     public String[] UpProfile(int id, JTextField addlname, JTextField addfname, JTextField addlog, JTextField address, JTextField zip, JTextField phone, JPasswordField addpass, JPasswordField repass, Connection co, String uppass) throws SQLException {
         check = true;
         System.out.println(addpass.getText());
@@ -65,6 +81,12 @@ public class UpProfile {
         return upcheck;
     }
 
+    /**
+     * DELETE request to delete the account
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void DelProfile(int id, Connection co) throws SQLException {
         String request = "DELETE FROM personal_user WHERE user_id = '" + id + "'";
         Statement stm = co.createStatement();

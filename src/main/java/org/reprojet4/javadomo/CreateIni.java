@@ -9,6 +9,12 @@ import java.io.IOException;
 public class CreateIni {
     File file = new File("log.ini");
 
+    /**
+     * Create the ini file that save last connection info
+     * @param username
+     * @param password
+     * @param check
+     */
     public void CreateIni(JTextField username, JPasswordField password, JCheckBox check){
         try {
             if(check.isSelected()){
@@ -26,6 +32,11 @@ public class CreateIni {
         }
     }
 
+    /**
+     * Check if the file exist and apply saved info
+     * @param username
+     * @param password
+     */
     public void Check(JTextField username, JPasswordField password) {
         System.out.println("file has been created");
         if (file.exists()) {

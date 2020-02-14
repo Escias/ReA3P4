@@ -14,6 +14,12 @@ public class ThermoIntel {
     boolean check = true;
     String order;
 
+    /**
+     * SELECT request
+     * @param co
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
@@ -66,6 +72,18 @@ public class ThermoIntel {
         return table;
     }
 
+    /**
+     * UPDATE request
+     * @param id
+     * @param co
+     * @param value1
+     * @param value2
+     * @param selection1
+     * @param selection2
+     * @param selection3
+     * @param selection4
+     * @throws SQLException
+     */
     public void Update(int id, Connection co, String value1, String value2, int selection1, int selection2, int selection3, int selection4) throws SQLException {
         Integer obj1 = selection4;
         if (obj1.equals(1)){
@@ -81,6 +99,14 @@ public class ThermoIntel {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get thermo information
+     * @param co
+     * @param id
+     * @param role
+     * @return
+     */
     public JTable UpdateAdd(Connection co, int id, String role){
         if (role.equals("admin")){
             String request = "SELECT thermo_id, thermo_name, thermo_temp_target " +
@@ -105,6 +131,17 @@ public class ThermoIntel {
     List<String> ls1 = new ArrayList<>();
     String stat;
 
+    /**
+     * INSERT request
+     * @param selection1
+     * @param selection2
+     * @param selection3
+     * @param selection4
+     * @param value1
+     * @param value2
+     * @param co
+     * @throws SQLException
+     */
     public void Insert(int selection1, int selection2, int selection3, int selection4, String value1, String value2, Connection co) throws SQLException {
         Integer obj1 = selection4;
         if (obj1.equals(1)){
@@ -119,6 +156,15 @@ public class ThermoIntel {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get room's name
+     * @param id
+     * @param co
+     * @param role
+     * @return
+     * @throws SQLException
+     */
     public List InsertAdd(int id, Connection co, String role) throws SQLException {
         if (role.equals("admin")){
             String request = "SELECT room_id, room_name " +
@@ -140,6 +186,15 @@ public class ThermoIntel {
         }
         return ls;
     }
+
+    /**
+     * Get sensor's name
+     * @param id
+     * @param co
+     * @param role
+     * @return
+     * @throws SQLException
+     */
     public List InsertAdd1(int id, Connection co, String role) throws SQLException {
         if (role.equals("admin")){
             String request = "SELECT sensor_id, sensor_name " +
@@ -166,6 +221,12 @@ public class ThermoIntel {
         return ls1;
     }
 
+    /**
+     * DELETE request
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM thermointel WHERE thermo_id = "+id+";";
         Statement stm = co.createStatement();

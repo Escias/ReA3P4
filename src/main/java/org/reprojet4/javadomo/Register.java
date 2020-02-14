@@ -10,6 +10,20 @@ public class Register {
     boolean check = true;
     String val;
 
+    /**
+     * INSERT request to sign-up new user
+     * @param addlname
+     * @param addfname
+     * @param addlog
+     * @param addpass
+     * @param repass
+     * @param address
+     * @param zip
+     * @param phone
+     * @param co
+     * @return
+     * @throws SQLException
+     */
     public String Register(JTextField addlname, JTextField addfname, JTextField addlog, JPasswordField addpass, JPasswordField repass, JTextField address, JTextField zip, JTextField phone, Connection co) throws SQLException {
         check = true;
         System.out.println(addlname.getText().length());

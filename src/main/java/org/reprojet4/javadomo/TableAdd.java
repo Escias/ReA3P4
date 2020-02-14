@@ -6,6 +6,13 @@ import java.sql.*;
 
 public class TableAdd {
 
+    /**
+     * Add element to the table to display it in Window Class
+     * @param co
+     * @param t
+     * @param req
+     * @return
+     */
     public JTable Tab(Connection co, String[] t, String req) {
         JTable table = new JTable();
         DefaultTableModel aModel = (DefaultTableModel) table.getModel();
