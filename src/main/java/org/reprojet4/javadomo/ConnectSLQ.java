@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.sql.*;
 
 public class ConnectSLQ {
-    protected String nolog;
     protected String role;
     protected String id;
     public String[] infoUser = {"0", "role", "nolog", "lastname", "firstname", "mail", "phone", "address", "ZIP"};
@@ -17,6 +16,7 @@ public class ConnectSLQ {
         if(rslt.next()){
             infoUser[0] = rslt.getString(1);
             infoUser[1] = rslt.getString(2);
+            infoUser[2] = "nolog";
             infoUser[3] = rslt.getString(3);
             infoUser[4] = rslt.getString(4);
             infoUser[5] = rslt.getString(5);
