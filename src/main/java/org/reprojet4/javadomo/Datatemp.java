@@ -16,6 +16,12 @@ public class Datatemp {
     boolean check = true;
     String order;
 
+    /**
+     * SELECT request
+     * @param co
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
@@ -53,12 +59,28 @@ public class Datatemp {
 
     List<String> ls = new ArrayList<>();
 
+    /**
+     * INSERT request
+     * @param selection1
+     * @param value1
+     * @param co
+     * @throws SQLException
+     */
     public void Insert(int selection1, String value1, Connection co) throws SQLException {
         String request = "INSERT INTO datatemp (datatemp_sensor_id, datatemp_temp, datatemp_time) " +
                 "VALUES ('"+selection1+"', '"+value1+"', NOW())";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get sensor's name
+     * @param id
+     * @param co
+     * @param role
+     * @return
+     * @throws SQLException
+     */
     public List InsertAdd(int id, Connection co, String role) throws SQLException {
         if (role.equals("admin")) {
             String request = "SELECT sensor_id, sensor_name " +
@@ -86,6 +108,12 @@ public class Datatemp {
         return ls;
     }
 
+    /**
+     * DELETE request
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM datatemp WHERE datatemp_id = "+id+";";
         Statement stm = co.createStatement();

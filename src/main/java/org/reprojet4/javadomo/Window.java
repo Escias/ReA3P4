@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Image;
 
 public class Window{
     ConnectSLQ connectSLQ = new ConnectSLQ();
@@ -22,7 +23,7 @@ public class Window{
     JTextField login = new JTextField(10);
     JPasswordField password = new JPasswordField(10);
     JButton blog = new JButton("Sign In");
-    JButton breg = new JButton("Register");
+    JButton breg = new JButton("Sign-Up");
     JButton bexit = new JButton("Exit");
     JLabel label = new JLabel("Mail/Password Incorrect");
     Box win1 = Box.createHorizontalBox();
@@ -49,6 +50,11 @@ public class Window{
     JPanel pcenter = new JPanel();
     JPanel pright = new JPanel();
 
+    /**
+     * Create the frame
+     * Display the login frame, with register option.
+     * @throws SQLException
+     */
     protected void Window() throws SQLException {
         Connection co = DriverManager.getConnection("jdbc:mysql://localhost:8889/projet4", "root", "root");
         window.setTitle("Javadomo");
@@ -71,6 +77,7 @@ public class Window{
         wincol1.add(win5);
         wincol1.add(win6);
         panel.add(wincol1, BorderLayout.WEST);
+        panel.setOpaque(false);
         panel.setLayout(new FlowLayout());
         window.add(panel, BorderLayout.NORTH);
         createIni.Check(login, password);
@@ -133,6 +140,10 @@ public class Window{
     Register register = new Register();
     String val;
 
+    /**
+     * Register frame, sign-up to the app.
+     * @param co
+     */
     private void Register(Connection co){
         RemoveAll();
         ResetRegister();
@@ -201,6 +212,9 @@ public class Window{
     JButton bmanage = new JButton("Management");
     JPanel pcontent = new JPanel();
 
+    /**
+     * Remove method to reset all components of Menu()
+     */
     private void RemoveMenu(){
         pleft.removeAll();
         pleft.revalidate();
@@ -214,6 +228,18 @@ public class Window{
         window.repaint();
     }
 
+    /**
+     * Menu, give access to the profile, and management menu, and able to disconnect.
+     * @param id
+     * @param role
+     * @param lastname
+     * @param firstname
+     * @param mail
+     * @param phonenumber
+     * @param adre
+     * @param ZIP
+     * @param co
+     */
     private void Menu(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveAll();
         RemoveMenu();
@@ -263,6 +289,9 @@ public class Window{
     Box dis3 = Box.createHorizontalBox();
     Box discol1 = Box.createVerticalBox();
 
+    /**
+     * Pop-up frame to confirm disconnection.
+     */
     private void ConfirmDisconnect(){
         DiscoRemove();
         discoFrame.setTitle("Javadomo");
@@ -297,6 +326,9 @@ public class Window{
         discoFrame.setVisible(true);
     }
 
+    /**
+     * Reset the disconnect pop-up frame.
+     */
     private void DiscoRemove(){
         dis1.removeAll();
         dis1.revalidate();
@@ -321,6 +353,11 @@ public class Window{
     ImageIcon img = new ImageIcon();
     ImageIcon image = new ImageIcon();
 
+    /**
+     * Change size of profile's image to fit the profile menu.
+     * @param imgpath
+     * @return
+     */
     private ImageIcon DisplayImageProfile(String imgpath){
         BufferedImage img = null;
         try {
@@ -343,6 +380,9 @@ public class Window{
     Box center7 = Box.createHorizontalBox();
     Box centercol = Box.createVerticalBox();
 
+    /**
+     * Reset all components that is displayed in the center of the frame.
+     */
     private void RemoveCenter(){
         center1.removeAll();
         center1.revalidate();
@@ -376,6 +416,19 @@ public class Window{
         pcontent.repaint();
     }
 
+    /**
+     * Display profile information and give access to the update profile option, update password option, and delete account.
+     * @param id
+     * @param role
+     * @param lastname
+     * @param firstname
+     * @param mail
+     * @param phonenumber
+     * @param adre
+     * @param ZIP
+     * @param co
+     * @throws SQLException
+     */
     private void Profile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co) throws SQLException {
         RemoveCenter();
         RemoveRight();
@@ -435,6 +488,9 @@ public class Window{
         window.setVisible(true);
     }
 
+    /**
+     * Empty JTextField in the register frame.
+     */
     private void ResetRegister(){
         addlname.setText(null);
         addfname.setText(null);
@@ -458,6 +514,18 @@ public class Window{
     public String adress;
     public String code;
 
+    /**
+     * Give the permission to update user's password.
+     * @param id
+     * @param role
+     * @param lastname
+     * @param firstname
+     * @param mail
+     * @param phonenumber
+     * @param adre
+     * @param ZIP
+     * @param co
+     */
     private void UpdatePassword(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveCenter();
         ResetRegister();
@@ -513,6 +581,18 @@ public class Window{
     JButton breturn4 = new JButton("Return");
     JButton bvalid3 = new JButton("Validate");
 
+    /**
+     * Update basic info of actual user.
+     * @param id
+     * @param role
+     * @param lastname
+     * @param firstname
+     * @param mail
+     * @param phonenumber
+     * @param adre
+     * @param ZIP
+     * @param co
+     */
     private void UpdateProfile(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveCenter();
         ResetRegister();
@@ -590,6 +670,11 @@ public class Window{
         window.setVisible(true);
     }
 
+    /**
+     * Pop-up frame to confirm the suppression of account.
+     * @param id
+     * @param co
+     */
     private void SupProfile(int id, Connection co){
         DiscoRemove();
         discoFrame.setTitle("Javadomo");
@@ -630,6 +715,9 @@ public class Window{
     JButton bupitem = new JButton("Update Item");
     JButton breturn5 = new JButton("Return");
 
+    /**
+     * Reset all component in the right side of the frame
+     */
     private void RemoveRight(){
         pright.removeAll();
         pright.revalidate();
@@ -637,6 +725,18 @@ public class Window{
         pcontent.remove(pright);
     }
 
+    /**
+     * Management menu, give access to all other function of the app.
+     * @param id
+     * @param role
+     * @param lastname
+     * @param firstname
+     * @param mail
+     * @param phonenumber
+     * @param adre
+     * @param ZIP
+     * @param co
+     */
     private void Management(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveRight();
         RemoveCenter();
@@ -698,6 +798,18 @@ public class Window{
     private String[] requp = {"Ampoule Connectée", "Caméra installée", "Donnée Ampoule", "Donnée Thermos", "Nourriture", "Info personnel", "Photo", "Salle", "Capteur", "Thermostats"};
     JComboBox scrollup = new JComboBox(requp);
 
+    /**
+     * Update elements of the DataBase
+     * @param id
+     * @param role
+     * @param lastname
+     * @param firstname
+     * @param mail
+     * @param phonenumber
+     * @param adre
+     * @param ZIP
+     * @param co
+     */
     private void UpdateItem(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveCenter();
         center1.add(scrollup);
@@ -778,6 +890,15 @@ public class Window{
     JComboBox upScroll = new JComboBox();
     JComboBox upPlusScroll = new JComboBox();
 
+    /**
+     * Update the frame to fit with the selected table
+     * @param table
+     * @param role
+     * @param id
+     * @param co
+     * @return
+     * @throws SQLException
+     */
     private JTable UpdateOption(int table, String role, int id, Connection co) throws SQLException {
         element = null;
         plus = null;
@@ -913,6 +1034,18 @@ public class Window{
     private String[] reqad = {"Ampoule Connectée", "Caméra installée", "Donnée Ampoule", "Donnée Thermos", "Nourriture", "Info personnel", "Photo", "Salle", "Capteur", "Thermostats"};
     JComboBox scrollad = new JComboBox(reqad);
 
+    /**
+     * Add elements to the DataBase. Restriction to fit with the DataBase
+     * @param id
+     * @param role
+     * @param lastname
+     * @param firstname
+     * @param mail
+     * @param phonenumber
+     * @param adre
+     * @param ZIP
+     * @param co
+     */
     private void InsertItem (int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveCenter();
         center1.add(scrollad);
@@ -1003,6 +1136,20 @@ public class Window{
     String pathimg;
     Integer obj2;
 
+    /**
+     * Display elements of the DataBase, depending on the type of user.
+     * Enable permission to delete some elements
+     * Open image file in the selected elements if the photo's table is selected.
+     * @param id
+     * @param role
+     * @param lastname
+     * @param firstname
+     * @param mail
+     * @param phonenumber
+     * @param adre
+     * @param ZIP
+     * @param co
+     */
     private void SelectTab(int id, String role, String lastname, String firstname, String mail, String phonenumber, String adre, String ZIP, Connection co){
         RemoveCenter();
         center1.add(scroll);
@@ -1139,6 +1286,12 @@ public class Window{
     Photo photo = new Photo();
     Room room = new Room();
 
+    /**
+     * Access to DELETE request of the corresponding table.
+     * @param table
+     * @param co
+     * @param orderby
+     */
     private void DelOption(int table, Connection co, int orderby){
         switch (table){
             case 0:
@@ -1216,6 +1369,10 @@ public class Window{
     String[] orderThermoIntel = {"order add", "room", "name", "thermo 1", "thermo 2", "temperature target", "status"};
     JComboBox ListScroll = new JComboBox(orderAmpConnect);
 
+    /**
+     * Display the JComboBox of the selected table
+     * @param table
+     */
     private void ListOption(int table){
         switch (table){
             case 0:
@@ -1306,6 +1463,15 @@ public class Window{
     JComboBox AddScroll = new JComboBox();
     JComboBox AddPlusScroll = new JComboBox();
 
+    /**
+     * Modify the frame of INSERT option the fit with selected table
+     * @param id
+     * @param co
+     * @param role
+     * @param table
+     * @return
+     * @throws SQLException
+     */
     private String[] AddOption(int id, Connection co, String role, int table) throws SQLException {
         element = null;
         column = null;
@@ -1473,6 +1639,10 @@ public class Window{
 
     JScrollPane DTable = new JScrollPane();
 
+    /**
+     * Add the table to JScrollPane and display it.
+     * @param tablist
+     */
     private void DisplayTable(JTable tablist){
         RemoveTable();
         DTable = new JScrollPane(tablist);
@@ -1485,11 +1655,18 @@ public class Window{
         window.setVisible(true);
     }
 
+    /**
+     * Simple method to remove all elements and return to the log frame
+     * @throws SQLException
+     */
     private void Disconnect() throws SQLException {
         RemoveAll();
         Window();
     }
 
+    /**
+     * Reset the table
+     */
     private void RemoveTable(){
         center2.removeAll();
         center2.revalidate();
@@ -1499,6 +1676,9 @@ public class Window{
         centercol.repaint();
     }
 
+    /**
+     * Empty all components of the log and register frame
+     */
     private void RemoveAll(){
         win1.removeAll();
         win1.revalidate();

@@ -14,6 +14,12 @@ public class AmpConnect {
     boolean check = true;
     String order;
 
+    /**
+     * SELECT request
+     * @param co
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
@@ -62,6 +68,19 @@ public class AmpConnect {
         return table;
     }
 //
+
+    /**
+     * UPDATE request with information given in Window Class.
+     * @param id
+     * @param co
+     * @param value1
+     * @param value2
+     * @param value3
+     * @param value4
+     * @param selection1
+     * @param selection2
+     * @throws SQLException
+     */
     public void Update(int id, Connection co, String value1, String value2, String value3, String value4, int selection1, int selection2) throws SQLException {
         Integer obj1 = selection2;
         if (obj1.equals(1)){
@@ -77,6 +96,14 @@ public class AmpConnect {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get name of bulb depending of the user's type
+     * @param co
+     * @param id
+     * @param role
+     * @return
+     */
     public JTable UpdateAdd(Connection co, int id, String role){
         if (role.equals("admin")){
             String request = "SELECT amp_id, amp_name, amp_color, amp_time_on, amp_time_off " +
@@ -98,6 +125,15 @@ public class AmpConnect {
     List<String> ls = new ArrayList<>();
     String stat;
 
+    /**
+     * INSERT request
+     * @param value1
+     * @param value2
+     * @param selection1
+     * @param selection2
+     * @param co
+     * @throws SQLException
+     */
     public void Insert(String value1, String value2, int selection1, int selection2, Connection co) throws SQLException {
         Integer obj1 = selection2;
         if (obj1.equals(1)){
@@ -112,6 +148,15 @@ public class AmpConnect {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get the name of room
+     * @param id
+     * @param co
+     * @param role
+     * @return
+     * @throws SQLException
+     */
     public List InsertAdd(int id, Connection co, String role) throws SQLException {
         System.out.println(role);
         if (role.equals("admin")){
@@ -136,6 +181,12 @@ public class AmpConnect {
     }
 //
 
+    /**
+     * DELETE request
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM ampconnect WHERE amp_id = "+id+";";
         Statement stm = co.createStatement();

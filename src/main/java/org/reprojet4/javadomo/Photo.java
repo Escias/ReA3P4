@@ -14,6 +14,12 @@ public class Photo {
     boolean check = true;
     String order;
 
+    /**
+     * SELECT request
+     * @param co
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
@@ -44,6 +50,12 @@ public class Photo {
         return table;
     }
 
+    /**
+     * DELETE request
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM photo WHERE photo_id = "+id+";";
         Statement stm = co.createStatement();
@@ -52,6 +64,13 @@ public class Photo {
 
     String imgpath;
 
+    /**
+     * Get path of image
+     * @param id
+     * @param co
+     * @return
+     * @throws SQLException
+     */
     public String TakePath(int id, Connection co) throws SQLException {
         String request = "SELECT photo_id, photo_image " +
                 "FROM photo " +

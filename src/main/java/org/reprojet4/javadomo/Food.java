@@ -14,6 +14,12 @@ public class Food {
     boolean check = true;
     String order;
 
+    /**
+     * SELECT request
+     * @param co
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
@@ -52,6 +58,16 @@ public class Food {
         return table;
     }
 
+    /**
+     * UPDATE request
+     * @param id
+     * @param co
+     * @param value1
+     * @param value2
+     * @param value3
+     * @param selection1
+     * @throws SQLException
+     */
     public void Update(int id, Connection co, String value1, String value2, String value3, int selection1) throws SQLException {
         String request = "Update food " +
                 "SET food_room_id = '"+selection1+"', food_name = '"+value1+"', food_perempt = '"+value2+"', food_quantity = '"+value3+"' " +
@@ -59,6 +75,13 @@ public class Food {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+    /**
+     * Get food information.
+     * @param co
+     * @param id
+     * @param role
+     * @return
+     */
     public JTable UpdateAdd(Connection co, int id, String role){
         if (role.equals("admin")){
             String request = "SELECT food_id, food_name, food_perempt, food_quantity " +
@@ -79,12 +102,30 @@ public class Food {
 
     List<String> ls = new ArrayList<>();
 
+    /**
+     * INSERT request
+     * @param selection1
+     * @param value1
+     * @param value2
+     * @param value3
+     * @param co
+     * @throws SQLException
+     */
     public void Insert(int selection1, String value1, String value2, String value3, Connection co) throws SQLException {
         String request = "INSERT INTO food (food_room_id, food_name, food_perempt, food_quantity, food_perempt_open, food_open) " +
                 "VALUES ('"+selection1+"', '"+value1+"', '"+value2+"', '"+value3+"', NOW() + INTERVAL 30 DAY, NOW())";
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get room's name
+     * @param id
+     * @param co
+     * @param role
+     * @return
+     * @throws SQLException
+     */
     public List InsertAdd(int id, Connection co, String role) throws SQLException {
         System.out.println(role);
         if (role.equals("admin")){
@@ -108,6 +149,12 @@ public class Food {
         return ls;
     }
 
+    /**
+     * DELETE request
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM food WHERE food_id = "+id+";";
         Statement stm = co.createStatement();

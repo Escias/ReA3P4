@@ -14,6 +14,12 @@ public class Datamp {
     boolean check = true;
     String order;
 
+    /**
+     * SELECT request
+     * @param co
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
@@ -52,6 +58,13 @@ public class Datamp {
     List<String> ls = new ArrayList<>();
     String stat;
 
+    /**
+     * INSERT request
+     * @param selection1
+     * @param selection2
+     * @param co
+     * @throws SQLException
+     */
     public void Insert(int selection1, int selection2, Connection co) throws SQLException {
         Integer obj1 = selection2;
         if (obj1.equals(1)){
@@ -64,6 +77,14 @@ public class Datamp {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+    /**
+     * Get bulb's name
+     * @param id
+     * @param co
+     * @param role
+     * @return
+     * @throws SQLException
+     */
     public List InsertAdd(int id, Connection co, String role) throws SQLException {
         if (role.equals("admin")) {
             String request = "SELECT amp_id, amp_name " +
@@ -90,6 +111,12 @@ public class Datamp {
         return ls;
     }
 
+    /**
+     * DELETE request
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM datamp WHERE datamp_id = "+id+";";
         Statement stm = co.createStatement();

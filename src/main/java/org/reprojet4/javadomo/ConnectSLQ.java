@@ -9,6 +9,15 @@ public class ConnectSLQ {
     public String[] infoUser = {"0", "role", "nolog", "lastname", "firstname", "mail", "phone", "address", "ZIP"};
     CreateIni createIni = new CreateIni();
 
+    /**
+     * Verify mail and password to allow connection to the app
+     * @param login
+     * @param password
+     * @param co
+     * @param check
+     * @return
+     * @throws SQLException
+     */
     public String[] ConnectSQL(JTextField login, JPasswordField password, Connection co, JCheckBox check) throws SQLException {
         String request = "SELECT user_id, user_type, user_lastname, user_firstname, user_mail, user_phone, user_adress, user_ZIP FROM personal_user WHERE '" + login.getText() + "' = personal_user.user_mail AND '" + password.getText() + "' = personal_user.user_password;";
         Statement stm = co.createStatement();

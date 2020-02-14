@@ -14,6 +14,12 @@ public class CamInstall {
     boolean check = true;
     String order;
 
+    /**
+     * SELECT request
+     * @param co
+     * @param orderby
+     * @return
+     */
     public JTable Request(Connection co, int orderby){
         switch (orderby){
             case 0:
@@ -62,6 +68,18 @@ public class CamInstall {
         return table;
     }
 
+    /**
+     * UPDATE request
+     * @param id
+     * @param co
+     * @param value1
+     * @param value2
+     * @param value3
+     * @param value4
+     * @param selection1
+     * @param selection2
+     * @throws SQLException
+     */
     public void Update(int id, Connection co, String value1, String value2, String value3, String value4, int selection1, int selection2) throws SQLException {
         Integer obj1 = selection2;
         if (obj1.equals(1)){
@@ -75,6 +93,14 @@ public class CamInstall {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get camera's name
+     * @param co
+     * @param id
+     * @param role
+     * @return
+     */
     public JTable UpdateAdd(Connection co, int id, String role){
         if (role.equals("admin")){
             String request = "SELECT cam_id, cam_name, cam_dist, cam_time_begin, cam_time_end " +
@@ -96,6 +122,15 @@ public class CamInstall {
     List<String> ls = new ArrayList<>();
     String stat;
 
+    /**
+     * INSERT request
+     * @param value1
+     * @param value2
+     * @param selection1
+     * @param selection2
+     * @param co
+     * @throws SQLException
+     */
     public void Insert(String value1, String value2, int selection1, int selection2, Connection co) throws SQLException {
         Integer obj1 = selection2;
         if (obj1.equals(1)){
@@ -108,6 +143,15 @@ public class CamInstall {
         Statement stm = co.createStatement();
         stm.executeUpdate(request);
     }
+
+    /**
+     * Get room name
+     * @param id
+     * @param co
+     * @param role
+     * @return
+     * @throws SQLException
+     */
     public List InsertAdd(int id, Connection co, String role) throws SQLException {
         if (role.equals("admin")){
             String request = "SELECT room_id, room_name " +
@@ -130,6 +174,12 @@ public class CamInstall {
         return ls;
     }
 
+    /**
+     * DELETE request
+     * @param id
+     * @param co
+     * @throws SQLException
+     */
     public void Delete(int id, Connection co) throws SQLException {
         String request = "DELETE FROM caminstall WHERE cam_id = "+id+";";
         Statement stm = co.createStatement();
