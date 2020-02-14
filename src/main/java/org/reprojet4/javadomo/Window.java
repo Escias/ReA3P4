@@ -69,6 +69,7 @@ public class Window{
         wincol1.add(win3);
         wincol1.add(win4);
         wincol1.add(win5);
+        wincol1.add(win6);
         panel.add(wincol1, BorderLayout.WEST);
         panel.setLayout(new FlowLayout());
         window.add(panel, BorderLayout.NORTH);
@@ -91,8 +92,8 @@ public class Window{
                 adre = infoUser[7];
                 ZIP = infoUser[8];
                 if(nolog == "fail"){
-                    window.getContentPane().remove(label);
-                    window.add(label);
+                    win6.remove(label);
+                    win6.add(label);
                     window.setVisible(true);
                 }else{
                     Menu(id, role, lastname, firstname, mail, phonenumber, adre, ZIP, co);
